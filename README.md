@@ -7,10 +7,12 @@ Zapisy przez Google Forms, płatność przelewem z instrukcją i kodem QR.
 
 | Plik | Co tu jest |
 |---|---|
-| `js/config.js` | **ustawienia**: stan zapisów, termin, limit miejsc, linki do Google Forms (PL/EN), ceny, dane do przelewu, e-mail biura, logotypy, zdjęcie hero |
+| `js/config.js` | **ustawienia**: język startowy, stan zapisów, termin, limit miejsc, Tally/Google Forms, ceny i early bird, dane do przelewu, e-mail biura, logotypy, zdjęcie hero, dane do .ics |
 | `content/pl.js` | **cała treść po polsku** (hero, dlaczego warto, dla kogo, program, warsztaty, prelegenci, organizatorzy, partnerzy, info praktyczne, cennik, rejestracja, stopka) |
 | `content/en.js` | to samo po angielsku |
 | `index.html` | szkielet strony (nagłówek, puste sekcje, stopka) |
+| `regulamin.html` | regulamin konferencji + klauzula RODO (PL/EN) — projekt do weryfikacji |
+| `tools/og.html` | źródło obrazka do udostępniania; render: headless Chrome 1200×630 → `images/og.jpg` |
 | `js/render.js` | buduje sekcje z treści; oś czasu/akordeon programu, rozwijane bio, cennik, stany rejestracji, QR przelewu |
 | `js/i18n.js` | przełącznik PL/EN (`?lang=en`, pamięta wybór) |
 | `css/style.css` | style; kolory i fonty w `:root` |
@@ -43,22 +45,30 @@ Wyszukaj `TODO` w `js/config.js`, `content/pl.js`, `content/en.js`:
 Fonty: nagłówki Playfair Display, tekst Inter (zgodnie ze specyfikacją). Żeby wrócić do fontów
 ziarno.edu.pl, zmień `--serif` i `--sans` w `css/style.css` oraz link do Google Fonts w `index.html`.
 
-## Zapisy — Google Forms
+## Zapisy — Tally (formularz + płatność Stripe w jednym)
 
-1. <https://forms.google.com> → nowy formularz (jeden dwujęzyczny albo dwa: PL i EN).
-   Pola: imię, nazwisko, e-mail, telefon, organizacja i stanowisko, kraj,
-   **pakiet** (pełny 100 EUR / tylko konferencja 40 EUR / konferencja + lunch 50 EUR),
-   **warsztaty – 3 preferencje** (lista z `program.workshops`), **wymagania dietetyczne**,
-   udział w zwiedzaniu Starego Miasta (tak/nie), dane do faktury (opcjonalnie),
-   zgoda RODO (wymagana), zgoda na wizerunek.
-2. Ustawienia → Odpowiedzi: „Zbieraj adresy e-mail” i „Wysyłaj kopię odpowiedzi”.
-3. Ustawienia → Prezentacja → **Komunikat potwierdzający**: wklej dane do przelewu i termin (te same co na stronie).
-4. Odpowiedzi → ikona Arkuszy → utwórz arkusz; dodaj kolumnę „Zapłacono”.
-5. Wyślij → `<>` → skopiuj adres z `src="..."` (bez `?embedded=true`) → `formUrl.pl` / `formUrl.en` w `js/config.js`.
+1. Załóż konto na <https://tally.so> (darmowe) i podłącz Stripe (Settings → Integrations → Stripe; konto Stripe na szkołę).
+2. Utwórz formularz PL (i osobny EN albo jeden dwujęzyczny). Pola: imię, nazwisko, e-mail, telefon,
+   organizacja i stanowisko, kraj, **pakiet** (pole wyboru: pełny / tylko konferencja / konferencja + obiad),
+   **wizyty studyjne w czwartek** (tak/nie), **warsztaty – 3 preferencje** (lista z `program.workshops`),
+   **wymagania dietetyczne**, faktura (tak/nie → logika warunkowa pokazuje pola: nazwa, NIP/VAT, adres),
+   **zgoda na regulamin i RODO** (wymagana, link do `regulamin.html`), zgoda na wizerunek (opcjonalna),
+   blok **Payment** (Stripe) z kwotą zależną od pakietu i early bird.
+3. Settings → Notifications: e-mail do biura przy każdym zgłoszeniu; Integrations → Google Sheets: eksport odpowiedzi.
+4. Skopiuj ID formularza z adresu `https://tally.so/r/<ID>` → `registration.tally.pl` / `.en` w `js/config.js`
+   (`registration.provider: "tally"`).
 
-Limit miejsc: Google Forms nie zamyka się sam – użyj dodatku **formLimiter** albo ustaw
-`registrationOpen: false` w `config.js`. Po dacie `registrationDeadline` strona sama przełącza
-się na stan „zapisy zamknięte / lista rezerwowa”.
+Google Forms nadal działa jako zapasowa opcja: `registration.provider: "google"` i adresy w `registration.google`.
+
+Limit miejsc: w Tally ustaw „Close form after N submissions” (Settings → Access), a na stronie
+`registrationOpen: false`, gdy chcesz pokazać stan „lista rezerwowa”. Po dacie `registrationDeadline`
+strona przełącza się sama.
+
+## Regulamin i RODO
+
+`regulamin.html` zawiera projekt regulaminu (PL + EN) z zasadami zwrotów (100% do 31.03, 50% do 15.04)
+oraz klauzulę informacyjną RODO. Pola w [nawiasach] uzupełnia organizator; **dokument wymaga przeglądu
+prawnego przed publikacją**. Link jest w stopce i pod formularzem zapisów.
 
 ## Płatność
 
@@ -67,6 +77,18 @@ się na stan „zapisy zamknięte / lista rezerwowa”.
 - Opcjonalnie: **płatność online** – wklej link Stripe Payment Link / Przelewy24 do `config.paymentUrl`,
   pojawi się przycisk „Zapłać online” pod formularzem. Stripe obsługuje BLIK, karty i EUR bez umowy z operatorem.
 - Waluta: ceny są w EUR (jak w specyfikacji). Jeśli podasz `prices.*.pln`, strona pokaże też kwoty w PLN.
+
+## Domena
+
+Docelowo własna, krótka domena (np. **nwow.pl** — 18.09.2026 wyglądała na wolną; sprawdź u rejestratora),
+a `conference.ziarno.edu.pl` jako przekierowanie. Po rejestracji domeny:
+
+1. W DNS nowej domeny: rekordy `A` na GitHub Pages (185.199.108.153, .109.153, .110.153, .111.153)
+   i `CNAME www → bartkosa.github.io`.
+2. W repo: plik `CNAME` = `nwow.pl`; w `js/config.js` `siteUrl: "https://nwow.pl"`; w `index.html` adresy `og:url` i `og:image`.
+3. GitHub → Settings → Pages → Custom domain `nwow.pl` → Enforce HTTPS.
+4. Przekierowanie `conference.ziarno.edu.pl → nwow.pl`: w panelu nazwa.pl (przekierowanie subdomeny) albo
+   drugie, jednoplikowe repo Pages z `<meta http-equiv="refresh">`.
 
 ## Publikacja na conference.ziarno.edu.pl (GitHub Pages)
 

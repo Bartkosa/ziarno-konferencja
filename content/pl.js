@@ -18,6 +18,7 @@ window.CONTENT.pl = {
       { href: "#speakers", label: "Prelegenci" },
       { href: "#partners", label: "Partnerzy" },
       { href: "#practical-info", label: "Informacje praktyczne" },
+      { href: "#faq", label: "FAQ" },
       { href: "#register", label: "Rejestracja" },
     ],
     cta: "Zapisz się",
@@ -33,6 +34,7 @@ window.CONTENT.pl = {
     primary: "Zapisz się",
     secondary: "Zobacz program",
     invite: "Pobierz zaproszenie (PDF)",
+    calendar: "Dodaj do kalendarza",
     chips: [
       { icon: "calendar", text: "6–8 maja 2027" },
       { icon: "pin", text: "Warszawa · UKSW, Szkoła Ziarno" },
@@ -199,10 +201,11 @@ window.CONTENT.pl = {
   },
 
   organisers: {
-    eyebrow: "Organizator",
-    title: "Szkoła Ziarno — gospodarz konferencji",
+    eyebrow: "Organizatorzy",
+    title: "Gospodarz i partner merytoryczny",
     items: [
-      { name: "Szkoła Ziarno", tag: "Organizator", text: "Placówka edukacyjna w Warszawie — przedszkole i dwujęzyczna szkoła podstawowa — będąca żywym przykładem wdrażania omawianych wartości: personalizacji, partnerstwa z rodziną i wychowania charakteru.", url: "https://www.ziarno.edu.pl/", logo: "ziarno" },
+      { name: "Szkoła Ziarno", tag: "Gospodarz edycji 2027", text: "Placówka edukacyjna w Warszawie — przedszkole i dwujęzyczna szkoła podstawowa — będąca żywym przykładem wdrażania omawianych wartości: personalizacji, partnerstwa z rodziną i wychowania charakteru.", url: "https://www.ziarno.edu.pl/", logo: "ziarno" },
+      { name: "Škola Libellus", tag: "Inicjator cyklu NWoW", text: "Szkoła z Bratysławy — inicjator i strategiczny partner merytoryczny cyklu New Way of Working. Gospodarz edycji 2026, z którą współtworzymy program i sieć uczestników.", url: "https://skolalibellus.sk/", logo: "libellus" },
     ],
   },
 
@@ -240,6 +243,24 @@ window.CONTENT.pl = {
     ],
   },
 
+  faq: {
+    eyebrow: "FAQ",
+    title: "Najczęstsze pytania",
+    lead: "Nie znalazłeś odpowiedzi? Napisz: {{email}}",
+    items: [
+      { q: "Czy mogę przyjechać tylko na piątkową konferencję?", a: "<p>Tak. Pakiet „Tylko konferencja” obejmuje sesje plenarne 7 maja i przerwy kawowe, opcjonalnie obiad na UKSW. Warsztaty sobotnie, kolacja czwartkowa i Garden Party są w pakiecie pełnym.</p>" },
+      { q: "W jakim języku odbywa się konferencja?", a: "<p>Sesje plenarne w piątek mają tłumaczenie symultaniczne polski / angielski / hiszpański. Warsztaty prowadzone są w języku podanym przy każdej sesji, część w dwóch wersjach językowych.</p>" },
+      { q: "Jak zapłacić i kiedy zgłoszenie jest ważne?", a: "<p>Najprościej kartą lub BLIK-iem w formularzu zapisów. Można też przelewem w ciągu {{days}} dni od zgłoszenia — dane w sekcji Informacje praktyczne. Miejsce jest potwierdzone po zaksięgowaniu wpłaty.</p>" },
+      { q: "Czy otrzymam fakturę?", a: "<p>Tak. Zaznacz to w formularzu i podaj dane organizacji (nazwa, NIP lub numer VAT, adres). Fakturę wyślemy e-mailem.</p>" },
+      { q: "Co jeśli nie będę mógł przyjechać?", a: "<p>Do 31 marca 2027 zwracamy całą wpłatę, do 15 kwietnia połowę, później zwrot nie przysługuje, ale zawsze możesz przekazać miejsce innej osobie. Szczegóły w <a href='regulamin.html'>regulaminie</a>.</p>" },
+      { q: "Potrzebuję zaproszenia do wizy — czy je wystawicie?", a: "<p>Tak. Po opłaceniu udziału napisz na {{email}} z danymi paszportowymi, a wyślemy imienne zaproszenie w PDF.</p>" },
+      { q: "Czy uwzględniacie diety?", a: "<p>Tak — wegetariańską, wegańską, bezglutenową i inne. Wpisz wymagania w formularzu; dotyczy to warsztatów kulinarnych, obiadów i Garden Party.</p>" },
+      { q: "Gdzie zaparkować i jak dojechać?", a: "<p>UKSW ma parking na kampusie przy ul. Wóycickiego, przy Szkole Ziarno jest parking dla gości. Dojazd komunikacją i z lotnisk opisujemy w sekcji Informacje praktyczne.</p>" },
+      { q: "Czy wizyty studyjne w czwartek są obowiązkowe?", a: "<p>Nie, są dla chętnych. Zaznacz udział w formularzu — liczba miejsc w szkołach jest ograniczona.</p>" },
+      { q: "Jak wybiorę warsztaty?", a: "<p>W formularzu zapisów wskażesz trzy preferencje. Ostateczny przydział potwierdzimy e-mailem najpóźniej dwa tygodnie przed konferencją.</p>" },
+    ],
+  },
+
   pricing: {
     eyebrow: "Koszty i rejestracja",
     title: "Wybierz pakiet",
@@ -249,6 +270,8 @@ window.CONTENT.pl = {
       { key: "conference", name: "Tylko konferencja (7 maja)", badge: "", includes: ["Udział w sesjach plenarnych 7 maja", "Przerwy kawowe", "Obiad na UKSW: +{{lunch}} (opcjonalnie)"] },
     ],
     perPerson: "za osobę",
+    earlyBird: "Early bird do {{date}}",
+    regular: "od {{date}}: {{price}}",
     stepsTitle: "Jak się zapisać",
     steps: ["Wypełnij formularz zapisów (poniżej).", "Opłać udział przelewem w ciągu {{days}} dni — dane w Instrukcji płatności.", "Po zaksięgowaniu wpłaty otrzymasz e-mail z potwierdzeniem miejsca."],
   },
@@ -258,7 +281,9 @@ window.CONTENT.pl = {
       title: "Formularz zapisów",
       lead: "Podaj dane, wybierz pakiet i preferowane warsztaty oraz wskaż wymagania dietetyczne. Potwierdzenie i dane do płatności otrzymasz e-mailem.",
       openForm: "Otwórz formularz w nowej karcie",
-      pending: "Formularz zapisów pojawi się tutaj — wklej adres Google Forms w pliku js/config.js.",
+      pending: "Formularz zapisów pojawi się tutaj — wpisz ID formularza Tally (lub adres Google Forms) w pliku js/config.js.",
+      terms: "Wysyłając formularz, akceptujesz {{link}}.",
+      termsLink: "regulamin konferencji i zasady przetwarzania danych",
       deadline: "Zapisy trwają do {{date}}",
       seats: "Liczba miejsc ograniczona do {{n}}.",
       payOnline: "Zapłać online",
@@ -290,7 +315,7 @@ window.CONTENT.pl = {
   },
 
   footer: {
-    org: "Organizator: Szkoła Ziarno",
+    org: "Organizatorzy: Szkoła Ziarno we współpracy ze Škola Libellus",
     address: "ul. Modlińska 184a, 03-119 Warszawa",
     linksTitle: "Na skróty",
     links: [
@@ -302,6 +327,7 @@ window.CONTENT.pl = {
     socialTitle: "Śledź nas",
     copy: "© 2027 Szkoła Ziarno. Wszelkie prawa zastrzeżone.",
     privacy: "Polityka prywatności",
+    terms: "Regulamin i RODO",
     photo: "Zdjęcie w nagłówku",
     privacyUrl: "https://www.ziarno.edu.pl/polityka-prywatnosci/",
   },

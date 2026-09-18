@@ -48,6 +48,8 @@ p{margin:0 0 1em}
 .site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h);gap:16px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy);min-width:0}
 .brand img{height:44px;width:auto}
+.brand .brand-x{color:#b0b8c4;font-size:18px}
+.brand img.lib{height:40px}
 .brand .brand-text{font-family:var(--serif);font-weight:700;font-size:17px;white-space:nowrap;color:var(--navy)}
 @media(max-width:480px){.brand .brand-text{display:none}}
 .nav-links{display:none;align-items:center;gap:22px}
@@ -249,6 +251,7 @@ p{margin:0 0 1em}
 .site-footer h3{color:#fff;font-size:18px;margin-bottom:14px}
 .site-footer .f-brand{display:flex;align-items:center;gap:14px;margin-bottom:16px}
 .site-footer .f-brand img{height:52px;background:#fff;border-radius:8px;padding:4px}
+.site-footer .f-brand .brand-x{color:rgba(255,255,255,.4);font-size:20px}
 .site-footer .f-title{font-family:var(--serif);font-size:22px;color:#fff;font-weight:700;margin-bottom:6px}
 .site-footer a{color:#fff;text-decoration:none}
 .site-footer a:hover{color:var(--gold)}
@@ -283,3 +286,16 @@ p{margin:0 0 1em}
 .hero-link a{color:rgba(255,255,255,.85);display:inline-flex;align-items:center;gap:6px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px}
 .hero-link a:hover{color:var(--gold);border-color:var(--gold)}
 .hero-link .icon{width:15px;height:15px}
+
+/* ---------- Hero links, FAQ, early bird, terms ---------- */
+.hero-links{margin:22px 0 0;font-size:14px;display:flex;flex-wrap:wrap;gap:8px 22px}
+.hero-links a{color:rgba(255,255,255,.85);display:inline-flex;align-items:center;gap:6px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px}
+.hero-links a:hover{color:var(--gold);border-color:var(--gold)}
+.hero-links .icon{width:15px;height:15px}
+.faq-grid{display:grid;gap:10px}
+@media(min-width:900px){.faq-grid{grid-template-columns:1fr 1fr;align-items:start}}
+.faq-grid .acc{margin:0}
+.pkg .was{font-size:14px;color:rgba(255,255,255,.6);margin:6px 0 0}
+.pkg .was s{opacity:.8}
+.pkg .eb{display:inline-block;background:rgba(249,179,59,.18);color:var(--gold);font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;margin-top:10px}
+.terms-note{font-size:13px;color:var(--muted);margin:14px 0 0}

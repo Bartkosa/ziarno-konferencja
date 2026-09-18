@@ -1,11 +1,15 @@
 // ============================================================
 //  USTAWIENIA STRONY — jedyny plik, który trzeba edytować
 //  przy zmianie stanu zapisów, linków i danych do płatności.
-//  Treść (teksty, program, prelegenci) jest w content/pl.js i content/en.js
+//  Treść (teksty, program, prelegenci, FAQ) jest w content/pl.js i content/en.js
 // ============================================================
 window.KONF = {
-  // Domyślny język, gdy nikt nie wybrał (pl | en)
-  defaultLang: "pl",
+  // Język startowy: "auto" = wg przeglądarki (polska → PL, inne → EN), albo "pl" / "en"
+  defaultLang: "auto",
+  fallbackLang: "pl",
+
+  // Publiczny adres strony (do linków w kalendarzu, OG). Po rejestracji nwow.pl zmień na "https://nwow.pl".
+  siteUrl: "https://conference.ziarno.edu.pl",
 
   // --- ZAPISY -------------------------------------------------
   // true = formularz widoczny; false = sekcja "brak miejsc / lista rezerwowa"
@@ -15,12 +19,13 @@ window.KONF = {
   // Limit miejsc (0 = nie pokazuj)
   seatLimit: 60,
 
-  // Google Forms — osobny formularz dla PL i EN (może być ten sam link).
-  // Google Forms → Wyślij → <> → skopiuj adres z src="..." i wklej BEZ "?embedded=true".
-  // Dopóki link zawiera "TODO", strona pokaże informację zamiast formularza.
-  formUrl: {
-    pl: "https://docs.google.com/forms/d/e/TODO_ID_FORMULARZA_PL/viewform",
-    en: "https://docs.google.com/forms/d/e/TODO_ID_FORMULARZA_EN/viewform",
+  registration: {
+    // "tally" (polecane: formularz + płatność Stripe w jednym) albo "google" (Google Forms)
+    provider: "tally",
+    // Tally: ID formularza z adresu https://tally.so/r/<ID>  (osobne PL i EN albo ten sam)
+    tally: { pl: "TODO_ID_PL", en: "TODO_ID_EN" },
+    // Google Forms: adres .../viewform (bez ?embedded=true)
+    google: { pl: "https://docs.google.com/forms/d/e/TODO/viewform", en: "https://docs.google.com/forms/d/e/TODO/viewform" },
   },
 
   // --- KONTAKT --------------------------------------------------
@@ -30,13 +35,15 @@ window.KONF = {
     instagram: "https://www.instagram.com/przedszkole_ziarno/",
   },
 
-  // --- PŁATNOŚĆ (przelew) ---------------------------------------
-  // Kwoty w EUR (jak w specyfikacji). PLN — opcjonalnie, wg stałego kursu.
+  // --- CENY I PŁATNOŚĆ ------------------------------------------
+  // Kwoty w EUR (jak w zaproszeniu). PLN — opcjonalnie, wg stałego kursu (0 = nie pokazuj).
   prices: {
     full: { eur: 100, pln: 0 },        // pełny pakiet, 3 dni
     conference: { eur: 40, pln: 0 },   // tylko konferencja 7.05
-    lunch: { eur: 10, pln: 0 },        // opcjonalny lunch do pakietu konferencyjnego
+    lunch: { eur: 10, pln: 0 },        // obiad do pakietu konferencyjnego
   },
+  // Early bird: niższa cena pełnego pakietu do podanej daty (null = brak)
+  earlyBird: { until: "2027-01-31", full: { eur: 85, pln: 0 } },
   paymentDeadlineDays: 7,
   bank: {
     recipient: "Dwujęzyczna Szkoła Podstawowa Ziarno",   // TODO: nazwa z umowy/konta
@@ -46,18 +53,23 @@ window.KONF = {
     swift: "TODO",
     titleFormat: "NWoW2027_Nazwisko_Imie",
   },
-
-  // --- OPCJONALNIE: płatność online ------------------------------
-  // Link Stripe Payment Link / Przelewy24 — gdy pusty, przycisk się nie pokaże
+  // Link do płatności online poza formularzem (Stripe Payment Link) — pusty = brak przycisku
   paymentUrl: "",
 
-  // --- Zaproszenie PDF (link w hero i stopce; pusty string = brak linku) ---
-  invitePdf: "files/zaproszenie-nwow-2027.pdf",
+  // --- WYDARZENIE (kalendarz .ics) --------------------------------
+  event: {
+    start: "2027-05-06",
+    end: "2027-05-08",
+    location: "Warszawa — UKSW, Aula Schumana (ul. Wóycickiego 1/3) · Szkoła Ziarno (ul. Modlińska 184a)",
+  },
 
-  // --- Zdjęcia -----------------------------------------------------
+  // --- PLIKI I GRAFIKA ----------------------------------------------
+  invitePdf: "files/zaproszenie-nwow-2027.pdf",   // pusty string = brak linku
+  termsPage: "regulamin.html",
   heroImage: "images/hero-warszawa.jpg",
-  // Zdjęcie z Wikimedia Commons na licencji CC BY-SA 4.0 — wymaga podpisu (pokazuje się w stopce).
-  // Gdy podmienisz na własne zdjęcie, ustaw heroCredit: null.
+  // Zdjęcie z Wikimedia Commons (CC BY-SA 4.0) — wymaga podpisu w stopce. Własne zdjęcie: heroCredit: null
   heroCredit: { text: "Oleslawlama, CC BY-SA 4.0, Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Evening_skyline_Warsaw_skyscrapers_Vistula_River.jpg" },
   logoZiarno: "https://www.ziarno.edu.pl/wp-content/uploads/2023/04/logo-ziarno.png", // TODO: images/logo-ziarno.svg
+  logoLibellus: "images/logo-libellus.png",
+  ogImage: "images/og.jpg",
 };

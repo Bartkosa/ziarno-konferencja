@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>OG image source — render with headless Chrome at 1200×630</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,500&family=Inter:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;width:1200px;height:630px;overflow:hidden;font-family:Inter,sans-serif}
+  .og{position:relative;width:1200px;height:630px;background:#1b2f52 url('../images/hero-warszawa.jpg') center/cover;color:#fff}
+  .og::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(21,37,65,.95) 0%,rgba(30,52,90,.8) 55%,rgba(39,68,116,.45) 100%)}
+  .in{position:relative;padding:64px 72px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between}
+  .top{display:flex;align-items:center;gap:18px}
+  .top img{height:64px;background:#fff;border-radius:10px;padding:5px}
+  .top .x{color:rgba(255,255,255,.5);font-size:26px}
+  .eyebrow{color:#f9b33b;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:20px}
+  h1{font-family:"Playfair Display",serif;font-size:88px;line-height:1.05;margin:10px 0 8px;font-weight:700;letter-spacing:-.01em}
+  .motto{font-family:"Playfair Display",serif;font-style:italic;color:#f9b33b;font-size:34px;margin:0}
+  .bottom{display:flex;gap:36px;font-size:22px;color:rgba(255,255,255,.9);font-weight:500}
+  .bottom span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:#f9b33b;margin-right:12px;vertical-align:middle}
+</style>
+</head>
+<body>
+<div class="og"><div class="in">
+  <div class="top"><img src="https://www.ziarno.edu.pl/wp-content/uploads/2023/04/logo-ziarno.png" alt=""><span class="x">×</span><img src="../images/logo-libellus.png" alt=""></div>
+  <div>
+    <div class="eyebrow">Warszawa · 6–8 maja 2027</div>
+    <h1>A New Way of Working</h1>
+    <p class="motto">Zaufanie. Przynależność. Cel. &nbsp;·&nbsp; Trust. Belonging. Purpose.</p>
+  </div>
+  <div class="bottom"><span>UKSW · Szkoła Ziarno</span><span>Konferencja · Warsztaty · Wizyty studyjne</span></div>
+</div></div>
+</body>
+</html>

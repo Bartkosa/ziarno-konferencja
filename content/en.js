@@ -17,6 +17,7 @@ window.CONTENT.en = {
       { href: "#speakers", label: "Speakers" },
       { href: "#partners", label: "Partners" },
       { href: "#practical-info", label: "Practical info" },
+      { href: "#faq", label: "FAQ" },
       { href: "#register", label: "Register" },
     ],
     cta: "Register",
@@ -32,6 +33,7 @@ window.CONTENT.en = {
     primary: "Register",
     secondary: "See the program",
     invite: "Download the invitation (PDF)",
+    calendar: "Add to calendar",
     chips: [
       { icon: "calendar", text: "6–8 May 2027" },
       { icon: "pin", text: "Warsaw · UKSW, Ziarno School" },
@@ -198,10 +200,11 @@ window.CONTENT.en = {
   },
 
   organisers: {
-    eyebrow: "Organiser",
-    title: "Ziarno School — conference host",
+    eyebrow: "Organisers",
+    title: "Host and content partner",
     items: [
-      { name: "Ziarno School", tag: "Organiser", text: "An educational institution in Warsaw — a preschool and a bilingual primary school — a living example of the values discussed: personalization, family partnership and character education.", url: "https://www.ziarno.edu.pl/", logo: "ziarno" },
+      { name: "Ziarno School", tag: "Host of the 2027 edition", text: "An educational institution in Warsaw — a preschool and a bilingual primary school — a living example of the values discussed: personalization, family partnership and character education.", url: "https://www.ziarno.edu.pl/", logo: "ziarno" },
+      { name: "Škola Libellus", tag: "Initiator of the NWoW series", text: "A school in Bratislava — initiator and strategic content partner of the New Way of Working series. Host of the 2026 edition, with whom we co-create the program and the participants' network.", url: "https://skolalibellus.sk/", logo: "libellus" },
     ],
   },
 
@@ -239,6 +242,24 @@ window.CONTENT.en = {
     ],
   },
 
+  faq: {
+    eyebrow: "FAQ",
+    title: "Frequently asked questions",
+    lead: "Didn't find your answer? Write to {{email}}",
+    items: [
+      { q: "Can I come only to the Friday conference?", a: "<p>Yes. The 'Conference only' package covers the plenary sessions on 7 May and coffee breaks, with an optional lunch at UKSW. Saturday workshops, Thursday dinner and the garden party are part of the full package.</p>" },
+      { q: "What language is the conference in?", a: "<p>Friday plenary sessions have simultaneous interpretation Polish / English / Spanish. Workshops are held in the language shown next to each session; several run in two language versions.</p>" },
+      { q: "How do I pay and when is my registration valid?", a: "<p>The easiest way is by card in the registration form. You can also pay by bank transfer within {{days}} days of registering — details in Practical information. Your seat is confirmed once the payment arrives.</p>" },
+      { q: "Will I get an invoice?", a: "<p>Yes. Tick the option in the form and enter your organisation's details (name, VAT number, address). We'll send the invoice by e-mail.</p>" },
+      { q: "What if I can't come?", a: "<p>Until 31 March 2027 we refund the full fee, until 15 April half of it; after that no refund is possible, but you can always transfer your seat to someone else. Details in the <a href='regulamin.html#en'>terms</a>.</p>" },
+      { q: "I need a visa invitation letter — can you issue one?", a: "<p>Yes. After paying, e-mail {{email}} with your passport details and we'll send a personal invitation letter as a PDF.</p>" },
+      { q: "Do you cater for dietary requirements?", a: "<p>Yes — vegetarian, vegan, gluten-free and others. Enter your requirements in the form; they apply to the cooking workshop, lunches and the garden party.</p>" },
+      { q: "Where can I park and how do I get there?", a: "<p>UKSW has a campus car park on Wóycickiego street; Ziarno School has visitor parking. Public transport and airport connections are described in Practical information.</p>" },
+      { q: "Are the Thursday school visits mandatory?", a: "<p>No, they are optional. Tick your participation in the form — places in the schools are limited.</p>" },
+      { q: "How do I choose workshops?", a: "<p>You'll indicate three preferences in the registration form. We'll confirm the final allocation by e-mail no later than two weeks before the conference.</p>" },
+    ],
+  },
+
   pricing: {
     eyebrow: "Fees and registration",
     title: "Choose your package",
@@ -248,6 +269,8 @@ window.CONTENT.en = {
       { key: "conference", name: "Conference only (7 May)", badge: "", includes: ["Plenary sessions on 7 May", "Coffee breaks", "Lunch at UKSW: +{{lunch}} (optional)"] },
     ],
     perPerson: "per person",
+    earlyBird: "Early bird until {{date}}",
+    regular: "from {{date}}: {{price}}",
     stepsTitle: "How to register",
     steps: ["Fill in the registration form (below).", "Pay by bank transfer within {{days}} days — see Payment instructions.", "Once your payment is received, you'll get a confirmation e-mail."],
   },
@@ -257,7 +280,9 @@ window.CONTENT.en = {
       title: "Registration form",
       lead: "Enter your details, choose a package and preferred workshops, and tell us about dietary requirements. Confirmation and payment details will follow by e-mail.",
       openForm: "Open the form in a new tab",
-      pending: "The registration form will appear here — paste the Google Forms address in js/config.js.",
+      pending: "The registration form will appear here — enter the Tally form ID (or Google Forms address) in js/config.js.",
+      terms: "By submitting the form you accept the {{link}}.",
+      termsLink: "conference terms and data-processing rules",
       deadline: "Registration closes {{date}}",
       seats: "Limited to {{n}} participants.",
       payOnline: "Pay online",
@@ -289,7 +314,7 @@ window.CONTENT.en = {
   },
 
   footer: {
-    org: "Organised by Ziarno School",
+    org: "Organised by Ziarno School in cooperation with Škola Libellus",
     address: "Modlińska 184a, 03-119 Warsaw, Poland",
     linksTitle: "Quick links",
     links: [
@@ -301,6 +326,7 @@ window.CONTENT.en = {
     socialTitle: "Follow us",
     copy: "© 2027 Ziarno School. All rights reserved.",
     privacy: "Privacy policy",
+    terms: "Terms and GDPR",
     photo: "Header photo",
     privacyUrl: "https://www.ziarno.edu.pl/polityka-prywatnosci/",
   },
