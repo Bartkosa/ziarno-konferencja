@@ -25,8 +25,7 @@ const LABELS: Record<string, string[]> = {
 const PACKAGE_MAP: [RegExp, string][] = [[/pe[łl]n|full/i, "full"], [/obiad|lunch/i, "conference_lunch"], [/konferencj|conference/i, "conference"]];
 
 async function verify(body: string, sig: string | null, secret: string) {
-  if (!secret) return true;
-  if (!sig) return false;
+  if (!secret || !sig) return false; // bez skonfigurowanego sekretu webhook odrzuca wszystko
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
   const mac = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(body));
   const expected = btoa(String.fromCharCode(...new Uint8Array(mac)));
@@ -46,7 +45,9 @@ function field(fields: any[], key: string): any {
 Deno.serve(async (req) => {
   if (req.method !== "POST") return new Response("ok");
   const raw = await req.text();
-  if (!(await verify(raw, req.headers.get("tally-signature"), Deno.env.get("TALLY_SIGNING_SECRET") || ""))) return new Response("bad signature", { status: 401 });
+  const secret = Deno.env.get("TALLY_SIGNING_SECRET") || "";
+  if (!secret) return new Response("webhook not configured (TALLY_SIGNING_SECRET)", { status: 503 });
+  if (!(await verify(raw, req.headers.get("tally-signature"), secret))) return new Response("bad signature", { status: 401 });
   const payload = JSON.parse(raw);
   const d = payload.data || {};
   const fields = d.fields || [];
