@@ -9,7 +9,7 @@ window.KONF = {
   fallbackLang: "pl",
 
   // Publiczny adres strony (do linków w kalendarzu, OG)
-  siteUrl: "https://nwow.ziarno.edu.pl",
+  siteUrl: "https://conference.ziarno.edu.pl",
 
   // --- ZAPISY -------------------------------------------------
   // true = formularz widoczny; false = sekcja "brak miejsc / lista rezerwowa"
