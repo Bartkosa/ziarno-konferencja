@@ -1,4 +1,4 @@
-# A New Way of Working 2027 — strona konferencji (conference.ziarno.edu.pl)
+# A New Way of Working 2027 — strona konferencji (nwow.ziarno.edu.pl)
 
 Statyczna strona one-page (HTML + CSS + JS, bez builda) w kolorach Ziarna (granat + złoto), dwujęzyczna PL/EN.
 Zapisy przez Google Forms, płatność przelewem z instrukcją i kodem QR.
@@ -78,30 +78,18 @@ prawnego przed publikacją**. Link jest w stopce i pod formularzem zapisów.
   pojawi się przycisk „Zapłać online” pod formularzem. Stripe obsługuje BLIK, karty i EUR bez umowy z operatorem.
 - Waluta: ceny są w EUR (jak w specyfikacji). Jeśli podasz `prices.*.pln`, strona pokaże też kwoty w PLN.
 
-## Domena
-
-Docelowo własna, krótka domena (np. **nwow.pl** — 18.09.2026 wyglądała na wolną; sprawdź u rejestratora),
-a `conference.ziarno.edu.pl` jako przekierowanie. Po rejestracji domeny:
-
-1. W DNS nowej domeny: rekordy `A` na GitHub Pages (185.199.108.153, .109.153, .110.153, .111.153)
-   i `CNAME www → bartkosa.github.io`.
-2. W repo: plik `CNAME` = `nwow.pl`; w `js/config.js` `siteUrl: "https://nwow.pl"`; w `index.html` adresy `og:url` i `og:image`.
-3. GitHub → Settings → Pages → Custom domain `nwow.pl` → Enforce HTTPS.
-4. Przekierowanie `conference.ziarno.edu.pl → nwow.pl`: w panelu nazwa.pl (przekierowanie subdomeny) albo
-   drugie, jednoplikowe repo Pages z `<meta http-equiv="refresh">`.
-
-## Publikacja na conference.ziarno.edu.pl (GitHub Pages)
+## Publikacja na nwow.ziarno.edu.pl (GitHub Pages)
 
 Repozytorium: <https://github.com/Bartkosa/ziarno-konferencja> (Pages włączone: gałąź `master`, katalog `/`,
-domena własna `conference.ziarno.edu.pl` ustawiona).
+domena własna `nwow.ziarno.edu.pl` ustawiona).
 
 1. **DNS (panel nazwa.pl, domena ziarno.edu.pl)** — dodaj rekord:
-   `CNAME  conference  →  bartkosa.github.io`
+   `CNAME  nwow  →  bartkosa.github.io`
 2. Po propagacji DNS (zwykle do 1 h): GitHub → Settings → Pages → zaznacz **Enforce HTTPS**
    (certyfikat wystawia się automatycznie).
 3. Każda kolejna zmiana: `git commit` + `git push` → strona aktualizuje się w ~1 min.
 
-Sprawdzenie DNS: `nslookup conference.ziarno.edu.pl` powinno zwrócić alias na `bartkosa.github.io`.
+Sprawdzenie DNS: `nslookup nwow.ziarno.edu.pl` powinno zwrócić alias na `bartkosa.github.io`.
 
 Alternatywy: Cloudflare Pages / Netlify („New site from Git”, bez komendy build, katalog `/`),
 albo katalog `public_html/konferencja/` obok WordPressa (wtedy adres `ziarno.edu.pl/konferencja/`).

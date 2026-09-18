@@ -8,8 +8,8 @@ window.KONF = {
   defaultLang: "auto",
   fallbackLang: "pl",
 
-  // Publiczny adres strony (do linków w kalendarzu, OG). Po rejestracji nwow.pl zmień na "https://nwow.pl".
-  siteUrl: "https://conference.ziarno.edu.pl",
+  // Publiczny adres strony (do linków w kalendarzu, OG)
+  siteUrl: "https://nwow.ziarno.edu.pl",
 
   // --- ZAPISY -------------------------------------------------
   // true = formularz widoczny; false = sekcja "brak miejsc / lista rezerwowa"
