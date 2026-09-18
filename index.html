@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A New Way of Working 2027 — konferencja, Warszawa 6–8 maja</title>
+<meta name="description" content="Trzy dni dla liderów edukacji: wizyty studyjne, konferencja w Auli Schumana UKSW i warsztaty w Szkole Ziarno. Zaufanie. Przynależność. Cel.">
+<meta property="og:title" content="A New Way of Working 2027 — Warszawa, 6–8 maja">
+<meta property="og:description" content="Zaufanie. Przynależność. Cel. Konferencja dla liderów edukacji spersonalizowanej.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://conference.ziarno.edu.pl/">
+<meta property="og:image" content="https://conference.ziarno.edu.pl/images/og.jpg"><!-- TODO: images/og.jpg 1200×630 -->
+<link rel="icon" href="https://www.ziarno.edu.pl/wp-content/uploads/2023/04/logo-ziarno.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/config.js"></script>
+<script src="content/pl.js"></script>
+<script src="content/en.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top" id="brand"></a>
+    <nav class="nav-links" id="nav-links" aria-label="Sekcje"></nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Język / Language">
+        <button type="button" data-lang="pl" aria-pressed="true">PL</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn-sm nav-cta" data-form-link href="#register"></a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mobile-menu">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu"></div>
+</header>
+
+<main id="top">
+  <section class="hero" id="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="wrap" id="hero-content"></div>
+  </section>
+
+  <section class="section alt" id="why"><div class="wrap" id="why-content"></div></section>
+  <section class="section" id="who"><div class="wrap" id="who-content"></div></section>
+  <section class="section alt" id="program"><div class="wrap" id="program-content"></div></section>
+  <section class="section" id="speakers"><div class="wrap" id="speakers-content"></div></section>
+  <section class="section alt" id="partners"><div class="wrap" id="partners-content"></div></section>
+  <section class="section" id="practical-info"><div class="wrap" id="practical-content"></div></section>
+  <section class="section dark" id="register"><div class="wrap" id="register-content"></div></section>
+</main>
+
+<footer class="site-footer" id="footer"></footer>
+
+<div class="mobile-cta"><a class="btn" data-form-link href="#register"></a></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+<script src="js/render.js"></script>
+<script src="js/i18n.js"></script>
+</body>
+</html>
