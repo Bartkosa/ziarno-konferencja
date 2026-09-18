@@ -71,7 +71,8 @@
   function renderHeader(T, lang) {
     var logoZ = C.logoZiarno ? '<img src="' + esc(C.logoZiarno) + '" alt="Ziarno">' : '<span class="brand-text">Ziarno</span>';
     var logoL = C.logoLibellus ? '<img class="lib" src="' + esc(C.logoLibellus) + '" alt="Škola Libellus">' : "";
-    document.getElementById("brand").innerHTML = logoZ + (logoL ? '<span class="brand-x">×</span>' + logoL : "") + '<span class="brand-text">' + esc(T.nav.brand) + "</span>";
+    document.getElementById("brand").innerHTML = logoZ + (logoL ? '<span class="brand-x">×</span>' + logoL : "");
+    document.getElementById("brand").setAttribute("aria-label", esc(T.nav.brand));
     document.getElementById("nav-links").innerHTML = T.nav.links.map(function (l) { return '<a href="' + esc(l.href) + '">' + esc(l.label) + "</a>"; }).join("");
     document.getElementById("mobile-menu").innerHTML = T.nav.links.map(function (l) { return '<a href="' + esc(l.href) + '">' + esc(l.label) + "</a>"; }).join("") + '<a class="btn" data-form-link href="#register">' + esc(T.nav.cta) + "</a>";
     var burger = document.getElementById("burger");
