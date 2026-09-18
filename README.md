@@ -70,18 +70,16 @@ się na stan „zapisy zamknięte / lista rezerwowa”.
 
 ## Publikacja na conference.ziarno.edu.pl (GitHub Pages)
 
-```bash
-git add -A
-git commit -m "Strona konferencji NWoW 2027"
-gh repo create ziarno-konferencja --public --source=. --push
-```
+Repozytorium: <https://github.com/Bartkosa/ziarno-konferencja> (Pages włączone: gałąź `master`, katalog `/`,
+domena własna `conference.ziarno.edu.pl` ustawiona).
 
-1. GitHub → repo → Settings → Pages → Source: branch `master`, folder `/ (root)`.
-2. U rejestratora domeny `ziarno.edu.pl` dodaj rekord DNS:
-   `CNAME  conference  →  <login-github>.github.io`
-3. Settings → Pages → Custom domain: `conference.ziarno.edu.pl` → zaznacz **Enforce HTTPS**
-   (plik `CNAME` w repo już zawiera tę nazwę).
-4. Każda kolejna zmiana: `git commit` + `git push` → strona aktualizuje się w ~1 min.
+1. **DNS (panel nazwa.pl, domena ziarno.edu.pl)** — dodaj rekord:
+   `CNAME  conference  →  bartkosa.github.io`
+2. Po propagacji DNS (zwykle do 1 h): GitHub → Settings → Pages → zaznacz **Enforce HTTPS**
+   (certyfikat wystawia się automatycznie).
+3. Każda kolejna zmiana: `git commit` + `git push` → strona aktualizuje się w ~1 min.
+
+Sprawdzenie DNS: `nslookup conference.ziarno.edu.pl` powinno zwrócić alias na `bartkosa.github.io`.
 
 Alternatywy: Cloudflare Pages / Netlify („New site from Git”, bez komendy build, katalog `/`),
 albo katalog `public_html/konferencja/` obok WordPressa (wtedy adres `ziarno.edu.pl/konferencja/`).
