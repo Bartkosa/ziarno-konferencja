@@ -181,7 +181,7 @@
   function renderPractical(T, lang) {
     var P = T.practical;
     var glance = '<div class="glance">' + P.glance.map(function (g) { return '<div class="card">' + icon(g.icon) + '<div><div class="label">' + esc(g.label) + "</div><p>" + esc(g.text) + "</p></div></div>"; }).join("") + "</div>";
-    var app = P.appNote ? '<div class="app-note">' + icon("app") + "<div><h3>" + esc(P.appNote.title) + "</h3><p>" + esc(P.appNote.text) + "</p></div></div>" : "";
+    var app = P.appNote ? '<div class="app-note">' + icon("app") + "<div><h3>" + esc(P.appNote.title) + "</h3><p>" + esc(P.appNote.text) + (C.portal && C.portal.enabled ? ' <a href="' + esc(C.portal.url) + (lang === "en" ? "?lang=en" : "") + '">' + esc(T.portalBox ? T.portalBox.cta : "") + " →</a>" : "") + "</p></div></div>" : "";
     var acc = P.accordion.map(function (a, i) {
       var body = a.payment ? paymentHtml(T, lang) : tpl(a.html, { email: C.contactEmail });
       return '<details class="acc"' + (a.payment ? " open" : "") + "><summary>" + esc(a.title) + icon("chev", "chev") + '</summary><div class="acc-body">' + body + "</div></details>";
@@ -241,7 +241,8 @@
     } else {
       box = '<div class="closed-box" style="margin-top:56px"><span class="badge">' + esc(R.closed.badge) + "</span><h3>" + esc(R.closed.title) + "</h3><p>" + esc(R.closed.text) + "</p><p>" + esc(R.closed.waitlist) + ' <a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a></p></div>";
     }
-    document.getElementById("register-content").innerHTML = head(PR, true) + '<div class="packages">' + pkgs + "</div>" + steps + box;
+    var portalBox = C.portal && C.portal.enabled && T.portalBox ? '<div class="portal-box"><div class="pb-icon">' + icon("app") + '</div><div><h3>' + esc(T.portalBox.title) + "</h3><p>" + esc(T.portalBox.text) + '</p><a class="btn" href="' + esc(C.portal.url) + (lang === "en" ? "?lang=en" : "") + '">' + esc(T.portalBox.cta) + " →</a><p class=\"pb-hint\">" + esc(T.portalBox.hint) + "</p></div></div>" : "";
+    document.getElementById("register-content").innerHTML = head(PR, true) + '<div class="packages">' + pkgs + "</div>" + steps + box + portalBox;
   }
 
   function renderFooter(T) {

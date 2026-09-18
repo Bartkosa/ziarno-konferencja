@@ -230,7 +230,7 @@ window.CONTENT.en = {
       { icon: "euro", label: "Fee", text: "100 EUR full package · 40 EUR conference only (+10 EUR lunch). Details in the Register section." },
       { icon: "globe", label: "Languages", text: "Polish, English, Spanish — simultaneous interpretation of plenary sessions" },
     ],
-    appNote: { title: "Participant app", text: "Registered participants will receive access to materials, workshop selection and the participant list before the conference. Details will follow by e-mail." },
+    appNote: { title: "Participant portal", text: "After registering you'll get an e-mail with a link to your portal: workshop choice, extra program, diet, participants list. Sign-in without a password — via a one-time link." },
     detailsTitle: "Useful details for participants",
     accordion: [
       { title: "Conference locations", html: "<p><strong>Friday — UKSW, Schuman Hall</strong><br>Wóycickiego 1/3, 01-938 Warsaw (Bielany campus) · <a href='https://www.google.com/maps/search/?api=1&query=UKSW+W%C3%B3ycickiego+1%2F3+Warszawa' target='_blank' rel='noopener'>Open in Google Maps</a></p><p><strong>Friday evening and Saturday — Ziarno School</strong><br>Modlińska 184a, 03-119 Warsaw · <a href='https://www.google.com/maps/search/?api=1&query=Modli%C5%84ska+184a+Warszawa' target='_blank' rel='noopener'>Open in Google Maps</a></p><p><strong>Thursday evening — Let's GoCook</strong><br>Jutrzenki 76, Warsaw · <a href='https://www.google.com/maps/search/?api=1&query=Let%27s+GoCook+Jutrzenki+76+Warszawa' target='_blank' rel='noopener'>Open in Google Maps</a></p><p><strong>Thursday — school visits</strong><br>Strumienie School, 3 Maja 129, Józefów · Azymut School, Staszica 1, Pruszków (TODO: confirm program and transport)</p>" },
@@ -273,6 +273,13 @@ window.CONTENT.en = {
     regular: "from {{date}}: {{price}}",
     stepsTitle: "How to register",
     steps: ["Fill in the registration form (below).", "Pay by bank transfer within {{days}} days — see Payment instructions.", "Once your payment is received, you'll get a confirmation e-mail."],
+  },
+
+  portalBox: {
+    title: "Already registered? Your participant portal is live.",
+    text: "Sign in with the e-mail from your registration form to choose workshops, confirm the extra program, update your diet and meet other participants before the conference.",
+    cta: "Open the participant portal",
+    hint: "Use the link from your welcome e-mail, or sign in with the e-mail you registered with.",
   },
 
   register: {

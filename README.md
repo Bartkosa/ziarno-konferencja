@@ -12,6 +12,11 @@ Zapisy przez Google Forms, płatność przelewem z instrukcją i kodem QR.
 | `content/en.js` | to samo po angielsku |
 | `index.html` | szkielet strony (nagłówek, puste sekcje, stopka) |
 | `regulamin.html` | regulamin konferencji + klauzula RODO (PL/EN) — projekt do weryfikacji |
+| `moje/`, `js/portal.js` | **portal uczestnika**: logowanie linkiem z maila, wybór warsztatów z limitem miejsc, program dodatkowy, dieta, lista uczestników |
+| `admin/`, `js/admin.js` | panel organizatora: lista zgłoszeń, obłożenie warsztatów, catering, eksport CSV |
+| `js/api.js` | warstwa danych portalu: tryb `mock` (dane testowe z `data/test-data.js` w przeglądarce) lub `supabase` (produkcja) |
+| `content/portal.js` | teksty portalu i panelu PL/EN |
+| `supabase/` | schemat bazy, webhook Tally → konto + mail powitalny, instrukcja wdrożenia |
 | `tools/og.html` | źródło obrazka do udostępniania; render: headless Chrome 1200×630 → `images/og.jpg` |
 | `js/render.js` | buduje sekcje z treści; oś czasu/akordeon programu, rozwijane bio, cennik, stany rejestracji, QR przelewu |
 | `js/i18n.js` | przełącznik PL/EN (`?lang=en`, pamięta wybór) |
@@ -63,6 +68,16 @@ Google Forms nadal działa jako zapasowa opcja: `registration.provider: "google"
 Limit miejsc: w Tally ustaw „Close form after N submissions” (Settings → Access), a na stronie
 `registrationOpen: false`, gdy chcesz pokazać stan „lista rezerwowa”. Po dacie `registrationDeadline`
 strona przełącza się sama.
+
+## Portal uczestnika (/moje) i panel organizatora (/admin)
+
+Działa jak u Libellusa: po zapisie uczestnik dostaje mail z linkiem, loguje się bez hasła i sam wybiera
+warsztaty (jedna sesja na blok, limit miejsc pilnowany przez bazę), potwierdza program dodatkowy, podaje dietę
+i widzi listę uczestników, którzy wyrazili zgodę. Organizatorki mają `/admin` z listami i eksportem.
+
+Dziś strona działa w trybie **mock** (`portal.backend: "mock"` w `js/config.js`): dane testowe z `data/test-data.js`
+trzymane w localStorage przeglądarki, logowanie testowe dowolnym e-mailem z tej listy (link pojawia się na ekranie
+zamiast w mailu). Przełączenie na produkcję: `supabase/README.md` (6 kroków, 0 zł).
 
 ## Regulamin i RODO
 

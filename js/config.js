@@ -63,6 +63,16 @@ window.KONF = {
     location: "Warszawa — UKSW, Aula Schumana (ul. Wóycickiego 1/3) · Szkoła Ziarno (ul. Modlińska 184a)",
   },
 
+  // --- PORTAL UCZESTNIKA (/moje) ----------------------------------
+  portal: {
+    enabled: true,
+    url: "moje/",                 // adres panelu (względny do strony głównej)
+    backend: "mock",              // "mock" = dane testowe w przeglądarce · "supabase" = produkcja
+    supabase: { url: "", anonKey: "", redirectTo: "https://conference.ziarno.edu.pl/moje/" }, // TODO po założeniu projektu
+    workshopsDeadline: "2027-04-23", // do kiedy można zmieniać wybór warsztatów
+    adminEmails: ["nwow@ziarno.edu.pl"], // (tryb supabase: tabela admins; tu tylko informacyjnie)
+  },
+
   // --- PLIKI I GRAFIKA ----------------------------------------------
   invitePdf: "files/zaproszenie-nwow-2027.pdf",   // pusty string = brak linku
   termsPage: "regulamin.html",

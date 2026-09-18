@@ -231,7 +231,7 @@ window.CONTENT.pl = {
       { icon: "euro", label: "Opłata", text: "100 EUR pełny pakiet · 40 EUR tylko konferencja (+10 EUR lunch). Szczegóły w sekcji Rejestracja." },
       { icon: "globe", label: "Języki", text: "Polski, angielski, hiszpański — tłumaczenie symultaniczne sesji plenarnych" },
     ],
-    appNote: { title: "Aplikacja uczestnika", text: "Osoby zarejestrowane otrzymają przed konferencją dostęp do materiałów, wyboru warsztatów i listy uczestników. Szczegóły prześlemy e-mailem." },
+    appNote: { title: "Panel uczestnika", text: "Po zapisie dostaniesz e-mail z linkiem do panelu: wybór warsztatów, program dodatkowy, dieta, lista uczestników. Logowanie bez hasła — jednorazowym linkiem." },
     detailsTitle: "Przydatne informacje dla uczestników",
     accordion: [
       { title: "Lokalizacje", html: "<p><strong>Piątek — UKSW, Aula Schumana</strong><br>ul. Wóycickiego 1/3, 01-938 Warszawa (kampus Bielany) · <a href='https://www.google.com/maps/search/?api=1&query=UKSW+W%C3%B3ycickiego+1%2F3+Warszawa' target='_blank' rel='noopener'>Otwórz w Google Maps</a></p><p><strong>Piątek wieczór i sobota — Szkoła Ziarno</strong><br>ul. Modlińska 184a, 03-119 Warszawa · <a href='https://www.google.com/maps/search/?api=1&query=Modli%C5%84ska+184a+Warszawa' target='_blank' rel='noopener'>Otwórz w Google Maps</a></p><p><strong>Czwartek wieczór — Let's GoCook</strong><br>ul. Jutrzenki 76, Warszawa · <a href='https://www.google.com/maps/search/?api=1&query=Let%27s+GoCook+Jutrzenki+76+Warszawa' target='_blank' rel='noopener'>Otwórz w Google Maps</a></p><p><strong>Czwartek — wizyty studyjne</strong><br>Szkoła Strumienie, ul. 3 Maja 129, Józefów · Szkoła Azymut, ul. Staszica 1, Pruszków (TODO: potwierdzić program i transport)</p>" },
@@ -274,6 +274,13 @@ window.CONTENT.pl = {
     regular: "od {{date}}: {{price}}",
     stepsTitle: "Jak się zapisać",
     steps: ["Wypełnij formularz zapisów (poniżej).", "Opłać udział przelewem w ciągu {{days}} dni — dane w Instrukcji płatności.", "Po zaksięgowaniu wpłaty otrzymasz e-mail z potwierdzeniem miejsca."],
+  },
+
+  portalBox: {
+    title: "Jesteś już zapisany? Twój panel uczestnika działa.",
+    text: "Zaloguj się e-mailem z formularza zapisów, żeby wybrać warsztaty, potwierdzić udział w programie dodatkowym, podać dietę i poznać innych uczestników przed konferencją.",
+    cta: "Otwórz panel uczestnika",
+    hint: "Użyj linku z maila powitalnego albo zaloguj się adresem e-mail podanym przy zapisie.",
   },
 
   register: {

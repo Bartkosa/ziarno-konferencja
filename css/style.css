@@ -299,3 +299,12 @@ p{margin:0 0 1em}
 .pkg .was s{opacity:.8}
 .pkg .eb{display:inline-block;background:rgba(249,179,59,.18);color:var(--gold);font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;margin-top:10px}
 .terms-note{font-size:13px;color:var(--muted);margin:14px 0 0}
+
+/* ---------- Box "Jesteś już zapisany?" ---------- */
+.portal-box{max-width:880px;margin:36px auto 0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:28px;display:flex;gap:20px;align-items:flex-start}
+.portal-box .pb-icon{flex:none;width:48px;height:48px;border-radius:12px;background:rgba(249,179,59,.15);display:grid;place-items:center}
+.portal-box .pb-icon .icon{color:var(--gold);width:24px;height:24px}
+.portal-box h3{color:#fff;font-size:22px;margin-bottom:8px}
+.portal-box p{color:rgba(255,255,255,.8);margin-bottom:16px}
+.portal-box .pb-hint{font-size:13px;color:rgba(255,255,255,.55);margin:12px 0 0}
+@media(max-width:640px){.portal-box{flex-direction:column;padding:22px}}
