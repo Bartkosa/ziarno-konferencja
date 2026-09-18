@@ -67,8 +67,9 @@ window.KONF = {
   portal: {
     enabled: true,
     url: "moje/",                 // adres panelu (względny do strony głównej)
-    backend: "mock",              // "mock" = dane testowe w przeglądarce · "supabase" = produkcja
-    supabase: { url: "", anonKey: "", redirectTo: "https://conference.ziarno.edu.pl/moje/" }, // TODO po założeniu projektu
+    backend: "supabase",          // "mock" = dane testowe w przeglądarce · "supabase" = produkcja
+    // anon key jest kluczem publicznym (do przeglądarki); dostęp do danych ogranicza RLS w bazie
+    supabase: { url: "https://uvonqpbngdwlxwybbnxu.supabase.co", anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2b25xcGJuZ2R3bHh3eWJibnh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk3MzQzMjYsImV4cCI6MjEwNTMxMDMyNn0.MuD7lA6wiSBn_bNrUmF5EX52CYWNIuTf8AjXtSlMOzw", redirectTo: "https://conference.ziarno.edu.pl/moje/" },
     workshopsDeadline: "2027-04-23", // do kiedy można zmieniać wybór warsztatów
     adminEmails: ["nwow@ziarno.edu.pl"], // (tryb supabase: tabela admins; tu tylko informacyjnie)
   },

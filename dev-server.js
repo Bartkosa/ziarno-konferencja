@@ -1,6 +1,6 @@
-// Minimalny serwer statyczny do podglądu: node dev-server.js  ->  http://localhost:5173
+// Minimalny serwer statyczny do podglądu: node dev-server.js  ->  http://localhost:5180
 const http = require("http"), fs = require("fs"), path = require("path");
-const root = __dirname, port = process.env.PORT || 5173;
+const root = __dirname, port = process.env.PORT || 5180;
 const types = { ".html": "text/html; charset=utf-8", ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".ico": "image/x-icon", ".pdf": "application/pdf" };
 http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split("?")[0]);

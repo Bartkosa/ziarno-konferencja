@@ -87,14 +87,21 @@
     this.mode = "supabase";
     function unwrap(r) { if (r.error) throw r.error; return r.data; }
     this.requestLink = function (email) {
-      return sb.auth.signInWithOtp({ email: String(email).trim().toLowerCase(), options: { emailRedirectTo: cfg.redirectTo || location.href.split("?")[0] } })
+      return sb.auth.signInWithOtp({ email: String(email).trim().toLowerCase(), options: { emailRedirectTo: cfg.redirectTo || location.href.split("?")[0].split("#")[0] } })
         .then(function (r) { return r.error ? { ok: false, error: r.error.message } : { ok: true }; });
     };
-    this.sessionFromUrl = function () { return sb.auth.getSession().then(function () { return self.currentUser(); }); };
+    this.sessionFromUrl = function () {
+      // magic link wraca z tokenami w #hash — supabase-js sam je odczytuje przy getSession()
+      return sb.auth.getSession().then(function () { if (/access_token=|type=magiclink/.test(location.hash)) history.replaceState(null, "", location.pathname + location.search); return self.currentUser(); });
+    };
     this.currentUser = function () {
       return sb.auth.getUser().then(function (r) {
         if (!r.data || !r.data.user) return null;
-        return sb.from("participants").select("*").eq("email", r.data.user.email).maybeSingle().then(unwrap);
+        var email = r.data.user.email;
+        return sb.from("participants").select("*").ilike("email", email).maybeSingle().then(unwrap).then(function (p) {
+          if (p) return p;
+          return sb.from("admins").select("email").limit(1).then(function (a) { return { _unregistered: true, _admin: !!(a.data && a.data.length), email: email, first_name: "", package: "", options: {} }; });
+        });
       });
     };
     this.signOut = function () { return sb.auth.signOut().then(function () { return true; }); };

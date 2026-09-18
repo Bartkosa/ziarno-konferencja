@@ -14,6 +14,8 @@ window.PORTAL_CONTENT = {
       notFound: "Nie znaleźliśmy zgłoszenia z tym adresem. Użyj e-maila podanego w formularzu zapisów albo napisz do nas: {{contact}}.",
       devOpen: "Tryb testowy: otwórz link logowania", devHint: "W trybie testowym e-maile nie są wysyłane. Konta testowe: {{emails}}",
       notRegistered: "Nie masz jeszcze zgłoszenia?", register: "Zapisz się na konferencję",
+      unregisteredTitle: "Jesteś zalogowany, ale nie mamy Twojego zgłoszenia",
+      unregisteredLead: "Adres {{email}} nie figuruje na liście uczestników. Jeśli zapisałeś się innym e-mailem, wyloguj się i użyj tamtego. Jeśli to pomyłka, napisz: {{contact}}.",
     },
     nav: { overview: "Mój udział", workshops: "Warsztaty", options: "Program dodatkowy", profile: "Dane i dieta", networking: "Uczestnicy", info: "Informacje praktyczne", logout: "Wyloguj" },
     overview: {
@@ -78,6 +80,8 @@ window.PORTAL_CONTENT = {
       notFound: "We couldn't find a registration with this address. Use the e-mail from your registration form or write to us: {{contact}}.",
       devOpen: "Test mode: open the sign-in link", devHint: "In test mode no e-mails are sent. Test accounts: {{emails}}",
       notRegistered: "Not registered yet?", register: "Register for the conference",
+      unregisteredTitle: "You're signed in, but we have no registration for you",
+      unregisteredLead: "The address {{email}} is not on the participants list. If you registered with a different e-mail, sign out and use that one. If this is a mistake, write to {{contact}}.",
     },
     nav: { overview: "My participation", workshops: "Workshops", options: "Extra program", profile: "Details and diet", networking: "Participants", info: "Practical info", logout: "Sign out" },
     overview: {

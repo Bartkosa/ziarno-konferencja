@@ -35,6 +35,10 @@
   function view() { var h = (location.hash || "#overview").slice(1); return T.nav[h] ? h : "overview"; }
   function render() {
     if (!me) return renderLogin();
+    if (me._unregistered) {
+      app.innerHTML = '<div class="login"><h1>' + esc(T.login.unregisteredTitle) + '</h1><p class="lead">' + tpl(esc(T.login.unregisteredLead), { email: "<strong>" + esc(me.email) + "</strong>", contact: contactLink() }) + "</p>" + (me._admin ? '<p class="alt"><a class="btn btn-sm" href="../admin/">' + esc(T.admin.title) + "</a></p>" : "") + '<p class="alt"><a href="../#register">' + esc(T.login.register) + "</a></p></div>";
+      return;
+    }
     var nav = Object.keys(T.nav).filter(function (k) { return k !== "logout"; }).map(function (k) { return '<a href="#' + k + '" class="' + (view() === k ? "active" : "") + '">' + icon(k) + esc(T.nav[k]) + "</a>"; }).join("");
     app.innerHTML = '<div class="dash"><nav class="side" aria-label="Sekcje">' + nav + '</nav><section class="panel" id="panel"></section></div>';
     ({ overview: vOverview, workshops: vWorkshops, options: vOptions, profile: vProfile, networking: vNetworking, info: vInfo })[view()]();

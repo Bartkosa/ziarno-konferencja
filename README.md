@@ -31,7 +31,7 @@ Zapisy przez Google Forms, płatność przelewem z instrukcją i kodem QR.
 node dev-server.js
 ```
 
-Strona: <http://localhost:5173>. Wersja angielska: <http://localhost:5173/?lang=en>.
+Strona: <http://localhost:5180>. Wersja angielska: <http://localhost:5180/?lang=en>.
 
 ## Co uzupełnić przed publikacją
 
@@ -75,9 +75,9 @@ Działa jak u Libellusa: po zapisie uczestnik dostaje mail z linkiem, loguje si�
 warsztaty (jedna sesja na blok, limit miejsc pilnowany przez bazę), potwierdza program dodatkowy, podaje dietę
 i widzi listę uczestników, którzy wyrazili zgodę. Organizatorki mają `/admin` z listami i eksportem.
 
-Dziś strona działa w trybie **mock** (`portal.backend: "mock"` w `js/config.js`): dane testowe z `data/test-data.js`
-trzymane w localStorage przeglądarki, logowanie testowe dowolnym e-mailem z tej listy (link pojawia się na ekranie
-zamiast w mailu). Przełączenie na produkcję: `supabase/README.md` (6 kroków, 0 zł).
+Portal jest podłączony do Supabase (`portal.backend: "supabase"` w `js/config.js`, projekt `uvonqpbngdwlxwybbnxu`).
+Tryb testowy bez bazy: `portal.backend: "mock"` (dane z `data/test-data.js` w localStorage, link logowania na ekranie).
+Wdrożenie krok po kroku, webhook Tally i SMTP: `supabase/README.md`.
 
 ## Regulamin i RODO
 
