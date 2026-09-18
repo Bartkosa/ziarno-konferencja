@@ -35,8 +35,7 @@ W `js/config.js`:
 portal: { backend: "supabase", supabase: { url: "https://<ref>.supabase.co", anonKey: "<anon key>", redirectTo: "https://conference.ziarno.edu.pl/moje/" }, ... }
 ```
 
-W `moje/index.html` i `admin/index.html` odkomentuj `<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js">`
-i usuń `<script src="../data/test-data.js">`. `git push` — gotowe.
+`git push` — gotowe (biblioteka supabase-js ładuje się zawsze, dane testowe są ignorowane w trybie supabase).
 
 ## Jak to działa
 
