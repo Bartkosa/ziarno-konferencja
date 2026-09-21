@@ -23,7 +23,7 @@ window.KONF = {
     // "tally" (polecane: formularz + płatność Stripe w jednym) albo "google" (Google Forms)
     provider: "tally",
     // Tally: ID formularza z adresu https://tally.so/r/<ID>  (osobne PL i EN albo ten sam)
-    tally: { pl: "TODO_ID_PL", en: "TODO_ID_EN" },
+    tally: { pl: "RGO1Xv", en: "TODO_ID_EN" },
     // Google Forms: adres .../viewform (bez ?embedded=true)
     google: { pl: "https://docs.google.com/forms/d/e/TODO/viewform", en: "https://docs.google.com/forms/d/e/TODO/viewform" },
   },
