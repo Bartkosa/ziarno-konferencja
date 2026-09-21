@@ -21,6 +21,7 @@ create table if not exists public.participants (
   networking_consent  boolean not null default false,
   lang                text not null default 'pl' check (lang in ('pl','en')),
   options             jsonb not null default '{}'::jsonb,   -- {school_visits, gocook, garden, mass, tour}
+  photo_consent       boolean not null default false,
   tally_submission_id text unique,
   created_at          timestamptz not null default now(),
   updated_at          timestamptz not null default now()
@@ -48,6 +49,8 @@ create table if not exists public.session_picks (
 create table if not exists public.admins (
   email text primary key
 );
+
+alter table public.participants add column if not exists photo_consent boolean not null default false;
 
 -- ---------- pomocnicze ----------
 create or replace function public.current_participant_id() returns uuid

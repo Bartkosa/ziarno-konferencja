@@ -21,6 +21,7 @@ const LABELS: Record<string, string[]> = {
   networking: ["Lista uczestników", "Participants list", "Networking"],
   school_visits: ["Wizyty studyjne", "School visits"],
   lang: ["Język", "Language"],
+  photo: ["Wizerunek", "Photo consent"],
 };
 const PACKAGE_MAP: [RegExp, string][] = [[/pe[łl]n|full/i, "full"], [/obiad|lunch/i, "conference_lunch"], [/konferencj|conference/i, "conference"]];
 
@@ -57,6 +58,8 @@ Deno.serve(async (req) => {
   const pkgText = String(field(fields, "package") || "");
   const pkg = (PACKAGE_MAP.find(([re]) => re.test(pkgText)) || [null, "full"])[1];
   const yes = (v: any) => /tak|yes|true/i.test(String(v || ""));
+  // checkbox z jedną opcją (np. "Chcę być widoczny…"): zaznaczone = wartość niepusta i nie "nie/no"
+  const checked = (v: any) => { const s = String(v ?? "").trim(); return s !== "" && !/^(nie|no|false)$/i.test(s); };
   const langText = String(field(fields, "lang") || "");
   const lang = /en|angiel/i.test(langText) ? "en" : /pl|pol/i.test(langText) ? "pl" : (payload.eventType && /en/i.test(String(d.formName || ""))) ? "en" : "pl";
 
@@ -64,8 +67,9 @@ Deno.serve(async (req) => {
   const row = {
     email, first_name: field(fields, "first_name") || "", last_name: field(fields, "last_name") || "",
     org: field(fields, "org") || "", role: field(fields, "role") || "", country: String(field(fields, "country") || "").slice(0, 2).toUpperCase(),
-    package: pkg, diet: field(fields, "diet") || "", networking_consent: yes(field(fields, "networking")), lang,
+    package: pkg, diet: field(fields, "diet") || "", networking_consent: checked(field(fields, "networking")), lang,
     options: { school_visits: yes(field(fields, "school_visits")) },
+    photo_consent: checked(field(fields, "photo")),
     tally_submission_id: d.submissionId || d.responseId || null,
     // płatność Stripe w Tally: pole "payment" w payloadzie → paid, jeśli status = paid
     paid: !!fields.find((f: any) => f.type === "PAYMENT" && /paid|succeeded/i.test(JSON.stringify(f.value || ""))),
