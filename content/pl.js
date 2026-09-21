@@ -22,6 +22,8 @@ window.CONTENT.pl = {
       { href: "#register", label: "Rejestracja" },
     ],
     cta: "Zapisz się",
+    login: "Zaloguj się",
+    loginHint: "Masz już zgłoszenie? Zaloguj się do panelu uczestnika",
     menuOpen: "Otwórz menu",
     menuClose: "Zamknij menu",
   },

@@ -10,9 +10,9 @@ Tryb testowy bez bazy: `portal.backend: "mock"` w `js/config.js`.
 | Schemat bazy + migracje (`photo_consent`, `phone`, `invoice_requested`) | ✅ wdrożone (`npx supabase db push`) | — |
 | Funkcja `tally-webhook` (v5), sygnatura Tally | ✅ wdrożona, odrzuca żądania bez podpisu | — |
 | Tally PL `RGO1Xv` → webhook | ✅ testowe zgłoszenie trafiło do bazy | — |
-| Tally EN `7RQY4L` → webhook | ❓ nie do sprawdzenia z kodu | W Tally EN: Integrations → Webhooks → ten sam URL i Signing secret |
-| Powrót na stronę po wysłaniu (Tally *Redirect on completion*) | ❌ do ustawienia | PL: `https://conference.ziarno.edu.pl/?registered=1#register`, EN: `https://conference.ziarno.edu.pl/?lang=en&registered=1#register` |
-| Mail powitalny przez Resend | ❌ brak sekretu `RESEND_API_KEY` | `npx supabase secrets set RESEND_API_KEY=re_...` po weryfikacji domeny `ziarno.edu.pl` w Resend. Do tego czasu webhook wysyła zapasowo zwykły magic link przez Supabase Auth (szablon „Magic Link”, limity SMTP projektu) |
+| Tally EN `7RQY4L` → webhook | ✅ testowe zgłoszenie trafiło do bazy | — |
+| Powrót na stronę po wysłaniu (Tally *Redirect on completion*) | ✅ ustawione i przetestowane w obu formularzach (21.09.2026) | PL: `https://conference.ziarno.edu.pl/?registered=1#register`, EN: `https://conference.ziarno.edu.pl/?lang=en&registered=1#register` |
+| Mail powitalny przez Resend | ✅ domena `ziarno.edu.pl` zweryfikowana (21.09.2026), sekret `RESEND_API_KEY` ustawiony | Gdyby klucz zniknął, webhook wysyła zapasowo zwykły magic link przez Supabase Auth. Domena utknęła kiedyś na „Checking DNS” mimo poprawnych rekordów — pomogło wywołanie `POST https://api.resend.com/domains/<id>/verify` kluczem Full access |
 | SMTP dla Supabase Auth (linki logowania z `/moje`) | ❓ | Authentication → SMTP settings → Resend; bez tego wbudowany mailer ma limit kilku maili/h |
 | Ważność linku z maila | ⚠️ domyślnie 1 h | Authentication → Providers → Email → *Email OTP expiration* = 86400 (24 h). Wygasły link portal obsługuje: prosi o e-mail i wysyła nowy |
 | Redirect URLs | ❓ | Authentication → URL configuration: `https://conference.ziarno.edu.pl/moje/` **i** `https://conference.ziarno.edu.pl/admin/` (panel organizatora loguje teraz prosto do `/admin/`) |

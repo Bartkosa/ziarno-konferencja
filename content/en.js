@@ -21,6 +21,8 @@ window.CONTENT.en = {
       { href: "#register", label: "Register" },
     ],
     cta: "Register",
+    login: "Sign in",
+    loginHint: "Already registered? Sign in to your participant portal",
     menuOpen: "Open menu",
     menuClose: "Close menu",
   },

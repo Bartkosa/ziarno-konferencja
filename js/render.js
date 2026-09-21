@@ -80,13 +80,18 @@
     document.getElementById("brand").innerHTML = logoZ + (logoL ? '<span class="brand-x">×</span>' + logoL : "");
     document.getElementById("brand").setAttribute("aria-label", esc(T.nav.brand));
     document.getElementById("nav-links").innerHTML = T.nav.links.map(function (l) { return '<a href="' + esc(l.href) + '">' + esc(l.label) + "</a>"; }).join("");
-    document.getElementById("mobile-menu").innerHTML = T.nav.links.map(function (l) { return '<a href="' + esc(l.href) + '">' + esc(l.label) + "</a>"; }).join("") + '<a class="btn" data-form-link href="#register">' + esc(T.nav.cta) + "</a>";
+    // "Zaloguj się" dla osób już zapisanych — obok "Zapisz się" (nagłówek na desktopie, menu mobilne)
+    var portalOn = C.portal && C.portal.enabled && T.nav.login, login = document.getElementById("nav-login");
+    if (login) { login.hidden = !portalOn; login.textContent = T.nav.login || ""; login.setAttribute("href", portalUrl(lang)); }
+    document.getElementById("mobile-menu").innerHTML = T.nav.links.map(function (l) { return '<a href="' + esc(l.href) + '">' + esc(l.label) + "</a>"; }).join("") +
+      '<a class="btn" data-form-link href="#register">' + esc(T.nav.cta) + "</a>" +
+      (portalOn ? '<a class="btn btn-outline" href="' + esc(portalUrl(lang)) + '">' + esc(T.nav.login) + "</a>" : "");
     var burger = document.getElementById("burger");
     burger.setAttribute("aria-label", T.nav.menuOpen);
     document.querySelectorAll(".lang button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === lang)); });
   }
 
-  function renderHero(T) {
+  function renderHero(T, lang) {
     document.getElementById("hero-bg").style.backgroundImage = "url('" + C.heroImage + "')";
     var h = T.hero;
     document.getElementById("hero-content").innerHTML =
@@ -99,6 +104,7 @@
       '<div class="hero-links">' +
       (C.invitePdf && h.invite ? '<a href="' + esc(C.invitePdf) + '" target="_blank" rel="noopener">' + icon("external") + esc(h.invite) + "</a>" : "") +
       (h.calendar ? '<a href="' + icsHref(T) + '" download="nwow-2027.ics">' + icon("calendar") + esc(h.calendar) + "</a>" : "") +
+      (C.portal && C.portal.enabled && T.nav.loginHint ? '<a href="' + esc(portalUrl(lang)) + '">' + icon("app") + esc(T.nav.loginHint) + "</a>" : "") +
       "</div>";
   }
 
@@ -335,7 +341,7 @@
     document.documentElement.lang = lang;
     document.title = T.meta.title;
     var md = document.querySelector('meta[name="description"]'); if (md) md.setAttribute("content", T.meta.description);
-    renderHeader(T, lang); renderHero(T); renderWhy(T); renderWho(T); renderProgram(T); renderSpeakers(T); renderPartners(T); renderPractical(T, lang); renderFaq(T); renderRegister(T, lang); renderFooter(T);
+    renderHeader(T, lang); renderHero(T, lang); renderWhy(T); renderWho(T); renderProgram(T); renderSpeakers(T); renderPartners(T); renderPractical(T, lang); renderFaq(T); renderRegister(T, lang); renderFooter(T);
     afterRender(T, lang);
   };
   window.renderSite.bindOnce = bindOnce;
