@@ -55,7 +55,8 @@
     return open;
   }
   // Stan "właśnie wysłano zgłoszenie": ?registered=1 (redirect z Tally po wysłaniu) albo zdarzenie z osadzonego formularza
-  function registeredState() { try { return new URLSearchParams(location.search).get("registered") === "1"; } catch (e) { return false; } }
+  // (toleruje też "&amp;registered=1", gdyby narzędzie przekierowujące zakodowało "&" jako encję HTML)
+  function registeredState() { try { var q = new URLSearchParams(location.search); return q.get("registered") === "1" || q.get("amp;registered") === "1"; } catch (e) { return false; } }
   function setRegistered(on) {
     try { var u = new URL(location.href); if (on) u.searchParams.set("registered", "1"); else u.searchParams.delete("registered"); history.replaceState(null, "", u.pathname + u.search + u.hash); } catch (e) {}
   }
