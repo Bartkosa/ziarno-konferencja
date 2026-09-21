@@ -15,7 +15,7 @@
   }
 
   function pkgLabel(k) { return T.packages[k] || k; }
-  function optLabels(o) { return Object.keys(o || {}).filter(function (k) { return o[k]; }).map(function (k) { return (T.options.items[k] || { label: k }).label.split(" · ")[1] || k; }); }
+  function optLabels(o) { return Object.keys(o || {}).filter(function (k) { return o[k] && T.options.items[k]; }).map(function (k) { return T.options.items[k].label.split(" · ")[1] || k; }); }
   function visible() {
     var qq = q.toLowerCase();
     return people.filter(function (p) {
@@ -37,7 +37,7 @@
     var c = A.cols;
     var rows = visible().map(function (p) {
       var picks = p.picks.map(function (id) { var s = sessions.find(function (x) { return x.id === id; }); return s ? "B" + s.block + ": " + s.speaker : id; }).join("<br>");
-      return "<tr><td><strong>" + esc(p.last_name + " " + p.first_name) + "</strong><br><span style='color:var(--muted)'>" + esc(p.role || "") + "</span></td><td>" + esc(p.email) + "</td><td>" + esc(p.org || "") + "</td><td>" + esc(p.country || "") + "</td><td>" + esc(pkgLabel(p.package)) + '</td><td><span class="pill-sm ' + (p.paid ? "ok" : "bad") + '">' + esc(p.paid ? T.common.yes : T.common.no) + '</span><br><button class="btn btn-outline" data-paid="' + esc(p.id) + '" data-val="' + (p.paid ? "0" : "1") + '">' + esc(p.paid ? A.markUnpaid : A.markPaid) + "</button></td><td>" + (picks || A.noPicks) + "</td><td>" + esc(p.diet || "") + "</td><td>" + esc(optLabels(p.options).join(", ")) + "</td></tr>";
+      return "<tr><td><strong>" + esc(p.last_name + " " + p.first_name) + "</strong><br><span style='color:var(--muted)'>" + esc(p.role || "") + (p.invoice_requested ? " · " + esc(A.invoice) : "") + "</span></td><td>" + esc(p.email) + (p.phone ? "<br><span style='color:var(--muted)'>" + esc(p.phone) + "</span>" : "") + "</td><td>" + esc(p.org || "") + "</td><td>" + esc(p.country || "") + "</td><td>" + esc(pkgLabel(p.package)) + '</td><td><span class="pill-sm ' + (p.paid ? "ok" : "bad") + '">' + esc(p.paid ? T.common.yes : T.common.no) + '</span><br><button class="btn btn-outline" data-paid="' + esc(p.id) + '" data-val="' + (p.paid ? "0" : "1") + '">' + esc(p.paid ? A.markUnpaid : A.markPaid) + "</button></td><td>" + (picks || A.noPicks) + "</td><td>" + esc(p.diet || "") + "</td><td>" + esc(optLabels(p.options).join(", ")) + "</td></tr>";
     }).join("");
     document.getElementById("panel").innerHTML = '<div class="toolbar"><select id="filter">' + Object.keys(A.filters).map(function (k) { return '<option value="' + k + '"' + (filter === k ? " selected" : "") + ">" + esc(A.filters[k]) + "</option>"; }).join("") + '</select><input id="q" placeholder="' + esc(T.networking.search) + '" value="' + esc(q) + '"><span style="color:var(--muted);font-size:13px">' + visible().length + " / " + people.length + '</span></div><div class="tbl-wrap"><table class="tbl"><thead><tr>' + ["name", "email", "org", "country", "package", "paid", "picks", "diet", "options"].map(function (k) { return "<th>" + esc(c[k]) + "</th>"; }).join("") + "</tr></thead><tbody>" + rows + "</tbody></table></div>";
     document.getElementById("filter").addEventListener("change", function (e) { filter = e.target.value; vParticipants(); });
@@ -64,10 +64,10 @@
   }
 
   function exportCsv() {
-    var head = ["last_name", "first_name", "email", "org", "role", "country", "package", "paid", "diet", "networking_consent", "options", "block1", "block2", "block3"];
+    var head = ["last_name", "first_name", "email", "phone", "org", "role", "country", "package", "paid", "invoice", "diet", "networking_consent", "photo_consent", "lang", "options", "block1", "block2", "block3"];
     var lines = [head.join(";")].concat(people.map(function (p) {
       var bl = [1, 2, 3].map(function (b) { var id = p.picks.find(function (x) { var s = sessions.find(function (y) { return y.id === x; }); return s && s.block === b; }); var s = sessions.find(function (y) { return y.id === id; }); return s ? s.speaker + " — " + s.title : ""; });
-      return [p.last_name, p.first_name, p.email, p.org, p.role, p.country, p.package, p.paid ? 1 : 0, p.diet, p.networking_consent ? 1 : 0, optLabels(p.options).join(", ")].concat(bl).map(function (v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; }).join(";");
+      return [p.last_name, p.first_name, p.email, p.phone, p.org, p.role, p.country, p.package, p.paid ? 1 : 0, p.invoice_requested ? 1 : 0, p.diet, p.networking_consent ? 1 : 0, p.photo_consent ? 1 : 0, p.lang, optLabels(p.options).join(", ")].concat(bl).map(function (v) { return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; }).join(";");
     }));
     var blob = new Blob(["﻿" + lines.join("\r\n")], { type: "text/csv;charset=utf-8" }); var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "nwow-2027-uczestnicy.csv"; a.click();
   }
@@ -86,7 +86,17 @@
     if (api.mode === "mock") return load().then(function () { setLang("pl"); });
     // Supabase: wymaga zalogowania e-mailem z tabeli admins (RLS odrzuci listę dla innych)
     api.sessionFromUrl().then(function (u) { return u || api.currentUser(); }).then(function (u) {
-      if (!u) { T = window.PORTAL_CONTENT.pl; app.innerHTML = '<div class="login"><h1>' + esc(T.admin.title) + '</h1><p class="lead">' + esc(T.admin.loginLead) + '</p><form id="f"><input id="email" type="email" required placeholder="e-mail"><button class="btn" type="submit">' + esc(T.login.send) + "</button></form></div>"; document.getElementById("f").addEventListener("submit", function (e) { e.preventDefault(); api.requestLink(document.getElementById("email").value).then(function () { app.innerHTML = '<div class="login"><h1>' + esc(T.login.sentTitle) + "</h1></div>"; }); }); return; }
+      if (!u) {
+        T = window.PORTAL_CONTENT.pl;
+        var expired = api.lastError ? '<div class="msg warn">' + esc(T.login.linkExpired) + "</div>" : ""; api.lastError = null;
+        app.innerHTML = '<div class="login"><h1>' + esc(T.admin.title) + '</h1><p class="lead">' + esc(T.admin.loginLead) + "</p>" + expired + '<form id="f"><input id="email" type="email" required placeholder="e-mail" autocomplete="email"><button class="btn" type="submit">' + esc(T.login.send) + "</button></form></div>";
+        document.getElementById("f").addEventListener("submit", function (e) {
+          e.preventDefault(); var email = document.getElementById("email").value;
+          // link z maila wraca prosto do /admin/ (adres musi być na liście Redirect URLs w Supabase)
+          api.requestLink(email, location.origin + location.pathname).then(function (r) { app.innerHTML = '<div class="login"><h1>' + esc(r.ok ? T.login.sentTitle : T.common.error) + "</h1>" + (r.ok ? "<p class='lead'>" + esc(tpl(T.login.sentLead, { email: email })) + "</p>" : "") + "</div>"; });
+        });
+        return;
+      }
       return load().then(function () { setLang("pl"); });
     });
   }

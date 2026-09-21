@@ -55,13 +55,18 @@ ziarno.edu.pl, zmień `--serif` i `--sans` w `css/style.css` oraz link do Google
 1. Załóż konto na <https://tally.so> (darmowe) i podłącz Stripe (Settings → Integrations → Stripe; konto Stripe na szkołę).
 2. Utwórz formularz PL (i osobny EN albo jeden dwujęzyczny). Pola: imię, nazwisko, e-mail, telefon,
    organizacja i stanowisko, kraj, **pakiet** (pole wyboru: pełny / tylko konferencja / konferencja + obiad),
-   **wizyty studyjne w czwartek** (tak/nie), **warsztaty – 3 preferencje** (lista z `program.workshops`),
-   **wymagania dietetyczne**, faktura (tak/nie → logika warunkowa pokazuje pola: nazwa, NIP/VAT, adres),
-   **zgoda na regulamin i RODO** (wymagana, link do `regulamin.html`), zgoda na wizerunek (opcjonalna),
-   blok **Payment** (Stripe) z kwotą zależną od pakietu i early bird.
+   **wizyty studyjne w czwartek** (tak/nie), **wymagania dietetyczne**, lista uczestników (checkbox), faktura (checkbox),
+   **zgoda na regulamin i RODO** (wymagana, link do `regulamin.html`), zgoda na wizerunek (opcjonalna), język.
+   Warsztatów NIE wybiera się w formularzu — uczestnik wybiera je sam w panelu `/moje` (limit miejsc pilnuje baza).
+   Opcjonalnie blok **Payment** (Stripe) z kwotą zależną od pakietu i early bird — webhook oznaczy wtedy `paid` automatycznie.
 3. Settings → Notifications: e-mail do biura przy każdym zgłoszeniu; Integrations → Google Sheets: eksport odpowiedzi.
 4. Skopiuj ID formularza z adresu `https://tally.so/r/<ID>` → `registration.tally.pl` / `.en` w `js/config.js`
-   (`registration.provider: "tally"`).
+   (`registration.provider: "tally"`). Aktualne: PL `RGO1Xv`, EN `7RQY4L`.
+5. **Powrót na stronę po wysłaniu** — w każdym formularzu Settings → *Redirect on completion*:
+   PL `https://conference.ziarno.edu.pl/?registered=1#register`, EN `https://conference.ziarno.edu.pl/?lang=en&registered=1#register`.
+   Strona pokazuje wtedy ekran „Dziękujemy” z linkiem do panelu, instrukcją płatności i kalendarzem. Formularz osadzony
+   na stronie robi to sam (nasłuchuje zdarzenia `Tally.FormSubmitted`), redirect obsługuje wersję otwartą w nowej karcie.
+6. Integrations → Webhooks w **obu** formularzach (PL i EN): adres funkcji `tally-webhook` i ten sam Signing secret (`supabase/README.md`).
 
 Google Forms nadal działa jako zapasowa opcja: `registration.provider: "google"` i adresy w `registration.google`.
 

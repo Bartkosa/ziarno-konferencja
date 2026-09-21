@@ -1,7 +1,35 @@
 # Portal uczestnika — wdrożenie na Supabase
 
-Portal (`/moje`) i panel organizatora (`/admin`) działają dziś w trybie **mock** (dane testowe w przeglądarce).
-Przełączenie na produkcję to 6 kroków, bez zmian w kodzie strony poza `js/config.js`.
+Portal (`/moje`) i panel organizatora (`/admin`) są podłączone do projektu `uvonqpbngdwlxwybbnxu` (`portal.backend: "supabase"`).
+Tryb testowy bez bazy: `portal.backend: "mock"` w `js/config.js`.
+
+## Stan wdrożenia i lista kontrolna (21.09.2026)
+
+| Element | Stan | Co zrobić |
+|---|---|---|
+| Schemat bazy + migracje (`photo_consent`, `phone`, `invoice_requested`) | ✅ wdrożone (`npx supabase db push`) | — |
+| Funkcja `tally-webhook` (v5), sygnatura Tally | ✅ wdrożona, odrzuca żądania bez podpisu | — |
+| Tally PL `RGO1Xv` → webhook | ✅ testowe zgłoszenie trafiło do bazy | — |
+| Tally EN `7RQY4L` → webhook | ❓ nie do sprawdzenia z kodu | W Tally EN: Integrations → Webhooks → ten sam URL i Signing secret |
+| Powrót na stronę po wysłaniu (Tally *Redirect on completion*) | ❌ do ustawienia | PL: `https://conference.ziarno.edu.pl/?registered=1#register`, EN: `https://conference.ziarno.edu.pl/?lang=en&registered=1#register` |
+| Mail powitalny przez Resend | ❌ brak sekretu `RESEND_API_KEY` | `npx supabase secrets set RESEND_API_KEY=re_...` po weryfikacji domeny `ziarno.edu.pl` w Resend. Do tego czasu webhook wysyła zapasowo zwykły magic link przez Supabase Auth (szablon „Magic Link”, limity SMTP projektu) |
+| SMTP dla Supabase Auth (linki logowania z `/moje`) | ❓ | Authentication → SMTP settings → Resend; bez tego wbudowany mailer ma limit kilku maili/h |
+| Ważność linku z maila | ⚠️ domyślnie 1 h | Authentication → Providers → Email → *Email OTP expiration* = 86400 (24 h). Wygasły link portal obsługuje: prosi o e-mail i wysyła nowy |
+| Redirect URLs | ❓ | Authentication → URL configuration: `https://conference.ziarno.edu.pl/moje/` **i** `https://conference.ziarno.edu.pl/admin/` (panel organizatora loguje teraz prosto do `/admin/`) |
+| Dane do przelewu na stronie | ❌ `TODO` w `js/config.js` (`bank.ibanPln` itd.) | Mail powitalny i ekran „Dziękujemy” kierują do Instrukcji płatności — bez IBAN uczestnik nie ma jak zapłacić |
+
+Sekrety i funkcje sprawdzisz poleceniami `npx supabase secrets list` i `npx supabase functions list` (CLI przez `npx`, projekt jest zlinkowany).
+
+## Jak wygląda ścieżka uczestnika
+
+1. **Zapis** — formularz Tally osadzony w sekcji „Rejestracja” (przyciski „Zapisz się” przewijają do formularza; link „w nowej karcie” jest zapasowy).
+2. **Po wysłaniu** — strona pokazuje „Dziękujemy za zgłoszenie” z 3 krokami i przyciskami: panel uczestnika, instrukcja płatności, kalendarz.
+   Osadzony formularz zgłasza wysłanie zdarzeniem `Tally.FormSubmitted`; wersja otwarta w nowej karcie wraca przez *Redirect on completion* (`?registered=1`).
+3. **Webhook** — rekord w `participants` (upsert po e-mailu; ponowne zgłoszenie nie kasuje opłaty ani wyborów z panelu) + mail powitalny z jednorazowym linkiem.
+4. **Panel `/moje`** — link z maila loguje bez hasła; sesja zostaje w przeglądarce, więc kolejne wejścia nie wymagają maila.
+   Osoba bez sesji (nowe urządzenie, wygasły link) podaje e-mail z formularza i dostaje nowy link. Osoba zalogowana bez zgłoszenia widzi, co zrobić; organizatorka z listy `admins` dostaje przejście do `/admin`.
+
+## 1. Projekt Supabase (0 zł)
 
 ## 1. Projekt Supabase (0 zł)
 
@@ -23,9 +51,9 @@ supabase secrets set TALLY_SIGNING_SECRET=<z Tally> RESEND_API_KEY=<z Resend> SI
 supabase functions deploy tally-webhook --no-verify-jwt
 ```
 
-W Tally: formularz → Integrations → Webhooks → URL `https://<ref>.functions.supabase.co/tally-webhook`, ustaw Signing secret.
-Etykiety pytań muszą pasować do `LABELS` w `supabase/functions/tally-webhook/index.ts` (Imię, Nazwisko, E-mail, Organizacja, Stanowisko, Kraj, Pakiet, Dieta, Lista uczestników, Wizyty studyjne, Język).
-Blok płatności Stripe w Tally ustawia `paid = true` automatycznie; przelewy oznacza się ręcznie w `/admin`.
+W Tally: **każdy** formularz (PL i EN) → Integrations → Webhooks → URL `https://<ref>.supabase.co/functions/v1/tally-webhook`, ten sam Signing secret.
+Etykiety pytań muszą pasować do `LABELS` w `supabase/functions/tally-webhook/index.ts` (Imię, Nazwisko, E-mail, Telefon, Organizacja, Stanowisko, Kraj, Pakiet, Dieta, Lista uczestników, Wizyty studyjne, Faktura, Wizerunek, Język — i ich angielskie odpowiedniki).
+Blok płatności Stripe w Tally ustawia `paid = true` automatycznie; przelewy oznacza się ręcznie w `/admin`. Kraj zapisuje się tak, jak wpisał uczestnik (tekst, nie kod).
 
 ## 3. Przełączenie strony
 

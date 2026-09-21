@@ -86,11 +86,19 @@
     var self = this, sb = window.supabase.createClient(cfg.url, cfg.anonKey);
     this.mode = "supabase";
     function unwrap(r) { if (r.error) throw r.error; return r.data; }
-    this.requestLink = function (email) {
-      return sb.auth.signInWithOtp({ email: String(email).trim().toLowerCase(), options: { emailRedirectTo: cfg.redirectTo || location.href.split("?")[0].split("#")[0] } })
+    // redirectTo: dokąd ma wrócić link z maila (domyślnie /moje/ z config; /admin/ podaje panel organizatora)
+    this.requestLink = function (email, redirectTo) {
+      return sb.auth.signInWithOtp({ email: String(email).trim().toLowerCase(), options: { emailRedirectTo: redirectTo || cfg.redirectTo || location.href.split("?")[0].split("#")[0] } })
         .then(function (r) { return r.error ? { ok: false, error: r.error.message } : { ok: true }; });
     };
+    // Błąd z linku (np. #error=access_denied&error_code=otp_expired — link wygasł lub był już użyty); portal pokazuje komunikat
+    this.lastError = null;
     this.sessionFromUrl = function () {
+      var h = location.hash.replace(/^#/, "");
+      if (/(^|&)error=/.test(h)) {
+        var q = new URLSearchParams(h); self.lastError = q.get("error_code") || q.get("error") || "error";
+        history.replaceState(null, "", location.pathname + location.search);
+      }
       // magic link wraca z tokenami w #hash — supabase-js sam je odczytuje przy getSession()
       return sb.auth.getSession().then(function () { if (/access_token=|type=magiclink/.test(location.hash)) history.replaceState(null, "", location.pathname + location.search); return self.currentUser(); });
     };

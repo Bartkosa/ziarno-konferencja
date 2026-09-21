@@ -51,6 +51,8 @@ create table if not exists public.admins (
 );
 
 alter table public.participants add column if not exists photo_consent boolean not null default false;
+alter table public.participants add column if not exists phone text not null default '';
+alter table public.participants add column if not exists invoice_requested boolean not null default false;
 
 -- ---------- pomocnicze ----------
 create or replace function public.current_participant_id() returns uuid
@@ -74,6 +76,7 @@ begin
   if not public.is_admin() and auth.role() <> 'service_role' then
     new.email := old.email; new.package := old.package; new.paid := old.paid; new.paid_at := old.paid_at;
     new.first_name := old.first_name; new.last_name := old.last_name; new.tally_submission_id := old.tally_submission_id;
+    new.invoice_requested := old.invoice_requested;
   end if;
   return new;
 end $$;

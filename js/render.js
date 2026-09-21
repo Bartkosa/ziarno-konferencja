@@ -54,7 +54,12 @@
     }
     return open;
   }
-  function formUrl(lang) { var e = regEmbed(window.CONTENT[lang] || window.CONTENT.pl, lang); return e ? e.url : ""; }
+  // Stan "właśnie wysłano zgłoszenie": ?registered=1 (redirect z Tally po wysłaniu) albo zdarzenie z osadzonego formularza
+  function registeredState() { try { return new URLSearchParams(location.search).get("registered") === "1"; } catch (e) { return false; } }
+  function setRegistered(on) {
+    try { var u = new URL(location.href); if (on) u.searchParams.set("registered", "1"); else u.searchParams.delete("registered"); history.replaceState(null, "", u.pathname + u.search + u.hash); } catch (e) {}
+  }
+  function portalUrl(lang) { return (C.portal && C.portal.url || "moje/") + (lang === "en" ? "?lang=en" : ""); }
 
   function icsHref(T) {
     var e = C.event || {};
@@ -231,7 +236,14 @@
     }).join("");
     var steps = '<h3 class="steps-title">' + esc(PR.stepsTitle) + '</h3><ol class="steps">' + PR.steps.map(function (s) { return "<li>" + esc(tpl(s, vars)) + "</li>"; }).join("") + "</ol>";
     var box;
-    if (regState()) {
+    if (regState() && registeredState() && R.open.thanksTitle) {
+      // ekran po wysłaniu formularza: co dalej + szybki powrót do panelu / płatności / kalendarza
+      box = '<div class="thanks-box" id="form"><div class="tb-icon">' + icon("mail") + "</div><h3>" + esc(R.open.thanksTitle) + '</h3><p class="lead">' + esc(R.open.thanksLead) + "</p>" +
+        "<ol>" + (R.open.thanksSteps || []).map(function (s) { return "<li>" + esc(tpl(s, vars)) + "</li>"; }).join("") + "</ol>" +
+        '<div class="form-actions">' + (C.portal && C.portal.enabled ? '<a class="btn" href="' + esc(portalUrl(lang)) + '">' + esc(R.open.thanksPortal) + "</a>" : "") +
+        '<a class="btn btn-outline" href="#practical-info">' + esc(R.open.thanksPay) + '</a><a class="btn btn-outline" href="' + icsHref(T) + '" download="nwow-2027.ics">' + icon("calendar") + esc(R.open.thanksCalendar) + "</a></div>" +
+        '<p class="tb-again"><a href="#form" data-register-again>' + esc(R.open.thanksAgain) + "</a></p></div>";
+    } else if (regState()) {
       var emb = regEmbed(T, lang), url = emb ? emb.url : "";
       var meta = '<div class="register-meta">' + (C.registrationDeadline ? "<span>" + esc(tpl(R.open.deadline, vars)).replace(esc(vars.date), "<strong>" + esc(vars.date) + "</strong>") + "</span>" : "") + (C.seatLimit ? "<span>" + esc(tpl(R.open.seats, vars)) + "</span>" : "") + "</div>";
       var form = emb ? '<div class="form-embed' + (emb.tally ? " tally" : "") + '">' + emb.html + "</div>" : '<p class="todo">' + esc(R.open.pending) + "</p>";
@@ -241,7 +253,7 @@
     } else {
       box = '<div class="closed-box" style="margin-top:56px"><span class="badge">' + esc(R.closed.badge) + "</span><h3>" + esc(R.closed.title) + "</h3><p>" + esc(R.closed.text) + "</p><p>" + esc(R.closed.waitlist) + ' <a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a></p></div>";
     }
-    var portalBox = C.portal && C.portal.enabled && T.portalBox ? '<div class="portal-box"><div class="pb-icon">' + icon("app") + '</div><div><h3>' + esc(T.portalBox.title) + "</h3><p>" + esc(T.portalBox.text) + '</p><a class="btn" href="' + esc(C.portal.url) + (lang === "en" ? "?lang=en" : "") + '">' + esc(T.portalBox.cta) + " →</a><p class=\"pb-hint\">" + esc(T.portalBox.hint) + "</p></div></div>" : "";
+    var portalBox = C.portal && C.portal.enabled && T.portalBox ? '<div class="portal-box"><div class="pb-icon">' + icon("app") + '</div><div><h3>' + esc(T.portalBox.title) + "</h3><p>" + esc(T.portalBox.text) + '</p><a class="btn" href="' + esc(portalUrl(lang)) + '">' + esc(T.portalBox.cta) + " →</a><p class=\"pb-hint\">" + esc(T.portalBox.hint) + "</p></div></div>" : "";
     document.getElementById("register-content").innerHTML = head(PR, true) + '<div class="packages">' + pkgs + "</div>" + steps + box + portalBox;
   }
 
@@ -262,12 +274,14 @@
 
   // ---------- po renderze: linki formularza, interakcje, QR ----------
   function afterRender(T, lang) {
-    var open = regState(), url = formUrl(lang);
+    var open = regState();
+    // Przyciski "Zapisz się" prowadzą do formularza osadzonego na stronie (uczestnik nie opuszcza strony konferencji);
+    // otwarcie w nowej karcie jest osobnym, mniejszym linkiem pod formularzem.
     document.querySelectorAll("[data-form-link]").forEach(function (a) {
       if (!a.textContent.trim() || a.classList.contains("nav-cta") || a.closest(".mobile-cta")) a.textContent = T.nav.cta;
       a.classList.toggle("is-disabled", !open);
-      a.setAttribute("href", open ? (url || "#form") : "#register");
-      if (open && url) { a.setAttribute("target", "_blank"); a.setAttribute("rel", "noopener"); } else { a.removeAttribute("target"); }
+      a.setAttribute("href", open ? "#form" : "#register");
+      a.removeAttribute("target"); a.removeAttribute("rel");
       if (!open) a.textContent = T.register.closed.badge;
     });
     // Tally: doładuj skrypt osadzania (raz) i odśwież iframy
@@ -296,6 +310,14 @@
       var tl = e.target.closest(".tl-item.has-more .tl-head");
       if (tl) { tl.parentElement.classList.toggle("open"); return; }
       if (e.target.closest("#mobile-menu a")) { toggleMenu(false); }
+      if (e.target.closest("[data-register-again]")) { e.preventDefault(); setRegistered(false); window.renderSite(document.documentElement.lang); scrollToForm(); }
+    });
+    function scrollToForm() { var el = document.getElementById("form"); if (el) el.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    // Osadzony formularz Tally zgłasza wysłanie przez postMessage — pokazujemy ekran "Dziękujemy" bez opuszczania strony
+    window.addEventListener("message", function (e) {
+      if (!e.origin || !/(^|\.)tally\.so$/.test((e.origin.split("//")[1] || "").split(":")[0])) return;
+      var d = e.data; try { if (typeof d === "string") d = JSON.parse(d); } catch (x) { return; }
+      if (d && d.event === "Tally.FormSubmitted") { setRegistered(true); window.renderSite(document.documentElement.lang); scrollToForm(); }
     });
     var burger = document.getElementById("burger");
     burger.addEventListener("click", function () { toggleMenu(); });

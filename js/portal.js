@@ -35,8 +35,14 @@
   function view() { var h = (location.hash || "#overview").slice(1); return T.nav[h] ? h : "overview"; }
   function render() {
     if (!me) return renderLogin();
+    if (me._unregistered && me._admin) {
+      // organizatorka bez własnego zgłoszenia: zamiast komunikatu o błędzie — przejście do panelu organizatora
+      app.innerHTML = '<div class="login"><h1>' + esc(T.login.adminTitle) + '</h1><p class="lead">' + tpl(esc(T.login.adminLead), { email: "<strong>" + esc(me.email) + "</strong>" }) + '</p><p class="alt"><a class="btn" href="../admin/">' + esc(T.login.adminOpen) + '</a></p><p class="alt"><a href="../">' + esc(T.common.back.replace("← ", "")) + "</a></p></div>";
+      return;
+    }
     if (me._unregistered) {
-      app.innerHTML = '<div class="login"><h1>' + esc(T.login.unregisteredTitle) + '</h1><p class="lead">' + tpl(esc(T.login.unregisteredLead), { email: "<strong>" + esc(me.email) + "</strong>", contact: contactLink() }) + "</p>" + (me._admin ? '<p class="alt"><a class="btn btn-sm" href="../admin/">' + esc(T.admin.title) + "</a></p>" : "") + '<p class="alt"><a href="../#register">' + esc(T.login.register) + "</a></p></div>";
+      app.innerHTML = '<div class="login"><h1>' + esc(T.login.unregisteredTitle) + '</h1><p class="lead">' + tpl(esc(T.login.unregisteredLead), { email: "<strong>" + esc(me.email) + "</strong>", contact: contactLink() }) + '</p><p class="alt"><a class="btn btn-sm" href="../#register">' + esc(T.login.register) + '</a></p><p class="alt"><a href="#" id="switch-account">' + esc(T.login.switchAccount) + "</a></p></div>";
+      document.getElementById("switch-account").addEventListener("click", function (e) { e.preventDefault(); document.getElementById("logout").click(); });
       return;
     }
     var nav = Object.keys(T.nav).filter(function (k) { return k !== "logout"; }).map(function (k) { return '<a href="#' + k + '" class="' + (view() === k ? "active" : "") + '">' + icon(k) + esc(T.nav[k]) + "</a>"; }).join("");
@@ -53,13 +59,16 @@
       app.innerHTML = '<div class="login"><h1>' + esc(T.login.sentTitle) + '</h1><p class="lead">' + esc(tpl(T.login.sentLead, { email: state.email })) + "</p>" + dev + "</div>";
       return;
     }
-    app.innerHTML = '<div class="login"><h1>' + esc(T.login.title) + '</h1><p class="lead">' + esc(T.login.lead) + '</p>' +
-      (state.error ? '<div class="msg err">' + tpl(esc(T.login.notFound), { contact: contactLink() }) + "</div>" : "") +
+    // link z maila wygasł / był już użyty → prośba o nowy, bez straszenia błędem
+    var expired = api.lastError ? '<div class="msg warn">' + esc(T.login.linkExpired) + "</div>" : ""; api.lastError = null;
+    var errMsg = state.error === "not_found" ? tpl(esc(T.login.notFound), { contact: contactLink() }) : state.error ? tpl(esc(T.login.sendError), { contact: contactLink() }) : "";
+    app.innerHTML = '<div class="login"><h1>' + esc(T.login.title) + '</h1><p class="lead">' + esc(T.login.lead) + '</p>' + expired +
+      (errMsg ? '<div class="msg err">' + errMsg + "</div>" : "") +
       '<form id="login-form"><label for="email">' + esc(T.login.email) + '</label><input id="email" type="email" required autocomplete="email" value="' + esc(state.email || "") + '"><button class="btn" type="submit">' + esc(T.login.send) + "</button></form>" +
-      '<p class="alt">' + esc(T.login.notRegistered) + ' <a href="../#register">' + esc(T.login.register) + "</a></p>" + dev + "</div>";
+      '<p class="alt">' + esc(T.login.notRegistered) + ' <a href="../#register">' + esc(T.login.register) + "</a></p>" + '<p class="alt"><a href="../">' + esc(T.common.back.replace("← ", "")) + "</a></p>" + dev + "</div>";
     document.getElementById("login-form").addEventListener("submit", function (e) {
       e.preventDefault(); var email = document.getElementById("email").value; var btn = e.target.querySelector("button"); btn.textContent = T.login.sending; btn.disabled = true;
-      api.requestLink(email).then(function (r) { if (r.ok) renderLogin({ sent: true, email: email, devLink: r.devLink }); else renderLogin({ error: true, email: email }); });
+      api.requestLink(email).then(function (r) { if (r.ok) renderLogin({ sent: true, email: email, devLink: r.devLink }); else { console.warn("requestLink:", r.error); renderLogin({ error: r.error || "error", email: email }); } });
     });
   }
 
@@ -123,14 +132,14 @@
       "<div><label>" + esc(f.email) + '</label><input type="email" value="' + esc(me.email) + '" disabled></div>' +
       "<div><label>" + esc(f.org) + '</label><input type="text" name="org" value="' + esc(me.org || "") + '"></div>' +
       "<div><label>" + esc(f.role) + '</label><input type="text" name="role" value="' + esc(me.role || "") + '"></div>' +
-      "<div><label>" + esc(f.country) + '</label><input type="text" name="country" value="' + esc(me.country || "") + '" maxlength="2" style="max-width:120px"></div>' +
+      "<div><label>" + esc(f.country) + '</label><input type="text" name="country" value="' + esc(me.country || "") + '" maxlength="60" style="max-width:260px"></div>' +
       "<div><label>" + esc(f.diet) + '</label><textarea name="diet">' + esc(me.diet || "") + '</textarea><div class="hint">' + esc(f.dietHint) + "</div></div>" +
       "<div><label>" + esc(f.lang) + '</label><select name="lang"><option value="pl"' + (me.lang === "pl" ? " selected" : "") + '>Polski</option><option value="en"' + (me.lang === "en" ? " selected" : "") + ">English</option></select></div>" +
       '<label class="check"><input type="checkbox" name="networking_consent"' + (me.networking_consent ? " checked" : "") + "><span><strong>" + esc(f.networking) + '</strong><div class="hint">' + esc(f.networkingHint) + "</div></span></label>" +
       '<div><button class="btn" type="submit">' + esc(f.save) + "</button></div></form>");
     document.getElementById("prof-form").addEventListener("submit", function (e) {
       e.preventDefault(); var fd = new FormData(e.target);
-      api.updateMe({ org: fd.get("org"), role: fd.get("role"), country: String(fd.get("country") || "").toUpperCase(), diet: fd.get("diet"), lang: fd.get("lang"), networking_consent: fd.get("networking_consent") === "on" }).then(function (p) { me = p; me._dietChecked = true; flash("ok", f.saved); });
+      api.updateMe({ org: fd.get("org"), role: fd.get("role"), country: String(fd.get("country") || "").trim(), diet: fd.get("diet"), lang: fd.get("lang"), networking_consent: fd.get("networking_consent") === "on" }).then(function (p) { me = p; me._dietChecked = true; flash("ok", f.saved); });
     });
   }
 
