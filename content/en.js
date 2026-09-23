@@ -153,9 +153,9 @@ window.CONTENT.en = {
             mapUrl: "https://www.google.com/maps/search/?api=1&query=Modli%C5%84ska+184a+Warszawa",
             kicker: "Workshops — practical sessions",
             title: "Three parallel workshop blocks",
-            text: "An interactive small-group experience (limited to 20 people) guaranteeing direct contact with the speakers. You choose your sessions in the registration form.",
+            text: "An interactive experience in groups of up to 35 people, guaranteeing direct contact with the speakers. You choose your sessions in the participant portal after registering.",
             items: [
-              { time: "9:30", title: "Workshop block 1", note: "Parallel sessions, chosen in the registration form." },
+              { time: "9:30", title: "Workshop block 1", note: "Parallel sessions, chosen in the participant portal." },
               { time: "10:30", title: "Break" },
               { time: "10:45", title: "Workshop block 2" },
               { time: "11:45", title: "Break" },
@@ -177,7 +177,7 @@ window.CONTENT.en = {
     ],
     workshops: {
       title: "Workshops — chosen at registration",
-      text: "Each workshop is limited to 20 participants. The final schedule and repetitions will be adjusted to the number of registrations.",
+      text: "Each workshop is limited to 35 participants. The final schedule and repetitions will be adjusted to the number of registrations.",
       items: [
         { speaker: "Lucia Calvo", sessions: [{ title: "TODO workshop title", lang: "ES · PL interpretation" }] },
         { speaker: "Dobrochna Lama", sessions: [{ title: "Co sprawia, że tutoring naprawdę działa?", lang: "PL" }, { title: "What makes tutoring actually work?", lang: "EN" }] },

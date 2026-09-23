@@ -154,9 +154,9 @@ window.CONTENT.pl = {
             mapUrl: "https://www.google.com/maps/search/?api=1&query=Modli%C5%84ska+184a+Warszawa",
             kicker: "Warsztaty — sesje praktyczne",
             title: "Trzy równoległe bloki warsztatowe",
-            text: "Interaktywne doświadczenie w małych grupach (limit 20 osób), gwarantujące bezpośredni kontakt z prelegentami. Sesje wybierasz w formularzu zapisów.",
+            text: "Interaktywne doświadczenie w grupach do 35 osób, gwarantujące bezpośredni kontakt z prelegentami. Sesje wybierasz po zapisie w panelu uczestnika.",
             items: [
-              { time: "9:30", title: "Blok warsztatowy 1", note: "Sesje równoległe, wybór w formularzu zapisów." },
+              { time: "9:30", title: "Blok warsztatowy 1", note: "Sesje równoległe, wybór w panelu uczestnika." },
               { time: "10:30", title: "Przerwa" },
               { time: "10:45", title: "Blok warsztatowy 2" },
               { time: "11:45", title: "Przerwa" },
@@ -178,7 +178,7 @@ window.CONTENT.pl = {
     ],
     workshops: {
       title: "Warsztaty — wybierasz przy zapisie",
-      text: "Każdy warsztat jest ograniczony do 20 uczestników. Ostateczny układ i powtórzenia sesji dostosujemy do liczby zgłoszeń.",
+      text: "Każdy warsztat jest ograniczony do 35 uczestników. Ostateczny układ i powtórzenia sesji dostosujemy do liczby zgłoszeń.",
       items: [
         { speaker: "Lucia Calvo", sessions: [{ title: "TODO tytuł warsztatu", lang: "ES · tłum. PL" }] },
         { speaker: "Dobrochna Lama", sessions: [{ title: "Co sprawia, że tutoring naprawdę działa?", lang: "PL" }, { title: "What makes tutoring actually work?", lang: "EN" }] },

@@ -17,7 +17,7 @@ window.KONF = {
   // Po tej dacie (włącznie) zapisy zamykają się same (RRRR-MM-DD)
   registrationDeadline: "2027-04-16",
   // Limit miejsc (0 = nie pokazuj)
-  seatLimit: 60,
+  seatLimit: 100,
 
   registration: {
     // "tally" (polecane: formularz + płatność Stripe w jednym) albo "google" (Google Forms)

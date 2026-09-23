@@ -6,20 +6,20 @@
 window.TEST_DATA = {
   sessions: [
     // block: 1 = 9:30, 2 = 10:45, 3 = 12:00 · capacity: limit miejsc · lang: język sesji
-    { id: "s1-lama-pl",   block: 1, title: "Co sprawia, że tutoring naprawdę działa?", speaker: "Dobrochna Lama", lang: "PL", room: "Sala 1", capacity: 20 },
-    { id: "s1-calvo-es",  block: 1, title: "Tożsamość szkoły edukacji spersonalizowanej", speaker: "Lucia Calvo", lang: "ES · tłum. PL", room: "Sala 2", capacity: 20 },
-    { id: "s1-kowal-pl",  block: 1, title: "Szkoła, którą buduje się latami — Źródło i Wierchy", speaker: "Stanisław Kowal", lang: "PL", room: "Sala 3", capacity: 20 },
-    { id: "s1-todo-en",   block: 1, title: "TODO: Character education in practice", speaker: "TODO prowadzący", lang: "EN", room: "Sala 4", capacity: 20 },
+    { id: "s1-lama-pl",   block: 1, title: "Co sprawia, że tutoring naprawdę działa?", speaker: "Dobrochna Lama", lang: "PL", room: "Sala 1", capacity: 35 },
+    { id: "s1-calvo-es",  block: 1, title: "Tożsamość szkoły edukacji spersonalizowanej", speaker: "Lucia Calvo", lang: "ES · tłum. PL", room: "Sala 2", capacity: 35 },
+    { id: "s1-kowal-pl",  block: 1, title: "Szkoła, którą buduje się latami — Źródło i Wierchy", speaker: "Stanisław Kowal", lang: "PL", room: "Sala 3", capacity: 35 },
+    { id: "s1-todo-en",   block: 1, title: "TODO: Character education in practice", speaker: "TODO prowadzący", lang: "EN", room: "Sala 4", capacity: 35 },
 
-    { id: "s2-lama-en",   block: 2, title: "What makes tutoring actually work?", speaker: "Dobrochna Lama", lang: "EN", room: "Sala 1", capacity: 20 },
-    { id: "s2-calvo-es",  block: 2, title: "Identity of a personalized-education school (part 2)", speaker: "Lucia Calvo", lang: "ES · EN interpretation", room: "Sala 2", capacity: 20 },
+    { id: "s2-lama-en",   block: 2, title: "What makes tutoring actually work?", speaker: "Dobrochna Lama", lang: "EN", room: "Sala 1", capacity: 35 },
+    { id: "s2-calvo-es",  block: 2, title: "Identity of a personalized-education school (part 2)", speaker: "Lucia Calvo", lang: "ES · EN interpretation", room: "Sala 2", capacity: 35 },
     { id: "s2-kowal-pl",  block: 2, title: "Współpraca z rodzicami: od informowania do partnerstwa", speaker: "Stanisław Kowal", lang: "PL", room: "Sala 3", capacity: 12 },
-    { id: "s2-todo-pl",   block: 2, title: "TODO: Rytuały i święta w kulturze szkoły", speaker: "TODO prowadzący", lang: "PL", room: "Sala 4", capacity: 20 },
+    { id: "s2-todo-pl",   block: 2, title: "TODO: Rytuały i święta w kulturze szkoły", speaker: "TODO prowadzący", lang: "PL", room: "Sala 4", capacity: 35 },
 
-    { id: "s3-lama-pl",   block: 3, title: "Rozmowa tutorska — warsztat praktyczny", speaker: "Dobrochna Lama", lang: "PL", room: "Sala 1", capacity: 20 },
-    { id: "s3-calvo-es",  block: 3, title: "Formación del carácter: casos prácticos", speaker: "Lucia Calvo", lang: "ES · tłum. PL", room: "Sala 2", capacity: 20 },
-    { id: "s3-kowal-en",  block: 3, title: "Founding a school: lessons learned", speaker: "Stanisław Kowal", lang: "EN", room: "Sala 3", capacity: 20 },
-    { id: "s3-todo-en",   block: 3, title: "TODO: Digital life as an educational project", speaker: "TODO prowadzący", lang: "EN", room: "Sala 4", capacity: 20 },
+    { id: "s3-lama-pl",   block: 3, title: "Rozmowa tutorska — warsztat praktyczny", speaker: "Dobrochna Lama", lang: "PL", room: "Sala 1", capacity: 35 },
+    { id: "s3-calvo-es",  block: 3, title: "Formación del carácter: casos prácticos", speaker: "Lucia Calvo", lang: "ES · tłum. PL", room: "Sala 2", capacity: 35 },
+    { id: "s3-kowal-en",  block: 3, title: "Founding a school: lessons learned", speaker: "Stanisław Kowal", lang: "EN", room: "Sala 3", capacity: 35 },
+    { id: "s3-todo-en",   block: 3, title: "TODO: Digital life as an educational project", speaker: "TODO prowadzący", lang: "EN", room: "Sala 4", capacity: 35 },
   ],
 
   // package: full | conference | conference_lunch

@@ -35,7 +35,7 @@ create table if not exists public.sessions (
   speaker   text not null default '',
   lang      text not null default '',
   room      text default '',
-  capacity  int  not null default 20,
+  capacity  int  not null default 35,
   sort      int  not null default 0
 );
 
@@ -149,13 +149,13 @@ grant execute on function public.pick_session(text) to authenticated;
 insert into public.admins (email) values ('nwow@ziarno.edu.pl') on conflict do nothing;  -- TODO: e-maile organizatorek
 
 insert into public.sessions (id, block, title, speaker, lang, room, capacity, sort) values
-  ('s1-lama-pl', 1, 'Co sprawia, że tutoring naprawdę działa?', 'Dobrochna Lama', 'PL', 'Sala 1', 20, 1),
-  ('s1-calvo-es', 1, 'Tożsamość szkoły edukacji spersonalizowanej', 'Lucia Calvo', 'ES · tłum. PL', 'Sala 2', 20, 2),
-  ('s1-kowal-pl', 1, 'Szkoła, którą buduje się latami — Źródło i Wierchy', 'Stanisław Kowal', 'PL', 'Sala 3', 20, 3),
-  ('s2-lama-en', 2, 'What makes tutoring actually work?', 'Dobrochna Lama', 'EN', 'Sala 1', 20, 1),
-  ('s2-calvo-es', 2, 'Identity of a personalized-education school (part 2)', 'Lucia Calvo', 'ES · EN interpretation', 'Sala 2', 20, 2),
-  ('s2-kowal-pl', 2, 'Współpraca z rodzicami: od informowania do partnerstwa', 'Stanisław Kowal', 'PL', 'Sala 3', 20, 3),
-  ('s3-lama-pl', 3, 'Rozmowa tutorska — warsztat praktyczny', 'Dobrochna Lama', 'PL', 'Sala 1', 20, 1),
-  ('s3-calvo-es', 3, 'Formación del carácter: casos prácticos', 'Lucia Calvo', 'ES · tłum. PL', 'Sala 2', 20, 2),
-  ('s3-kowal-en', 3, 'Founding a school: lessons learned', 'Stanisław Kowal', 'EN', 'Sala 3', 20, 3)
+  ('s1-lama-pl', 1, 'Co sprawia, że tutoring naprawdę działa?', 'Dobrochna Lama', 'PL', 'Sala 1', 35, 1),
+  ('s1-calvo-es', 1, 'Tożsamość szkoły edukacji spersonalizowanej', 'Lucia Calvo', 'ES · tłum. PL', 'Sala 2', 35, 2),
+  ('s1-kowal-pl', 1, 'Szkoła, którą buduje się latami — Źródło i Wierchy', 'Stanisław Kowal', 'PL', 'Sala 3', 35, 3),
+  ('s2-lama-en', 2, 'What makes tutoring actually work?', 'Dobrochna Lama', 'EN', 'Sala 1', 35, 1),
+  ('s2-calvo-es', 2, 'Identity of a personalized-education school (part 2)', 'Lucia Calvo', 'ES · EN interpretation', 'Sala 2', 35, 2),
+  ('s2-kowal-pl', 2, 'Współpraca z rodzicami: od informowania do partnerstwa', 'Stanisław Kowal', 'PL', 'Sala 3', 35, 3),
+  ('s3-lama-pl', 3, 'Rozmowa tutorska — warsztat praktyczny', 'Dobrochna Lama', 'PL', 'Sala 1', 35, 1),
+  ('s3-calvo-es', 3, 'Formación del carácter: casos prácticos', 'Lucia Calvo', 'ES · tłum. PL', 'Sala 2', 35, 2),
+  ('s3-kowal-en', 3, 'Founding a school: lessons learned', 'Stanisław Kowal', 'EN', 'Sala 3', 35, 3)
 on conflict (id) do update set title = excluded.title, speaker = excluded.speaker, lang = excluded.lang, room = excluded.room, capacity = excluded.capacity, sort = excluded.sort;
