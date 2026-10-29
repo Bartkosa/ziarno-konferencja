@@ -63,7 +63,7 @@ window.PORTAL_CONTENT = {
       title: "Uczestnicy", lead: "Osoby, które zgodziły się na kontakt. Napisz przed konferencją, umów się na kawę w Warszawie.",
       count: "{{n}} osób na liście", noConsent: "Nie jesteś na liście. Włącz widoczność w zakładce „Dane i dieta”, żeby inni mogli Cię znaleźć.", search: "Szukaj po nazwisku, organizacji, kraju",
     },
-    info: { title: "Informacje praktyczne", lead: "Lokalizacje, dojazd, noclegi i płatność są na stronie głównej.", open: "Otwórz informacje praktyczne", pay: "Instrukcja płatności", faq: "FAQ", contact: "Kontakt z biurem konferencji" },
+    info: { title: "Informacje praktyczne", lead: "Lokalizacje, dojazd i płatność są na stronie głównej.", open: "Otwórz informacje praktyczne", pay: "Instrukcja płatności", faq: "FAQ", contact: "Kontakt z biurem konferencji" },
     common: { back: "← Strona konferencji", loading: "Ładowanie…", error: "Coś poszło nie tak. Spróbuj ponownie.", yes: "tak", no: "nie" },
     admin: {
       title: "Panel organizatora", participants: "Uczestnicy", sessions: "Warsztaty", catering: "Catering i opcje", export: "Eksport CSV",
@@ -135,7 +135,7 @@ window.PORTAL_CONTENT = {
       title: "Participants", lead: "People who agreed to be contacted. Write before the conference, meet for coffee in Warsaw.",
       count: "{{n}} people on the list", noConsent: "You're not on the list. Enable visibility in “Details and diet” so others can find you.", search: "Search by name, organisation, country",
     },
-    info: { title: "Practical info", lead: "Venues, travel, accommodation and payment are on the main site.", open: "Open practical info", pay: "Payment instructions", faq: "FAQ", contact: "Contact the conference office" },
+    info: { title: "Practical info", lead: "Venues, travel and payment are on the main site.", open: "Open practical info", pay: "Payment instructions", faq: "FAQ", contact: "Contact the conference office" },
     common: { back: "← Conference website", loading: "Loading…", error: "Something went wrong. Try again.", yes: "yes", no: "no" },
     admin: {
       title: "Organiser panel", participants: "Participants", sessions: "Workshops", catering: "Catering and options", export: "Export CSV",
