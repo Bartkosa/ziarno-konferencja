@@ -43,7 +43,7 @@ window.KONF = {
     lunch: { eur: 10, pln: 0 },        // obiad do pakietu konferencyjnego
   },
   // Early bird: niższa cena pełnego pakietu do podanej daty (null = brak)
-  earlyBird: { until: "2027-01-31", full: { eur: 85, pln: 0 } },
+  earlyBird: null, // bez early bird (decyzja 29.10.2026); np. { until: "2027-01-31", full: { eur: 85, pln: 0 } }
   paymentDeadlineDays: 7,
   bank: {
     recipient: "Dwujęzyczna Szkoła Podstawowa Ziarno",   // TODO: nazwa z umowy/konta
