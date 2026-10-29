@@ -201,7 +201,7 @@ window.CONTENT.en = {
     ],
     workshops: {
       title: "Workshops — chosen in the participant portal",
-      text: "Each of the three blocks has several parallel sessions, each for up to 40 people. More facilitators may join — we will publish the detailed plan (times and rooms) closer to the conference.",
+      text: "Workshop seats are limited. Each of the three blocks has several parallel sessions, each for up to 40 people. More facilitators may join — we will publish the detailed plan (times and rooms) closer to the conference.",
       items: [
         { speaker: "Lucía Calvo", sessions: [{ title: "TODO workshop title", lang: "EN" }, { title: "TODO workshop title", lang: "ES" }] },
         { speaker: "Dobrochna Lama", sessions: [{ title: "Kultura pracy, która wydobywa najlepsze z ludzi — warsztat", lang: "PL" }, { title: "A work culture that brings out the best in people — workshop", lang: "EN" }] },
@@ -227,10 +227,11 @@ window.CONTENT.en = {
 
   organisers: {
     eyebrow: "Organisers",
-    title: "Host and content partner",
+    title: "Host and partners",
     items: [
       { name: "Ziarno School", tag: "Host of the 2027 edition", text: "An educational institution in Warsaw — a preschool and a bilingual primary school — a living example of the values discussed: personalization, family partnership and character education.", url: "https://www.ziarno.edu.pl/", logo: "ziarno" },
-      { name: "Škola Libellus", tag: "Initiator of the NWoW series", text: "A school in Bratislava — initiator and strategic content partner of the New Way of Working series. Host of the 2026 edition, with whom we co-create the program and the participants' network.", url: "https://skolalibellus.sk/", logo: "libellus" },
+      { name: "Arenales Education Network", tag: "Content partner", text: "A network of over 40 schools in Spain and worldwide, developing personalised education — the content partner of the conference.", url: "", logo: "", abbr: "Arenales" },
+      { name: "Škola Libellus", tag: "Initiator of the NWoW series", text: "A school in Bratislava — initiator of the New Way of Working conference series and host of the 2026 edition.", url: "https://skolalibellus.sk/", logo: "libellus" },
     ],
   },
 
@@ -290,7 +291,7 @@ window.CONTENT.en = {
     title: "Choose your package",
     lead: "We clearly recommend the full package — the entire three-day experience, from school visits to workshops.",
     packages: [
-      { key: "full", name: "Full package (3 days)", badge: "Recommended", includes: ["All sessions and school visits", "Full catering: GoCook dinner, UKSW lunch, garden party, Saturday lunch", "Small-group workshops", "Old Town guided tour"] },
+      { key: "full", name: "Full package (3 days)", badge: "Recommended", includes: ["All sessions and school visits", "Full catering: GoCook dinner, UKSW lunch, garden party, Saturday lunch", "Small-group workshops (limited seats)", "Old Town guided tour"] },
       { key: "conference", name: "Conference only (7 May)", badge: "", includes: ["Plenary sessions on 7 May", "Coffee breaks", "Lunch at UKSW: +{{lunch}} (optional)"] },
     ],
     perPerson: "per person",
@@ -353,7 +354,7 @@ window.CONTENT.en = {
   },
 
   footer: {
-    org: "Organised by Ziarno School in cooperation with Škola Libellus",
+    org: "Organised by Ziarno School · content partner: Arenales Education Network",
     address: "Modlińska 184a, 03-119 Warsaw, Poland",
     linksTitle: "Quick links",
     links: [

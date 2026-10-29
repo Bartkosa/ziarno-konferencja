@@ -202,7 +202,7 @@ window.CONTENT.pl = {
     ],
     workshops: {
       title: "Warsztaty — wybierasz w panelu uczestnika",
-      text: "W każdym z trzech bloków kilka sesji odbywa się równolegle, każda dla maksymalnie 40 osób. Lista prowadzących może się jeszcze poszerzyć — szczegółowy plan (godziny i sale) podamy bliżej konferencji.",
+      text: "Liczba miejsc na warsztatach jest ograniczona. W każdym z trzech bloków kilka sesji odbywa się równolegle, każda dla maksymalnie 40 osób. Lista prowadzących może się jeszcze poszerzyć — szczegółowy plan (godziny i sale) podamy bliżej konferencji.",
       items: [
         { speaker: "Lucía Calvo", sessions: [{ title: "TODO tytuł warsztatu", lang: "EN" }, { title: "TODO tytuł warsztatu", lang: "ES" }] },
         { speaker: "Dobrochna Lama", sessions: [{ title: "Kultura pracy, która wydobywa najlepsze z ludzi — warsztat", lang: "PL" }, { title: "A work culture that brings out the best in people — workshop", lang: "EN" }] },
@@ -228,10 +228,11 @@ window.CONTENT.pl = {
 
   organisers: {
     eyebrow: "Organizatorzy",
-    title: "Gospodarz i partner merytoryczny",
+    title: "Gospodarz i partnerzy",
     items: [
       { name: "Szkoła Ziarno", tag: "Gospodarz edycji 2027", text: "Placówka edukacyjna w Warszawie — przedszkole i dwujęzyczna szkoła podstawowa — będąca żywym przykładem wdrażania omawianych wartości: personalizacji, partnerstwa z rodziną i wychowania charakteru.", url: "https://www.ziarno.edu.pl/", logo: "ziarno" },
-      { name: "Škola Libellus", tag: "Inicjator cyklu NWoW", text: "Szkoła z Bratysławy — inicjator i strategiczny partner merytoryczny cyklu New Way of Working. Gospodarz edycji 2026, z którą współtworzymy program i sieć uczestników.", url: "https://skolalibellus.sk/", logo: "libellus" },
+      { name: "Red Educativa Arenales", tag: "Partner merytoryczny", text: "Sieć ponad 40 szkół w Hiszpanii i na świecie, rozwijająca edukację spersonalizowaną — partner merytoryczny konferencji.", url: "", logo: "", abbr: "Arenales" },
+      { name: "Škola Libellus", tag: "Inicjator cyklu NWoW", text: "Szkoła z Bratysławy — inicjator cyklu konferencji New Way of Working i gospodarz edycji 2026.", url: "https://skolalibellus.sk/", logo: "libellus" },
     ],
   },
 
@@ -291,7 +292,7 @@ window.CONTENT.pl = {
     title: "Wybierz pakiet",
     lead: "Wyraźnie rekomendujemy pełny pakiet — to całe trzydniowe doświadczenie, od wizyt studyjnych po warsztaty.",
     packages: [
-      { key: "full", name: "Pełny pakiet (3 dni)", badge: "Rekomendowany", includes: ["Wszystkie sesje i wizyty studyjne", "Pełne wyżywienie: kolacja GoCook, lunch UKSW, Garden Party, lunch sobotni", "Warsztaty w małych grupach", "Zwiedzanie Starego Miasta"] },
+      { key: "full", name: "Pełny pakiet (3 dni)", badge: "Rekomendowany", includes: ["Wszystkie sesje i wizyty studyjne", "Pełne wyżywienie: kolacja GoCook, lunch UKSW, Garden Party, lunch sobotni", "Warsztaty w małych grupach (liczba miejsc ograniczona)", "Zwiedzanie Starego Miasta"] },
       { key: "conference", name: "Tylko konferencja (7 maja)", badge: "", includes: ["Udział w sesjach plenarnych 7 maja", "Przerwy kawowe", "Obiad na UKSW: +{{lunch}} (opcjonalnie)"] },
     ],
     perPerson: "za osobę",
@@ -354,7 +355,7 @@ window.CONTENT.pl = {
   },
 
   footer: {
-    org: "Organizatorzy: Szkoła Ziarno we współpracy ze Škola Libellus",
+    org: "Organizator: Szkoła Ziarno · partner merytoryczny: Red Educativa Arenales",
     address: "ul. Modlińska 184a, 03-119 Warszawa",
     linksTitle: "Na skróty",
     links: [

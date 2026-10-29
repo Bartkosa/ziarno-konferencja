@@ -165,8 +165,8 @@
     }).join("");
     var O = T.organisers;
     var orgs = O.items.map(function (o) {
-      var logo = o.logo === "ziarno" && C.logoZiarno ? '<img src="' + esc(C.logoZiarno) + '" alt="">' : o.logo === "libellus" && C.logoLibellus ? '<img src="' + esc(C.logoLibellus) + '" alt="">' : esc(o.name.split(" ")[0]);
-      return '<div class="card org"><div class="org-logo">' + logo + '</div><div><span class="tag">' + esc(o.tag) + "</span><h3>" + esc(o.name) + "</h3><p>" + esc(o.text) + '</p><p style="margin-top:8px"><a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.url.replace(/^https?:\/\//, "").replace(/\/$/, "")) + "</a></p></div></div>";
+      var logo = o.logo === "ziarno" && C.logoZiarno ? '<img src="' + esc(C.logoZiarno) + '" alt="">' : o.logo === "libellus" && C.logoLibellus ? '<img src="' + esc(C.logoLibellus) + '" alt="">' : esc(o.abbr || o.name.split(" ")[0]);
+      return '<div class="card org"><div class="org-logo">' + logo + '</div><div><span class="tag">' + esc(o.tag) + "</span><h3>" + esc(o.name) + "</h3><p>" + esc(o.text) + "</p>" + (o.url ? '<p style="margin-top:8px"><a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.url.replace(/^https?:\/\//, "").replace(/\/$/, "")) + "</a></p>" : "") + "</div></div>";
     }).join("");
     document.getElementById("speakers-content").innerHTML = head(S) + '<div class="grid grid-3">' + cards + "</div>" +
       '<div class="section-head" style="margin-top:64px"><div class="eyebrow">' + esc(O.eyebrow) + "</div><h2>" + esc(O.title) + "</h2></div>" + '<div class="org-grid" style="margin-top:0">' + orgs + "</div>";
