@@ -29,7 +29,7 @@ window.KONF = {
   },
 
   // --- KONTAKT --------------------------------------------------
-  contactEmail: "nwow@ziarno.edu.pl", // TODO: właściwy adres biura konferencji
+  contactEmail: "", // adres kontaktowy na stronie i w panelu; pusty = adres ukryty (np. "nwow@ziarno.edu.pl")
   social: {
     facebook: "https://www.facebook.com/przedszkoleziarno",
     instagram: "https://www.instagram.com/przedszkole_ziarno/",

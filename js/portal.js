@@ -6,7 +6,8 @@
   var app = document.getElementById("app");
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
-  function tpl(s, v) { return String(s).replace(/\{\{(\w+)\}\}/g, function (_, k) { return v[k] != null ? v[k] : ""; }); }
+  // [[...]] = fragment z adresem kontaktowym; znika, gdy config.contactEmail jest pusty
+  function tpl(s, v) { return String(s).replace(/\[\[([\s\S]*?)\]\]/g, function (_, x) { return C.contactEmail ? x : ""; }).replace(/\{\{(\w+)\}\}/g, function (_, k) { return v[k] != null ? v[k] : ""; }); }
   function contactLink() { return '<a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a>"; }
   function fmtDate(iso) { try { return new Date(iso + "T12:00:00").toLocaleDateString(lang === "pl" ? "pl-PL" : "en-GB", { day: "numeric", month: "long", year: "numeric" }); } catch (e) { return iso; } }
   function deadlinePassed() { return P.workshopsDeadline && new Date() > new Date(P.workshopsDeadline + "T23:59:59"); }
@@ -160,7 +161,7 @@
 
   function vInfo() {
     var i = T.info;
-    panel("<h2>" + esc(i.title) + '</h2><p class="lead">' + esc(i.lead) + '</p><div class="row-actions" style="margin-top:0"><a class="btn" href="../#practical-info">' + esc(i.open) + '</a><a class="btn btn-outline" href="../#practical-info">' + esc(i.pay) + '</a><a class="btn btn-outline" href="../#faq">' + esc(i.faq) + '</a><a class="btn btn-outline" href="mailto:' + esc(C.contactEmail) + '">' + esc(i.contact) + "</a></div>");
+    panel("<h2>" + esc(i.title) + '</h2><p class="lead">' + esc(i.lead) + '</p><div class="row-actions" style="margin-top:0"><a class="btn" href="../#practical-info">' + esc(i.open) + '</a><a class="btn btn-outline" href="../#practical-info">' + esc(i.pay) + '</a><a class="btn btn-outline" href="../#faq">' + esc(i.faq) + "</a>" + (C.contactEmail ? '<a class="btn btn-outline" href="mailto:' + esc(C.contactEmail) + '">' + esc(i.contact) + "</a>" : "") + "</div>");
   }
 
   // ------------------------------------------------------------ boot

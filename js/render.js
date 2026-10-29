@@ -9,9 +9,12 @@
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+  // [[...]] = fragment z adresem kontaktowym; znika, gdy config.contactEmail jest pusty
   function tpl(s, vars) {
-    return String(s).replace(/\{\{(\w+)\}\}/g, function (_, k) { return vars[k] != null ? vars[k] : ""; });
+    return String(s).replace(/\[\[([\s\S]*?)\]\]/g, function (_, x) { return C.contactEmail ? x : ""; }).replace(/\{\{(\w+)\}\}/g, function (_, k) { return vars[k] != null ? vars[k] : ""; });
   }
+  // podlinkowuje adres kontaktowy w tekście już przepuszczonym przez esc()
+  function mailLink(html) { return C.contactEmail ? html.replace(esc(C.contactEmail), '<a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a>") : html; }
   function isTodo(v) { return !v || /TODO/i.test(String(v)); }
   function money(p, lang) {
     if (!p) return "";
@@ -128,7 +131,13 @@
           items = '<ol class="timeline">' + b.items.map(function (it) {
             var talk = !!it.who;
             var more = it.note ? '<p class="tl-more">' + esc(it.note) + "</p>" : "";
-            return '<li class="tl-item' + (talk ? " talk" : "") + (it.note ? " has-more" : "") + '"><div class="tl-head"><span class="tl-time">' + esc(it.time) + "</span><span>" + (talk ? '<span class="tl-who">' + esc(it.who) + "</span>" : "") + '<span class="tl-title">' + esc(it.title) + "</span></span></div>" + more + "</li>";
+            // abstract: akapity (string) i listy (tablica; punkt = string albo { lead, text })
+            if (it.abstract) {
+              more += '<div class="tl-abs">' + it.abstract.map(function (a) {
+                return typeof a === "string" ? "<p>" + esc(a) + "</p>" : "<ul>" + a.map(function (x) { return "<li>" + (typeof x === "string" ? esc(x) : "<strong>" + esc(x.lead) + "</strong> " + esc(x.text)) + "</li>"; }).join("") + "</ul>";
+              }).join("") + '</div><button type="button" class="tl-more abs-toggle" data-more="' + esc(P.abstractMore) + '" data-less="' + esc(P.abstractLess) + '">' + esc(P.abstractMore) + "</button>";
+            }
+            return '<li class="tl-item' + (talk ? " talk" : "") + (it.note ? " has-more" : "") + '"><div class="tl-head"><span class="tl-time">' + esc(it.time) + "</span><span>" + (talk ? '<span class="tl-who">' + esc(it.who) + "</span>" + (it.lang ? ' <span class="tag">' + esc(it.lang) + "</span>" : "") : "") + '<span class="tl-title">' + esc(it.title) + "</span></span></div>" + more + "</li>";
           }).join("") + "</ol>";
         }
         var venue = b.venue ? '<a class="pill venue" href="' + esc(b.mapUrl || "#") + '" target="_blank" rel="noopener">' + icon("pin") + esc(b.venue) + "</a>" : "";
@@ -168,7 +177,7 @@
     var logo = function (p) { return '<a href="' + esc(p.url) + '" target="_blank" rel="noopener" title="' + esc(p.name) + '">' + (p.logo ? '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '">' : '<span class="ph">' + esc(p.name) + "</span>") + "</a>"; };
     var media = P.media && P.media.items.length ? '<h3 class="partners-sub">' + esc(P.media.title) + '</h3><div class="partners media">' + P.media.items.map(logo).join("") + "</div>" : "";
     document.getElementById("partners-content").innerHTML = head(P, true) + '<div class="partners">' + P.items.map(logo).join("") + "</div>" + media +
-      '<div class="callout"><div><h3>' + esc(P.callout.title) + "</h3><p>" + esc(P.callout.text) + '</p></div><a class="btn" href="mailto:' + esc(C.contactEmail) + '">' + icon("mail") + esc(P.callout.cta) + "</a></div>";
+      (C.contactEmail ? '<div class="callout"><div><h3>' + esc(P.callout.title) + "</h3><p>" + esc(P.callout.text) + '</p></div><a class="btn" href="mailto:' + esc(C.contactEmail) + '">' + icon("mail") + esc(P.callout.cta) + "</a></div>" : "");
   }
 
   function paymentHtml(T, lang) {
@@ -186,7 +195,7 @@
     var dl = '<dl class="pay">' + rows.map(function (r) { return "<dt>" + esc(r[0]) + "</dt><dd>" + r[1] + "</dd>"; }).join("") + "</dl>";
     var todo = isTodo(b.ibanPln) && isTodo(b.ibanEur) ? '<p class="todo">' + esc(pm.todo) + "</p>" : "";
     var qr = !isTodo(b.ibanPln) ? '<div class="qr"><div id="qr-code"></div><p>' + esc(pm.qr) + "</p></div>" : "";
-    var inv = "<p><strong>" + esc(pm.invoice) + ":</strong> " + esc(tpl(pm.invoiceText, vars)).replace(esc(C.contactEmail), '<a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a>") + "</p>";
+    var inv = "<p><strong>" + esc(pm.invoice) + ":</strong> " + mailLink(esc(tpl(pm.invoiceText, vars))) + "</p>";
     return dl + todo + qr + inv;
   }
 
@@ -204,11 +213,11 @@
   function renderFaq(T) {
     var F = T.faq; if (!F) return;
     var vars = { email: C.contactEmail, days: C.paymentDeadlineDays };
-    var items = F.items.map(function (it) {
+    var items = F.items.filter(function (it) { return !it.contact || C.contactEmail; }).map(function (it) {
       return '<details class="acc"><summary>' + esc(it.q) + icon("chev", "chev") + '</summary><div class="acc-body">' + tpl(it.a, { email: '<a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a>", days: C.paymentDeadlineDays }) + "</div></details>";
     }).join("");
-    var lead = esc(tpl(F.lead, vars)).replace(esc(C.contactEmail), '<a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a>");
-    document.getElementById("faq-content").innerHTML = '<div class="section-head"><div class="eyebrow">' + esc(F.eyebrow) + "</div><h2>" + esc(F.title) + '</h2><p class="lead">' + lead + "</p></div>" + '<div class="faq-grid">' + items + "</div>";
+    var lead = mailLink(esc(tpl(F.lead, vars)));
+    document.getElementById("faq-content").innerHTML = '<div class="section-head"><div class="eyebrow">' + esc(F.eyebrow) + "</div><h2>" + esc(F.title) + "</h2>" + (lead ? '<p class="lead">' + lead + "</p>" : "") + "</div>" + '<div class="faq-grid">' + items + "</div>";
   }
 
   function regEmbed(T, lang) {
@@ -258,7 +267,7 @@
       var actions = '<div class="form-actions">' + (url ? '<a class="btn btn-outline btn-sm" href="' + esc(url) + '" target="_blank" rel="noopener">' + icon("external") + esc(R.open.openForm) + "</a>" : "") + (C.paymentUrl ? '<a class="btn btn-sm" href="' + esc(C.paymentUrl) + '" target="_blank" rel="noopener">' + esc(R.open.payOnline) + "</a>" : "") + "</div>";
       box = '<div class="register-box" id="form"><h3>' + esc(R.open.title) + '</h3><p class="lead">' + esc(R.open.lead) + "</p>" + meta + form + actions + termsNote + "</div>";
     } else {
-      box = '<div class="closed-box" style="margin-top:56px"><span class="badge">' + esc(R.closed.badge) + "</span><h3>" + esc(R.closed.title) + "</h3><p>" + esc(R.closed.text) + "</p><p>" + esc(R.closed.waitlist) + ' <a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a></p></div>";
+      box = '<div class="closed-box" style="margin-top:56px"><span class="badge">' + esc(R.closed.badge) + "</span><h3>" + esc(R.closed.title) + "</h3><p>" + esc(R.closed.text) + "</p>" + (C.contactEmail ? "<p>" + esc(R.closed.waitlist) + ' <a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a></p>" : "") + "</div>";
     }
     var portalBox = C.portal && C.portal.enabled && T.portalBox ? '<div class="portal-box"><div class="pb-icon">' + icon("app") + '</div><div><h3>' + esc(T.portalBox.title) + "</h3><p>" + esc(T.portalBox.text) + '</p><a class="btn" href="' + esc(portalUrl(lang)) + '">' + esc(T.portalBox.cta) + " →</a><p class=\"pb-hint\">" + esc(T.portalBox.hint) + "</p></div></div>" : "";
     document.getElementById("register-content").innerHTML = head(PR, true) + '<div class="packages">' + pkgs + "</div>" + steps + box + portalBox;
@@ -273,7 +282,7 @@
     document.getElementById("footer").innerHTML =
       '<div class="wrap"><div><div class="f-brand">' + logoZ + logoL + '</div><div class="f-title">' + esc(T.hero.title) + " 2027</div><p>" + esc(F.org) + "<br>" + esc(F.address) + "</p></div>" +
       "<div><h3>" + esc(F.linksTitle) + "</h3><ul>" + F.links.map(function (l) { return '<li><a href="' + esc(l.href) + '">' + esc(l.label) + "</a></li>"; }).join("") + (C.invitePdf && T.hero.invite ? '<li><a href="' + esc(C.invitePdf) + '" target="_blank" rel="noopener">' + esc(T.hero.invite) + "</a></li>" : "") + "</ul></div>" +
-      "<div><h3>" + esc(F.contactTitle) + '</h3><ul><li><a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + '</a></li><li><a href="https://www.ziarno.edu.pl/" target="_blank" rel="noopener">ziarno.edu.pl</a></li><li><a href="https://skolalibellus.sk/" target="_blank" rel="noopener">skolalibellus.sk</a></li></ul></div>' +
+      "<div><h3>" + esc(F.contactTitle) + "</h3><ul>" + (C.contactEmail ? '<li><a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a></li>" : "") + '<li><a href="https://www.ziarno.edu.pl/" target="_blank" rel="noopener">ziarno.edu.pl</a></li><li><a href="https://skolalibellus.sk/" target="_blank" rel="noopener">skolalibellus.sk</a></li></ul></div>' +
       "<div><h3>" + esc(F.socialTitle) + '</h3><div class="social-row">' + (s.facebook ? '<a href="' + esc(s.facebook) + '" target="_blank" rel="noopener" aria-label="Facebook">' + fb + "</a>" : "") + (s.instagram ? '<a href="' + esc(s.instagram) + '" target="_blank" rel="noopener" aria-label="Instagram">' + ig + "</a>" : "") + "</div></div></div>" +
       '<div class="bottom-bar">' + esc(F.copy) + ' · <a href="' + esc(F.privacyUrl) + '">' + esc(F.privacy) + "</a>" + (C.termsPage && F.terms ? ' · <a href="' + esc(C.termsPage) + '">' + esc(F.terms) + "</a>" : "") +
       (C.heroCredit ? '<br><span class="credit">' + esc(F.photo) + ': <a href="' + esc(C.heroCredit.url) + '" target="_blank" rel="noopener">' + esc(C.heroCredit.text) + "</a></span>" : "") + "</div>";
@@ -314,8 +323,22 @@
         more.textContent = o ? more.getAttribute("data-less") : more.getAttribute("data-more");
         return;
       }
+      var abs = e.target.closest(".abs-toggle");
+      if (abs) {
+        var li = abs.closest(".tl-item"), ao = li.classList.toggle("abs-open");
+        li.classList.toggle("open", ao);
+        abs.textContent = ao ? abs.getAttribute("data-less") : abs.getAttribute("data-more");
+        return;
+      }
       var tl = e.target.closest(".tl-item.has-more .tl-head");
-      if (tl) { tl.parentElement.classList.toggle("open"); return; }
+      if (tl) {
+        var it = tl.parentElement;
+        if (!it.classList.toggle("open") && it.classList.contains("abs-open")) {
+          it.classList.remove("abs-open");
+          var t = it.querySelector(".abs-toggle"); t.textContent = t.getAttribute("data-more");
+        }
+        return;
+      }
       if (e.target.closest("#mobile-menu a")) { toggleMenu(false); }
       if (e.target.closest("[data-register-again]")) { e.preventDefault(); setRegistered(false); window.renderSite(document.documentElement.lang); scrollToForm(); }
     });
