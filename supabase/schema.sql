@@ -149,10 +149,10 @@ grant execute on function public.pick_session(text) to authenticated;
 insert into public.admins (email) values ('nwow@ziarno.edu.pl') on conflict do nothing;  -- TODO: e-maile organizatorek
 
 insert into public.sessions (id, block, title, speaker, lang, room, capacity, sort) values
-  ('lama-pl',   1, 'Kultura pracy, która wydobywa najlepsze z ludzi — warsztat', 'Dobrochna Lama', 'PL', null, 35, 1),
-  ('calvo-en',  1, 'Workshop — title coming soon',                              'Lucía Calvo',    'EN', null, 35, 2),
-  ('teclaw-pl', 2, 'Kształtowanie kultury szkoły w praktyce',                   'Magda Tecław',   'PL', null, 35, 1),
-  ('lama-en',   2, 'A work culture that brings out the best in people — workshop', 'Dobrochna Lama', 'EN', null, 35, 2),
-  ('calvo-es',  3, 'Taller — título próximamente',                              'Lucía Calvo',    'ES', null, 35, 1),
-  ('teclaw-en', 3, 'Shaping school culture in practice',                        'Magda Tecław',   'EN', null, 35, 2)
+  ('lama-pl',   1, 'Kultura pracy, która wydobywa najlepsze z ludzi — warsztat', 'Dobrochna Lama', 'PL', null, 40, 1),
+  ('calvo-en',  1, 'Workshop — title coming soon',                              'Lucía Calvo',    'EN', null, 40, 2),
+  ('teclaw-pl', 2, 'Kształtowanie kultury szkoły w praktyce',                   'Magda Tecław',   'PL', null, 40, 1),
+  ('lama-en',   2, 'A work culture that brings out the best in people — workshop', 'Dobrochna Lama', 'EN', null, 40, 2),
+  ('calvo-es',  3, 'Taller — título próximamente',                              'Lucía Calvo',    'ES', null, 40, 1),
+  ('teclaw-en', 3, 'Shaping school culture in practice',                        'Magda Tecław',   'EN', null, 40, 2)
 on conflict (id) do update set title = excluded.title, speaker = excluded.speaker, lang = excluded.lang, room = excluded.room, capacity = excluded.capacity, sort = excluded.sort;

@@ -106,14 +106,14 @@ Deno.serve(async (req) => {
 <p>W panelu uczestnika wybierzesz warsztaty, potwierdzisz program dodatkowy, podasz dietę i zobaczysz listę uczestników.</p>
 <p><a href="${url}" ${btn}>Otwórz panel uczestnika</a></p>
 <p style="color:#555;font-size:14px">Ten link loguje bez hasła i jest jednorazowy. Gdy wygaśnie, wejdź na <a href="${portal}">${site}/moje</a> i podaj ten adres e-mail — wyślemy nowy.</p>
-<p>${paid ? "Płatność otrzymaliśmy — miejsce jest potwierdzone." : `Miejsce potwierdzimy po zaksięgowaniu wpłaty. Dane do przelewu: <a href="${site}/#practical-info">${site}/#practical-info</a>`}</p>
+<p>${paid ? "Płatność otrzymaliśmy — miejsce jest potwierdzone." : "Płatności uruchomimy w lutym 2027 — wtedy wyślemy Ci mailem instrukcję i dane do przelewu. Miejsce potwierdzimy po zaksięgowaniu wpłaty."}</p>
 <p>Do zobaczenia w Warszawie!<br>Zespół Szkoły Ziarno</p>`
       : `<p>Hello${firstName ? " " + firstName : ""}!</p>
 <p>Thank you for registering for <strong>A New Way of Working 2027</strong> (Warsaw, 6–8 May 2027).</p>
 <p>In your participant portal you choose workshops, confirm the extra program, tell us about your diet and see the participants list.</p>
 <p><a href="${url}" ${btn}>Open the participant portal</a></p>
 <p style="color:#555;font-size:14px">This link signs you in without a password and works once. When it expires, go to <a href="${portal}">${site}/moje</a> and enter this e-mail address — we'll send a new one.</p>
-<p>${paid ? "We've received your payment — your seat is confirmed." : `Your seat is confirmed once the payment arrives. Bank details: <a href="${site}/#practical-info">${site}/#practical-info</a>`}</p>
+<p>${paid ? "We've received your payment — your seat is confirmed." : "Payments will open in February 2027 — we will then e-mail you the instructions and bank details. Your seat is confirmed once the payment arrives."}</p>
 <p>See you in Warsaw!<br>Ziarno School team</p>`;
     // odpowiedzi uczestników idą na MAIL_REPLY_TO (skrzynka biura), nie na adres nadawcy
     const replyTo = Deno.env.get("MAIL_REPLY_TO");
