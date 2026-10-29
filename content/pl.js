@@ -177,8 +177,8 @@ window.CONTENT.pl = {
             venue: "Szkoła Ziarno, ul. Modlińska 184a",
             mapUrl: "https://www.google.com/maps/search/?api=1&query=Modli%C5%84ska+184a+Warszawa",
             kicker: "Warsztaty — sesje praktyczne",
-            title: "Trzy równoległe bloki warsztatowe",
-            text: "Interaktywne doświadczenie w grupach do 40 osób, gwarantujące bezpośredni kontakt z prelegentami. Sesje wybierasz po zapisie w panelu uczestnika.",
+            title: "Trzy bloki warsztatowe: 9:30, 10:45 i 12:00",
+            text: "Interaktywne doświadczenie w grupach do 40 osób, gwarantujące bezpośredni kontakt z prelegentami. W każdym bloku kilka sesji równolegle — wybierzesz je w panelu uczestnika, gdy bliżej konferencji podamy szczegółowy plan.",
             items: [
               { time: "9:30", title: "Blok warsztatowy 1", note: "Sesje równoległe, wybór w panelu uczestnika." },
               { time: "10:30", title: "Przerwa" },
@@ -202,7 +202,7 @@ window.CONTENT.pl = {
     ],
     workshops: {
       title: "Warsztaty — wybierasz w panelu uczestnika",
-      text: "Każdy warsztat jest ograniczony do 40 uczestników. Ostateczny układ i powtórzenia sesji dostosujemy do liczby zgłoszeń.",
+      text: "W każdym z trzech bloków kilka sesji odbywa się równolegle, każda dla maksymalnie 40 osób. Lista prowadzących może się jeszcze poszerzyć — szczegółowy plan (godziny i sale) podamy bliżej konferencji.",
       items: [
         { speaker: "Lucía Calvo", sessions: [{ title: "TODO tytuł warsztatu", lang: "EN" }, { title: "TODO tytuł warsztatu", lang: "ES" }] },
         { speaker: "Dobrochna Lama", sessions: [{ title: "Kultura pracy, która wydobywa najlepsze z ludzi — warsztat", lang: "PL" }, { title: "A work culture that brings out the best in people — workshop", lang: "EN" }] },

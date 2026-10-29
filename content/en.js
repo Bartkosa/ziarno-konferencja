@@ -176,8 +176,8 @@ window.CONTENT.en = {
             venue: "Ziarno School, Modlińska 184a",
             mapUrl: "https://www.google.com/maps/search/?api=1&query=Modli%C5%84ska+184a+Warszawa",
             kicker: "Workshops — practical sessions",
-            title: "Three parallel workshop blocks",
-            text: "An interactive experience in groups of up to 40 people, guaranteeing direct contact with the speakers. You choose your sessions in the participant portal after registering.",
+            title: "Three workshop blocks: 9:30, 10:45 and 12:00",
+            text: "An interactive experience in groups of up to 40 people, guaranteeing direct contact with the speakers. Each block has several parallel sessions — you will choose them in the participant portal once we publish the detailed plan closer to the conference.",
             items: [
               { time: "9:30", title: "Workshop block 1", note: "Parallel sessions, chosen in the participant portal." },
               { time: "10:30", title: "Break" },
@@ -201,7 +201,7 @@ window.CONTENT.en = {
     ],
     workshops: {
       title: "Workshops — chosen in the participant portal",
-      text: "Each workshop is limited to 40 participants. The final schedule and repetitions will be adjusted to the number of registrations.",
+      text: "Each of the three blocks has several parallel sessions, each for up to 40 people. More facilitators may join — we will publish the detailed plan (times and rooms) closer to the conference.",
       items: [
         { speaker: "Lucía Calvo", sessions: [{ title: "TODO workshop title", lang: "EN" }, { title: "TODO workshop title", lang: "ES" }] },
         { speaker: "Dobrochna Lama", sessions: [{ title: "Kultura pracy, która wydobywa najlepsze z ludzi — warsztat", lang: "PL" }, { title: "A work culture that brings out the best in people — workshop", lang: "EN" }] },
