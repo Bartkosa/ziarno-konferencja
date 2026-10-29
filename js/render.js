@@ -177,7 +177,7 @@
     var logo = function (p) { return '<a href="' + esc(p.url) + '" target="_blank" rel="noopener" title="' + esc(p.name) + '">' + (p.logo ? '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '">' : '<span class="ph">' + esc(p.name) + "</span>") + "</a>"; };
     var media = P.media && P.media.items.length ? '<h3 class="partners-sub">' + esc(P.media.title) + '</h3><div class="partners media">' + P.media.items.map(logo).join("") + "</div>" : "";
     document.getElementById("partners-content").innerHTML = head(P, true) + '<div class="partners">' + P.items.map(logo).join("") + "</div>" + media +
-      (C.contactEmail ? '<div class="callout"><div><h3>' + esc(P.callout.title) + "</h3><p>" + esc(P.callout.text) + '</p></div><a class="btn" href="mailto:' + esc(C.contactEmail) + '">' + icon("mail") + esc(P.callout.cta) + "</a></div>" : "");
+      (C.contactEmail && P.callout ? '<div class="callout"><div><h3>' + esc(P.callout.title) + "</h3><p>" + esc(P.callout.text) + '</p></div><a class="btn" href="mailto:' + esc(C.contactEmail) + '">' + icon("mail") + esc(P.callout.cta) + "</a></div>" : "");
   }
 
   function paymentHtml(T, lang) {

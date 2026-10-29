@@ -171,7 +171,7 @@
 
   function vInfo() {
     var i = T.info;
-    panel("<h2>" + esc(i.title) + '</h2><p class="lead">' + esc(i.lead) + '</p><div class="row-actions" style="margin-top:0"><a class="btn" href="../#practical-info">' + esc(i.open) + '</a><a class="btn btn-outline" href="../#practical-info">' + esc(i.pay) + '</a><a class="btn btn-outline" href="../#faq">' + esc(i.faq) + "</a>" + (C.contactEmail ? '<a class="btn btn-outline" href="mailto:' + esc(C.contactEmail) + '">' + esc(i.contact) + "</a>" : "") + "</div>");
+    panel("<h2>" + esc(i.title) + '</h2><p class="lead">' + esc(i.lead) + '</p><div class="row-actions" style="margin-top:0"><a class="btn" href="../#practical-info">' + esc(i.open) + '</a><a class="btn btn-outline" href="../#practical-info">' + esc(i.pay) + '</a><a class="btn btn-outline" href="../#faq">' + esc(i.faq) + "</a>" + (C.contactEmail && i.contact ? '<a class="btn btn-outline" href="mailto:' + esc(C.contactEmail) + '">' + esc(i.contact) + "</a>" : "") + "</div>");
   }
 
   // ------------------------------------------------------------ boot

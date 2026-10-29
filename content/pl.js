@@ -245,7 +245,7 @@ window.CONTENT.pl = {
       { name: "TODO partner", url: "#", logo: "" },
     ],
     media: { title: "Partnerzy medialni", items: [{ name: "TODO", url: "#", logo: "" }] },
-    callout: { title: "Szukamy partnerów", text: "Chcesz wesprzeć edukację i zwiększyć widoczność swojej organizacji? Zapraszamy nowych partnerów i sponsorów.", cta: "Napisz do nas" },
+    callout: null, // ramka „Szukamy partnerów” z przyciskiem e-mail — wyłączona (29.10)
   },
 
   practical: {
@@ -271,7 +271,7 @@ window.CONTENT.pl = {
   faq: {
     eyebrow: "FAQ",
     title: "Najczęstsze pytania",
-    lead: "[[Nie znalazłeś odpowiedzi? Napisz: {{email}}]]",
+    lead: "",
     items: [
       { q: "Czy mogę przyjechać tylko na piątkową konferencję?", a: "<p>Tak. Pakiet „Tylko konferencja” obejmuje sesje plenarne 7 maja i przerwy kawowe, opcjonalnie obiad na UKSW. Warsztaty sobotnie, kolacja czwartkowa i Garden Party są w pakiecie pełnym.</p>" },
       { q: "W jakim języku odbywa się konferencja?", a: "<p>Piątkowe wykłady są po polsku lub po angielsku (język podajemy w programie) i mają tłumaczenie symultaniczne polski ↔ angielski. Warsztaty prowadzone są w języku podanym przy każdej sesji — zwykle w dwóch wersjach: po polsku i po angielsku; jeden warsztat po angielsku i po hiszpańsku.</p>" },
@@ -349,7 +349,7 @@ window.CONTENT.pl = {
     titleHint: "np. NWoW2027_Kowalska_Anna",
     qr: "Zapłać kodem QR (aplikacja bankowa)",
     invoice: "Faktura",
-    invoiceText: "Jeśli potrzebujesz faktury, zaznacz to w formularzu zapisów[[ i napisz na {{email}}, podając nazwę organizacji, NIP, adres i e-mail do wysyłki]].",
+    invoiceText: "Jeśli potrzebujesz faktury, zaznacz to w formularzu zapisów — jak przekazać dane do faktury, piszemy w FAQ.",
     todo: "Płatności uruchomimy w lutym 2027 — wtedy podamy tu numer konta i wyślemy instrukcję mailem.",
   },
 

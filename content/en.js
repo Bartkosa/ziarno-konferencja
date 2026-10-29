@@ -244,7 +244,7 @@ window.CONTENT.en = {
       { name: "TODO partner", url: "#", logo: "" },
     ],
     media: { title: "Media partners", items: [{ name: "TODO", url: "#", logo: "" }] },
-    callout: { title: "Looking for conference partners", text: "Want to support education and raise the visibility of your organisation? We welcome new partners and sponsors.", cta: "Write to us" },
+    callout: null, // ramka „Szukamy partnerów” z przyciskiem e-mail — wyłączona (29.10)
   },
 
   practical: {
@@ -270,7 +270,7 @@ window.CONTENT.en = {
   faq: {
     eyebrow: "FAQ",
     title: "Frequently asked questions",
-    lead: "[[Didn't find your answer? Write to {{email}}]]",
+    lead: "",
     items: [
       { q: "Can I come only to the Friday conference?", a: "<p>Yes. The 'Conference only' package covers the plenary sessions on 7 May and coffee breaks, with an optional lunch at UKSW. Saturday workshops, Thursday dinner and the garden party are part of the full package.</p>" },
       { q: "What language is the conference in?", a: "<p>Friday talks are given in Polish or English (the language is shown in the programme) with simultaneous interpretation Polish ↔ English. Workshops are held in the language shown next to each session — usually in two versions, Polish and English; one workshop runs in English and Spanish.</p>" },
@@ -348,7 +348,7 @@ window.CONTENT.en = {
     titleHint: "e.g. NWoW2027_Smith_John",
     qr: "Pay via QR code (banking app)",
     invoice: "Invoice",
-    invoiceText: "If you require an invoice, tick it in the registration form[[ and e-mail {{email}} with your organisation name, VAT/company ID, billing address and e-mail]].",
+    invoiceText: "If you require an invoice, tick it in the registration form — the FAQ explains how to send your invoice details.",
     todo: "Payments will open in February 2027 — we will then add the bank details here and e-mail you the instructions.",
   },
 
