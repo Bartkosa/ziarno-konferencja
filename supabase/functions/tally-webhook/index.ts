@@ -2,7 +2,7 @@
 // zakłada/aktualizuje uczestnika i wysyła mail powitalny z linkiem do panelu.
 //
 // Wdrożenie:  supabase functions deploy tally-webhook --no-verify-jwt
-// Sekrety:    supabase secrets set TALLY_SIGNING_SECRET=... RESEND_API_KEY=... SITE_URL=https://conference.ziarno.edu.pl MAIL_FROM="NWoW 2027 <nwow@ziarno.edu.pl>"
+// Sekrety:    supabase secrets set TALLY_SIGNING_SECRET=... RESEND_API_KEY=... SITE_URL=https://conference.ziarno.edu.pl MAIL_FROM="NWoW 2027 <nwow@ziarno.edu.pl>" MAIL_REPLY_TO=<skrzynka biura>
 // W Tally:    Integrations → Webhooks (w KAŻDYM formularzu: PL i EN) → URL funkcji, Signing secret = TALLY_SIGNING_SECRET
 //
 // Mail powitalny: Resend (RESEND_API_KEY) — pełna treść PL/EN z linkiem logowania.
@@ -115,9 +115,11 @@ Deno.serve(async (req) => {
 <p style="color:#555;font-size:14px">This link signs you in without a password and works once. When it expires, go to <a href="${portal}">${site}/moje</a> and enter this e-mail address — we'll send a new one.</p>
 <p>${paid ? "We've received your payment — your seat is confirmed." : `Your seat is confirmed once the payment arrives. Bank details: <a href="${site}/#practical-info">${site}/#practical-info</a>`}</p>
 <p>See you in Warsaw!<br>Ziarno School team</p>`;
+    // odpowiedzi uczestników idą na MAIL_REPLY_TO (skrzynka biura), nie na adres nadawcy
+    const replyTo = Deno.env.get("MAIL_REPLY_TO");
     const r = await fetch("https://api.resend.com/emails", {
       method: "POST", headers: { Authorization: `Bearer ${resend}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ from: Deno.env.get("MAIL_FROM") || "NWoW 2027 <nwow@ziarno.edu.pl>", to: [email], subject: pl ? "NWoW 2027 — potwierdzenie zgłoszenia i panel uczestnika" : "NWoW 2027 — registration confirmed, your participant portal", html }),
+      body: JSON.stringify({ from: Deno.env.get("MAIL_FROM") || "NWoW 2027 <nwow@ziarno.edu.pl>", ...(replyTo ? { reply_to: replyTo } : {}), to: [email], subject: pl ? "NWoW 2027 — potwierdzenie zgłoszenia i panel uczestnika" : "NWoW 2027 — registration confirmed, your participant portal", html }),
     });
     if (!r.ok) console.error("resend:", r.status, await r.text());
   } else {

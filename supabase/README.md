@@ -47,7 +47,7 @@ Sekrety i funkcje sprawdzisz poleceniami `npx supabase secrets list` i `npx supa
 npm i -g supabase
 supabase login
 supabase link --project-ref <ref>
-supabase secrets set TALLY_SIGNING_SECRET=<z Tally> RESEND_API_KEY=<z Resend> SITE_URL=https://conference.ziarno.edu.pl MAIL_FROM="NWoW 2027 <nwow@ziarno.edu.pl>"
+supabase secrets set TALLY_SIGNING_SECRET=<z Tally> RESEND_API_KEY=<z Resend> SITE_URL=https://conference.ziarno.edu.pl MAIL_FROM="NWoW 2027 <nwow@ziarno.edu.pl>" MAIL_REPLY_TO=<skrzynka biura>
 supabase functions deploy tally-webhook --no-verify-jwt
 ```
 
