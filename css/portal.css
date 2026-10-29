@@ -5,6 +5,7 @@
 .portal h1{font-size:clamp(26px,3.4vw,38px);margin-bottom:8px}
 .portal .lead{color:var(--muted);margin:0 0 26px;max-width:640px}
 .portal .brand-title{font-family:var(--serif);color:var(--navy);font-weight:700;font-size:16px;margin-left:4px}
+@media(max-width:560px){.brand .brand-title{display:none}} /* na telefonie samo logo — tytuł nachodził na PL/EN */
 
 /* login */
 .login{max-width:520px;margin:48px auto;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:36px}
