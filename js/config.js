@@ -82,6 +82,5 @@ window.KONF = {
   // Zdjęcie z Wikimedia Commons (CC BY-SA 4.0) — wymaga podpisu w stopce. Własne zdjęcie: heroCredit: null
   heroCredit: { text: "Oleslawlama, CC BY-SA 4.0, Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Evening_skyline_Warsaw_skyscrapers_Vistula_River.jpg" },
   logoZiarno: "https://www.ziarno.edu.pl/wp-content/uploads/2023/04/logo-ziarno.png", // TODO: images/logo-ziarno.svg
-  logoLibellus: "images/logo-libellus.png",
   ogImage: "images/og.jpg",
 };

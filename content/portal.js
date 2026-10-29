@@ -45,7 +45,7 @@ window.PORTAL_CONTENT = {
     options: {
       title: "Program dodatkowy", lead: "Zaznacz, w czym weźmiesz udział — dzięki temu zaplanujemy catering i transport.",
       items: {
-        school_visits: { label: "Czwartek · wizyty studyjne (Strumienie, Azymut)", hint: "dla chętnych, ograniczona liczba miejsc" },
+        school_visits: { label: "Czwartek · wizyty studyjne (Strumienie, Azymut)", hint: "dla gości z zagranicy, ograniczona liczba miejsc" },
         gocook: { label: "Czwartek 18:00 · warsztaty kulinarne i kolacja w GoCook", hint: "" },
         garden: { label: "Piątek 18:00 · Garden Party w Szkole Ziarno", hint: "" },
         mass: { label: "Sobota 8:00 · Msza św. w Szkole Ziarno", hint: "opcjonalnie" },
@@ -118,7 +118,7 @@ window.PORTAL_CONTENT = {
     options: {
       title: "Extra program", lead: "Tick what you'll join — it helps us plan catering and transport.",
       items: {
-        school_visits: { label: "Thursday · school visits (Strumienie, Azymut)", hint: "optional, limited places" },
+        school_visits: { label: "Thursday · school visits (Strumienie, Azymut)", hint: "for international guests, limited places" },
         gocook: { label: "Thursday 18:00 · cooking workshop and dinner at GoCook", hint: "" },
         garden: { label: "Friday 18:00 · garden party at Ziarno School", hint: "" },
         mass: { label: "Saturday 8:00 · Holy Mass at Ziarno School", hint: "optional" },

@@ -79,8 +79,7 @@
   // ---------- sekcje ----------
   function renderHeader(T, lang) {
     var logoZ = C.logoZiarno ? '<img src="' + esc(C.logoZiarno) + '" alt="Ziarno">' : '<span class="brand-text">Ziarno</span>';
-    var logoL = C.logoLibellus ? '<img class="lib" src="' + esc(C.logoLibellus) + '" alt="Škola Libellus">' : "";
-    document.getElementById("brand").innerHTML = logoZ + (logoL ? '<span class="brand-x">×</span>' + logoL : "");
+    document.getElementById("brand").innerHTML = logoZ;
     document.getElementById("brand").setAttribute("aria-label", esc(T.nav.brand));
     document.getElementById("nav-links").innerHTML = T.nav.links.map(function (l) { return '<a href="' + esc(l.href) + '">' + esc(l.label) + "</a>"; }).join("");
     // "Zaloguj się" dla osób już zapisanych — obok "Zapisz się" (nagłówek na desktopie, menu mobilne)
@@ -165,7 +164,7 @@
     }).join("");
     var O = T.organisers;
     var orgs = O.items.map(function (o) {
-      var logo = o.logo === "ziarno" && C.logoZiarno ? '<img src="' + esc(C.logoZiarno) + '" alt="">' : o.logo === "libellus" && C.logoLibellus ? '<img src="' + esc(C.logoLibellus) + '" alt="">' : esc(o.abbr || o.name.split(" ")[0]);
+      var logo = o.logo === "ziarno" && C.logoZiarno ? '<img src="' + esc(C.logoZiarno) + '" alt="">' : esc(o.abbr || o.name.split(" ")[0]);
       return '<div class="card org"><div class="org-logo">' + logo + '</div><div><span class="tag">' + esc(o.tag) + "</span><h3>" + esc(o.name) + "</h3><p>" + esc(o.text) + "</p>" + (o.url ? '<p style="margin-top:8px"><a href="' + esc(o.url) + '" target="_blank" rel="noopener">' + esc(o.url.replace(/^https?:\/\//, "").replace(/\/$/, "")) + "</a></p>" : "") + "</div></div>";
     }).join("");
     document.getElementById("speakers-content").innerHTML = head(S) + '<div class="grid grid-3">' + cards + "</div>" +
@@ -175,8 +174,10 @@
   function renderPartners(T) {
     var P = T.partners;
     var logo = function (p) { return '<a href="' + esc(p.url) + '" target="_blank" rel="noopener" title="' + esc(p.name) + '">' + (p.logo ? '<img src="' + esc(p.logo) + '" alt="' + esc(p.name) + '">' : '<span class="ph">' + esc(p.name) + "</span>") + "</a>"; };
-    var media = P.media && P.media.items.length ? '<h3 class="partners-sub">' + esc(P.media.title) + '</h3><div class="partners media">' + P.media.items.map(logo).join("") + "</div>" : "";
-    document.getElementById("partners-content").innerHTML = head(P, true) + '<div class="partners">' + P.items.map(logo).join("") + "</div>" + media +
+    var real = function (p) { return !isTodo(p.name); };   // zaślepki "TODO" nie trafiają na stronę
+    var mediaItems = P.media ? P.media.items.filter(real) : [];
+    var media = mediaItems.length ? '<h3 class="partners-sub">' + esc(P.media.title) + '</h3><div class="partners media">' + mediaItems.map(logo).join("") + "</div>" : "";
+    document.getElementById("partners-content").innerHTML = head(P, true) + '<div class="partners">' + P.items.filter(real).map(logo).join("") + "</div>" + media +
       (C.contactEmail && P.callout ? '<div class="callout"><div><h3>' + esc(P.callout.title) + "</h3><p>" + esc(P.callout.text) + '</p></div><a class="btn" href="mailto:' + esc(C.contactEmail) + '">' + icon("mail") + esc(P.callout.cta) + "</a></div>" : "");
   }
 
@@ -278,11 +279,10 @@
     var fb = '<svg viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.8c0-.9.3-1.6 1.6-1.6h1.7V4.4c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.8v8h3.3z"/></svg>';
     var ig = '<svg viewBox="0 0 24 24"><path d="M12 7.3A4.7 4.7 0 1 0 12 16.7 4.7 4.7 0 0 0 12 7.3zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm6-7.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0zM21 8.1c-.1-1.5-.4-2.8-1.5-3.9S17.1 2.8 15.6 2.7C14 2.6 9.9 2.6 8.4 2.7 6.9 2.8 5.6 3.1 4.5 4.2S3 6.6 2.9 8.1c-.1 1.5-.1 6.2 0 7.7.1 1.5.4 2.8 1.5 3.9s2.4 1.4 3.9 1.5c1.5.1 6.2.1 7.7 0 1.5-.1 2.8-.4 3.9-1.5s1.4-2.4 1.5-3.9c.1-1.5.1-6.2 0-7.7zm-2 9.4a3 3 0 0 1-1.7 1.7c-1.2.5-4 .4-5.3.4s-4.1.1-5.3-.4a3 3 0 0 1-1.7-1.7c-.5-1.2-.4-4-.4-5.3s-.1-4.1.4-5.3A3 3 0 0 1 6.7 5C7.9 4.5 10.7 4.6 12 4.6s4.1-.1 5.3.4A3 3 0 0 1 19 6.7c.5 1.2.4 4 .4 5.3s.1 4.1-.4 5.5z"/></svg>';
     var logoZ = C.logoZiarno ? '<img src="' + esc(C.logoZiarno) + '" alt="Ziarno">' : "";
-    var logoL = C.logoLibellus ? '<span class="brand-x">×</span><img src="' + esc(C.logoLibellus) + '" alt="Škola Libellus">' : "";
     document.getElementById("footer").innerHTML =
-      '<div class="wrap"><div><div class="f-brand">' + logoZ + logoL + '</div><div class="f-title">' + esc(T.hero.title) + " 2027</div><p>" + esc(F.org) + "<br>" + esc(F.address) + "</p></div>" +
+      '<div class="wrap"><div><div class="f-brand">' + logoZ + '</div><div class="f-title">' + esc(T.hero.title) + " 2027</div><p>" + esc(F.org) + "<br>" + esc(F.address) + "</p></div>" +
       "<div><h3>" + esc(F.linksTitle) + "</h3><ul>" + F.links.map(function (l) { return '<li><a href="' + esc(l.href) + '">' + esc(l.label) + "</a></li>"; }).join("") + (C.invitePdf && T.hero.invite ? '<li><a href="' + esc(C.invitePdf) + '" target="_blank" rel="noopener">' + esc(T.hero.invite) + "</a></li>" : "") + "</ul></div>" +
-      "<div><h3>" + esc(F.contactTitle) + "</h3><ul>" + (C.contactEmail ? '<li><a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a></li>" : "") + '<li><a href="https://www.ziarno.edu.pl/" target="_blank" rel="noopener">ziarno.edu.pl</a></li><li><a href="https://skolalibellus.sk/" target="_blank" rel="noopener">skolalibellus.sk</a></li></ul></div>' +
+      "<div><h3>" + esc(F.contactTitle) + "</h3><ul>" + (C.contactEmail ? '<li><a href="mailto:' + esc(C.contactEmail) + '">' + esc(C.contactEmail) + "</a></li>" : "") + '<li><a href="https://www.ziarno.edu.pl/" target="_blank" rel="noopener">ziarno.edu.pl</a></li></ul></div>' +
       "<div><h3>" + esc(F.socialTitle) + '</h3><div class="social-row">' + (s.facebook ? '<a href="' + esc(s.facebook) + '" target="_blank" rel="noopener" aria-label="Facebook">' + fb + "</a>" : "") + (s.instagram ? '<a href="' + esc(s.instagram) + '" target="_blank" rel="noopener" aria-label="Instagram">' + ig + "</a>" : "") + "</div></div></div>" +
       '<div class="bottom-bar">' + esc(F.copy) + ' · <a href="' + esc(F.privacyUrl) + '">' + esc(F.privacy) + "</a>" + (C.termsPage && F.terms ? ' · <a href="' + esc(C.termsPage) + '">' + esc(F.terms) + "</a>" : "") +
       (C.heroCredit ? '<br><span class="credit">' + esc(F.photo) + ': <a href="' + esc(C.heroCredit.url) + '" target="_blank" rel="noopener">' + esc(C.heroCredit.text) + "</a></span>" : "") + "</div>";

@@ -48,7 +48,7 @@ window.CONTENT.en = {
     title: "Education is better done together",
     lead: "Three days in Warsaw with educators who share your mission — to form the whole person, not just teach a curriculum.",
     items: [
-      { icon: "users", title: "Connect", text: "Join educators from Central and Eastern Europe. We create space for friendships and alliances that last years beyond the conference." },
+      { icon: "users", title: "Connect", text: "Join educators from Central and Eastern Europe, Croatia and Spain. We create space for friendships and alliances that last years beyond the conference." },
       { icon: "message", title: "Share", text: "Your experience is invaluable. Exchange real-world tutoring and character formation solutions that work in actual classrooms, not just textbooks." },
       { icon: "bulb", title: "Reflect", text: "Pause and honestly reflect on the challenges of forming the whole person with peers who truly understand your mission." },
     ],
@@ -81,13 +81,13 @@ window.CONTENT.en = {
         theme: "Experience in the field",
         blocks: [
           {
-            time: "optional",
+            time: "for international guests",
             venue: "Strumienie (Józefów) and Azymut (Pruszków) schools",
             mapUrl: "https://www.google.com/maps/search/?api=1&query=Strumienie+Sternik+3+Maja+129+J%C3%B3zef%C3%B3w",
-            kicker: "School visits (optional)",
+            kicker: "School visits for international guests",
             title: "Tours of Strumienie and Azymut schools",
             text: "Observe organisational culture in practice: lessons, tutoring, the daily rituals of a school.",
-            bullets: ["Optional — tick it in the registration form.", "Small groups guided by the schools' staff.", "TODO: times, meeting point and transport from Warsaw."],
+            bullets: ["For guests from abroad — tick it in the registration form.", "Small groups guided by the schools' staff.", "TODO: times, meeting point and transport from Warsaw."],
           },
           {
             time: "18:00",
@@ -115,7 +115,7 @@ window.CONTENT.en = {
             items: [
               { time: "9:15", title: "Registration and morning coffee", note: "Opening networking." },
               { time: "10:00", who: "TODO speaker", title: "Opening", note: "TODO session description." },
-              { time: "10:15", who: "Lucía Calvo", lang: "EN", title: "TODO talk title", note: "The identity of personalized-education schools and their role in modern society." },
+              { time: "10:15", who: "Lucía Calvo", lang: "EN", title: "Trust-building schools: the challenge of connection", note: "The identity of personalized-education schools and their role in modern society." },
               { time: "11:00", who: "Dobrochna Lama", lang: "PL", title: "A Work Culture That Brings Out the Best in People", note: "Leadership that serves and people first — two of the Quality Standards for Personalized Education in a school’s everyday practice.",
                 abstract: [
                   "Does a good school begin in the classroom? Or perhaps a little earlier — in the staff room, in the principal’s office, and at the table where decisions are made?",
@@ -201,10 +201,10 @@ window.CONTENT.en = {
     ],
     workshops: {
       title: "Workshops — chosen in the participant portal",
-      text: "Workshop seats are limited. Each of the three blocks has several parallel sessions, each for up to 40 people. More facilitators may join — we will publish the detailed plan (times and rooms) closer to the conference.",
+      text: "Workshop seats are limited. Each of the three blocks has several parallel sessions, each for up to 40 people. More facilitators will join — we will keep you posted about new workshops. We will publish the detailed plan (times and rooms) closer to the conference.",
       items: [
-        { speaker: "Lucía Calvo", sessions: [{ title: "TODO workshop title", lang: "EN" }, { title: "TODO workshop title", lang: "ES" }] },
         { speaker: "Dobrochna Lama", sessions: [{ title: "Kultura pracy, która wydobywa najlepsze z ludzi — warsztat", lang: "PL" }, { title: "A work culture that brings out the best in people — workshop", lang: "EN" }] },
+        { speaker: "Lucía Calvo", sessions: [{ title: "TODO workshop title", lang: "EN" }, { title: "TODO workshop title", lang: "ES" }] },
         { speaker: "Magda Tecław", sessions: [{ title: "Kształtowanie kultury szkoły w praktyce", lang: "PL" }, { title: "Shaping school culture in practice", lang: "EN" }] },
       ],
     },
@@ -218,8 +218,8 @@ window.CONTENT.en = {
     readMore: "Read more",
     readLess: "Show less",
     items: [
-      { name: "Lucía Calvo", role: "Arenales Education Network · Madrid", short: "Educator and English teacher who combines school leadership with classroom teaching. Advisor to the Arenales Education Network; collaborates with EASSE.", bio: "Born in Madrid, she was educated in a wide variety of settings — public and private, co-educational and single-sex, Spanish and international — in Madrid, Barcelona, Cambridge, Rome and Sydney. She studied Teaching and Educational Sciences at the Complutense University of Madrid and, on a scholarship, completed an MA in linguistics at Macquarie University in Sydney. She has devoted her career to education and English teaching: ten years in the public system, then in private and state-subsidised schools. Throughout, she has combined leading several schools with direct teaching, always staying close to families and students. She is an advisor to the Arenales Education Network and a trustee of the Tacumi Foundation, which promotes the inclusion of students with intellectual disabilities in mainstream schools. She collaborates with EASSE (European Association for Single-Sex Education) and is a member of the Spanish Association of Women Leaders in Education. She also mentors teachers, strengthening their leadership and helping them take further steps towards a more personalised education.", photo: "images/speakers/lucia-calvo.jpg" },
       { name: "Dobrochna Lama", role: "Leadership and organizational development in education", short: "For over 20 years she has worked at the intersection of education, leadership and organizational development — as a teacher, principal, consultant and senior manager.", bio: "Her expertise is building and growing organizations that help people flourish. She has co-founded and developed educational initiatives with lasting social impact: training, leadership development, running schools and supporting educational institutions across Poland. She has developed programs reaching more than 3,000 teachers a year, supported the launch of over 40 schools and kindergartens, managed organizations with more than 200 employees, and been responsible for budgets exceeding PLN 20 million in annual operating revenue. She is especially drawn to ventures built from the ground up and organizations in rapid growth, turning an ambitious vision into effective structures, processes and teams. She has completed international management programs at IESE Business School and Universidad Villanueva. She believes lasting results come where high-quality management meets genuine care for people’s growth and a clearly defined mission.", photo: "images/speakers/dobrochna-lama.jpg" },
+      { name: "Lucía Calvo", role: "Arenales Education Network · Madrid", short: "Educator and English teacher who combines school leadership with classroom teaching. Advisor to the Arenales Education Network; collaborates with EASSE.", bio: "Born in Madrid, she was educated in a wide variety of settings — public and private, co-educational and single-sex, Spanish and international — in Madrid, Barcelona, Cambridge, Rome and Sydney. She studied Teaching and Educational Sciences at the Complutense University of Madrid and, on a scholarship, completed an MA in linguistics at Macquarie University in Sydney. She has devoted her career to education and English teaching: ten years in the public system, then in private and state-subsidised schools. Throughout, she has combined leading several schools with direct teaching, always staying close to families and students. She is an advisor to the Arenales Education Network and a trustee of the Tacumi Foundation, which promotes the inclusion of students with intellectual disabilities in mainstream schools. She collaborates with EASSE (European Association for Single-Sex Education) and is a member of the Spanish Association of Women Leaders in Education. She also mentors teachers, strengthening their leadership and helping them take further steps towards a more personalised education.", photo: "images/speakers/lucia-calvo.jpg" },
       { name: "Dr Stanisław Kowal", role: "Jagiellonian University · Sternik Foundation, Kraków", short: "PhD in pedagogy, assistant professor at the Jagiellonian University, Director of Education at the Sternik-Kraków Foundation and co-founder of schools rooted in personalised education.", bio: "For many years he headed the Teacher Education Centre at the Pedagogical University of Kraków; he now teaches in the Jagiellonian University’s Pedagogical Studies unit. He has written numerous academic publications, mainly in pedeutology (the study of the teaching profession), as well as articles for teachers, educators and parents. He organises and leads academic and popular conferences for teachers and parents. He designed postgraduate teacher-training programmes, including Poland’s first postgraduate programme in personalised education. He has served as an expert to the Polish Ministry of National Education and the Ministry of Science and Higher Education on teacher-training standards. He is an academic tutor and family tutor, and co-founder of the Źródło and Wierchy kindergarten and schools in Kraków. He is married to Maria and is the father of Maria, Julianna, Franciszek, Józef, Ludwik, Wojciech and Andrzej.", photo: "images/speakers/stanislaw-kowal.jpg" },
       { name: "Magda Tecław", role: "Haileybury Malta · school culture", short: "Teacher and educational leader with over 20 years in British independent schools; author of the book Zawód Nauczyciel. Currently teaches at Haileybury Malta.", bio: "Having lived in the UK for over twenty years, she taught in both primary and secondary schools and held a range of leadership roles. She holds a PGCE in Secondary Education (University of East London), an MA in Leadership in Catholic Education (St Mary’s University, London), an MA in Education (University of York), an MA in Comparative Education (University College London) and an MSc in Educational Assessment (University of Oxford). She is the author of Zawód Nauczyciel (“Profession: Teacher”), published in Poland in 2024. She brings this academic background into her daily classroom practice and her support for fellow teachers. She lives in Malta, where she teaches at Haileybury Malta, a British international school. She is a wife and mother of three university students and a teenage daughter, and a keen recreational scuba diver.", photo: "images/speakers/magda-teclaw.jpg" },
     ],
@@ -227,11 +227,10 @@ window.CONTENT.en = {
 
   organisers: {
     eyebrow: "Organisers",
-    title: "Host and partners",
+    title: "Host and content partner",
     items: [
       { name: "Ziarno School", tag: "Host of the 2027 edition", text: "An educational institution in Warsaw — a preschool and a bilingual primary school — a living example of the values discussed: personalization, family partnership and character education.", url: "https://www.ziarno.edu.pl/", logo: "ziarno" },
       { name: "Arenales Education Network", tag: "Content partner", text: "A network of over 40 schools in Spain and worldwide, developing personalised education — the content partner of the conference.", url: "", logo: "", abbr: "Arenales" },
-      { name: "Škola Libellus", tag: "Initiator of the NWoW series", text: "A school in Bratislava — initiator of the New Way of Working conference series and host of the 2026 edition.", url: "https://skolalibellus.sk/", logo: "libellus" },
     ],
   },
 
@@ -239,6 +238,7 @@ window.CONTENT.en = {
     eyebrow: "Partners",
     title: "United by a shared vision for education",
     items: [
+      { name: "Škola Libellus", url: "https://skolalibellus.sk/", logo: "" },
       { name: "EASSE", url: "https://www.easse.org/", logo: "" },
       { name: "Be-come", url: "https://be-come.org/en/", logo: "" },
       { name: "Family Academy", url: "https://www.ziarno.edu.pl/akademia-rodzinna/", logo: "" },
@@ -281,7 +281,7 @@ window.CONTENT.en = {
       { q: "I need a visa invitation letter — can you issue one?", a: "<p>Yes. After paying, e-mail {{email}} with your passport details and we'll send a personal invitation letter as a PDF.</p>", contact: true },
       { q: "Do you cater for dietary requirements?", a: "<p>Yes — vegetarian, vegan, gluten-free and others. Enter your requirements in the form; they apply to the cooking workshop, lunches and the garden party.</p>" },
       { q: "How do I get there?", a: "<p>Public transport and airport connections are described in Practical information.</p>" },
-      { q: "Are the Thursday school visits mandatory?", a: "<p>No, they are optional. Tick your participation in the form — places in the schools are limited.</p>" },
+      { q: "Who are the Thursday school visits for?", a: "<p>The school visits are intended for our guests from abroad. Tick your participation in the form — places in the schools are limited.</p>" },
       { q: "How do I choose workshops?", a: "<p>After registering, you sign in to the participant portal and pick one session in each of the three Saturday blocks yourself. Seats per session are limited and you can change your choice until 23 April 2027.</p>" },
     ],
   },
