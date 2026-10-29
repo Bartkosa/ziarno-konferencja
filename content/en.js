@@ -39,7 +39,7 @@ window.CONTENT.en = {
     chips: [
       { icon: "calendar", text: "6–8 May 2027" },
       { icon: "pin", text: "Warsaw · UKSW, Ziarno School" },
-      { icon: "users", text: "Limited number of seats" },
+      { icon: "users", text: "Workshops: 80 seats — register by the end of December" },
     ],
   },
 
@@ -177,7 +177,7 @@ window.CONTENT.en = {
             mapUrl: "https://www.google.com/maps/search/?api=1&query=Modli%C5%84ska+184a+Warszawa",
             kicker: "Workshops — practical sessions",
             title: "Three parallel workshop blocks",
-            text: "An interactive experience in groups of up to 35 people, guaranteeing direct contact with the speakers. You choose your sessions in the participant portal after registering.",
+            text: "An interactive experience in groups of up to 40 people, guaranteeing direct contact with the speakers. You choose your sessions in the participant portal after registering.",
             items: [
               { time: "9:30", title: "Workshop block 1", note: "Parallel sessions, chosen in the participant portal." },
               { time: "10:30", title: "Break" },
@@ -200,8 +200,8 @@ window.CONTENT.en = {
       },
     ],
     workshops: {
-      title: "Workshops — chosen at registration",
-      text: "Each workshop is limited to 35 participants. The final schedule and repetitions will be adjusted to the number of registrations.",
+      title: "Workshops — chosen in the participant portal",
+      text: "Each workshop is limited to 40 participants. The final schedule and repetitions will be adjusted to the number of registrations.",
       items: [
         { speaker: "Lucía Calvo", sessions: [{ title: "TODO workshop title", lang: "EN" }, { title: "TODO workshop title", lang: "ES" }] },
         { speaker: "Dobrochna Lama", sessions: [{ title: "Kultura pracy, która wydobywa najlepsze z ludzi — warsztat", lang: "PL" }, { title: "A work culture that brings out the best in people — workshop", lang: "EN" }] },
@@ -274,7 +274,7 @@ window.CONTENT.en = {
     items: [
       { q: "Can I come only to the Friday conference?", a: "<p>Yes. The 'Conference only' package covers the plenary sessions on 7 May and coffee breaks, with an optional lunch at UKSW. Saturday workshops, Thursday dinner and the garden party are part of the full package.</p>" },
       { q: "What language is the conference in?", a: "<p>Friday talks are given in Polish or English (the language is shown in the programme) with simultaneous interpretation Polish ↔ English. Workshops are held in the language shown next to each session — usually in two versions, Polish and English; one workshop runs in English and Spanish.</p>" },
-      { q: "How do I pay and when is my registration valid?", a: "<p>By bank transfer within {{days}} days of registering — bank details are in Practical information and in your welcome e-mail. Your seat is confirmed once the payment arrives; you can see the status in your participant portal.</p>" },
+      { q: "How do I pay and when is my registration valid?", a: "<p>Registration is open now and payments will open in February 2027 — we will then e-mail you the instructions and bank details (they will also appear in Practical information). Please pay within {{days}} days of receiving the instructions. Your seat is confirmed once the payment arrives; you can see the status in your participant portal.</p>" },
       { q: "Will I get an invoice?", a: "<p>Yes. Tick “I need an invoice” in the form[[ and, after registering, send your organisation's details (name, VAT number, address) to {{email}}]]. We'll send the invoice by e-mail.</p>" },
       { q: "What if I can't come?", a: "<p>Until 31 March 2027 we refund the full fee, until 15 April half of it; after that no refund is possible, but you can always transfer your seat to someone else. Details in the <a href='regulamin.html#en'>terms</a>.</p>" },
       { q: "I need a visa invitation letter — can you issue one?", a: "<p>Yes. After paying, e-mail {{email}} with your passport details and we'll send a personal invitation letter as a PDF.</p>", contact: true },
@@ -297,7 +297,7 @@ window.CONTENT.en = {
     earlyBird: "Early bird until {{date}}",
     regular: "from {{date}}: {{price}}",
     stepsTitle: "How to register",
-    steps: ["Fill in the registration form (below).", "Pay by bank transfer within {{days}} days — see Payment instructions.", "Once your payment is received, you'll get a confirmation e-mail."],
+    steps: ["Fill in the registration form (below) — ideally by the end of December, as there are only 80 workshop seats.", "In February 2027 we will send you the payment instructions — please pay within {{days}} days.", "Once your payment is received, you'll get a confirmation e-mail."],
   },
 
   portalBox: {
@@ -314,7 +314,7 @@ window.CONTENT.en = {
       openForm: "Open the form in a new tab",
       thanksTitle: "Thank you for registering!",
       thanksLead: "We've sent you an e-mail with confirmation and a link to your participant portal. Can't see it? Check spam, or sign in to the portal with the e-mail from the form.",
-      thanksSteps: ["Pay the fee by bank transfer within {{days}} days — instructions below.", "In the participant portal choose your workshops and confirm the extra program.", "Add the conference to your calendar — see you in Warsaw!"],
+      thanksSteps: ["Payments open in February 2027 — we will then e-mail you the instructions and bank details.", "In the participant portal choose your workshops and confirm the extra program.", "Add the conference to your calendar — see you in Warsaw!"],
       thanksPortal: "Open the participant portal",
       thanksPay: "Payment instructions",
       thanksCalendar: "Add to calendar",
@@ -323,7 +323,7 @@ window.CONTENT.en = {
       terms: "By submitting the form you accept the {{link}}.",
       termsLink: "conference terms and data-processing rules",
       deadline: "Registration closes {{date}}",
-      seats: "Limited to {{n}} participants.",
+      seats: "Full package with workshops: {{n}} seats · no limit for the conference.",
       payOnline: "Pay online",
     },
     closed: {
@@ -339,7 +339,7 @@ window.CONTENT.en = {
     amount: "Amount",
     amountText: "{{full}} (full package) or {{conf}} (conference only, lunch +{{lunch}})",
     deadline: "Payment deadline",
-    deadlineText: "{{days}} days after submitting the form",
+    deadlineText: "{{days}} days after receiving the instructions (payments open in February 2027)",
     recipient: "Recipient",
     account: "Account number (PLN)",
     accountEur: "IBAN (EUR)",
@@ -349,7 +349,7 @@ window.CONTENT.en = {
     qr: "Pay via QR code (banking app)",
     invoice: "Invoice",
     invoiceText: "If you require an invoice, tick it in the registration form[[ and e-mail {{email}} with your organisation name, VAT/company ID, billing address and e-mail]].",
-    todo: "TODO: bank details will be provided once confirmed by the organiser.",
+    todo: "Payments will open in February 2027 — we will then add the bank details here and e-mail you the instructions.",
   },
 
   footer: {

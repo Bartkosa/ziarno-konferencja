@@ -17,7 +17,7 @@ window.KONF = {
   // Po tej dacie (włącznie) zapisy zamykają się same (RRRR-MM-DD)
   registrationDeadline: "2027-04-16",
   // Limit miejsc (0 = nie pokazuj)
-  seatLimit: 100,
+  seatLimit: 80,                // limit pakietu pełnego (warsztaty); konferencja bez limitu
 
   registration: {
     // "tally" (polecane: formularz + płatność Stripe w jednym) albo "google" (Google Forms)
@@ -44,7 +44,7 @@ window.KONF = {
   },
   // Early bird: niższa cena pełnego pakietu do podanej daty (null = brak)
   earlyBird: null, // bez early bird (decyzja 29.10.2026); np. { until: "2027-01-31", full: { eur: 85, pln: 0 } }
-  paymentDeadlineDays: 7,
+  paymentDeadlineDays: 14,       // dni od wysłania instrukcji płatności (płatności ruszają w lutym 2027)
   bank: {
     recipient: "Dwujęzyczna Szkoła Podstawowa Ziarno",   // TODO: nazwa z umowy/konta
     address: "ul. Modlińska 184a, 03-119 Warszawa",

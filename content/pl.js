@@ -40,7 +40,7 @@ window.CONTENT.pl = {
     chips: [
       { icon: "calendar", text: "6–8 maja 2027" },
       { icon: "pin", text: "Warszawa · UKSW, Szkoła Ziarno" },
-      { icon: "users", text: "Liczba miejsc ograniczona" },
+      { icon: "users", text: "Warsztaty: 80 miejsc — zapisz się do końca grudnia" },
     ],
   },
 
@@ -178,7 +178,7 @@ window.CONTENT.pl = {
             mapUrl: "https://www.google.com/maps/search/?api=1&query=Modli%C5%84ska+184a+Warszawa",
             kicker: "Warsztaty — sesje praktyczne",
             title: "Trzy równoległe bloki warsztatowe",
-            text: "Interaktywne doświadczenie w grupach do 35 osób, gwarantujące bezpośredni kontakt z prelegentami. Sesje wybierasz po zapisie w panelu uczestnika.",
+            text: "Interaktywne doświadczenie w grupach do 40 osób, gwarantujące bezpośredni kontakt z prelegentami. Sesje wybierasz po zapisie w panelu uczestnika.",
             items: [
               { time: "9:30", title: "Blok warsztatowy 1", note: "Sesje równoległe, wybór w panelu uczestnika." },
               { time: "10:30", title: "Przerwa" },
@@ -201,8 +201,8 @@ window.CONTENT.pl = {
       },
     ],
     workshops: {
-      title: "Warsztaty — wybierasz przy zapisie",
-      text: "Każdy warsztat jest ograniczony do 35 uczestników. Ostateczny układ i powtórzenia sesji dostosujemy do liczby zgłoszeń.",
+      title: "Warsztaty — wybierasz w panelu uczestnika",
+      text: "Każdy warsztat jest ograniczony do 40 uczestników. Ostateczny układ i powtórzenia sesji dostosujemy do liczby zgłoszeń.",
       items: [
         { speaker: "Lucía Calvo", sessions: [{ title: "TODO tytuł warsztatu", lang: "EN" }, { title: "TODO tytuł warsztatu", lang: "ES" }] },
         { speaker: "Dobrochna Lama", sessions: [{ title: "Kultura pracy, która wydobywa najlepsze z ludzi — warsztat", lang: "PL" }, { title: "A work culture that brings out the best in people — workshop", lang: "EN" }] },
@@ -275,7 +275,7 @@ window.CONTENT.pl = {
     items: [
       { q: "Czy mogę przyjechać tylko na piątkową konferencję?", a: "<p>Tak. Pakiet „Tylko konferencja” obejmuje sesje plenarne 7 maja i przerwy kawowe, opcjonalnie obiad na UKSW. Warsztaty sobotnie, kolacja czwartkowa i Garden Party są w pakiecie pełnym.</p>" },
       { q: "W jakim języku odbywa się konferencja?", a: "<p>Piątkowe wykłady są po polsku lub po angielsku (język podajemy w programie) i mają tłumaczenie symultaniczne polski ↔ angielski. Warsztaty prowadzone są w języku podanym przy każdej sesji — zwykle w dwóch wersjach: po polsku i po angielsku; jeden warsztat po angielsku i po hiszpańsku.</p>" },
-      { q: "Jak zapłacić i kiedy zgłoszenie jest ważne?", a: "<p>Przelewem w ciągu {{days}} dni od zgłoszenia — dane do przelewu i kod QR znajdziesz w sekcji Informacje praktyczne oraz w mailu powitalnym. Miejsce jest potwierdzone po zaksięgowaniu wpłaty; status widzisz w panelu uczestnika.</p>" },
+      { q: "Jak zapłacić i kiedy zgłoszenie jest ważne?", a: "<p>Zapisy trwają już teraz, a płatności uruchomimy w lutym 2027 — wtedy wyślemy Ci mailem instrukcję i dane do przelewu (pojawią się też w sekcji Informacje praktyczne). Opłatę wnosisz w ciągu {{days}} dni od otrzymania instrukcji. Miejsce jest potwierdzone po zaksięgowaniu wpłaty; status widzisz w panelu uczestnika.</p>" },
       { q: "Czy otrzymam fakturę?", a: "<p>Tak. Zaznacz „Potrzebuję faktury” w formularzu[[, a po zgłoszeniu prześlij dane organizacji (nazwa, NIP lub numer VAT, adres) na {{email}}]]. Fakturę wyślemy e-mailem.</p>" },
       { q: "Co jeśli nie będę mógł przyjechać?", a: "<p>Do 31 marca 2027 zwracamy całą wpłatę, do 15 kwietnia połowę, później zwrot nie przysługuje, ale zawsze możesz przekazać miejsce innej osobie. Szczegóły w <a href='regulamin.html'>regulaminie</a>.</p>" },
       { q: "Potrzebuję zaproszenia do wizy — czy je wystawicie?", a: "<p>Tak. Po opłaceniu udziału napisz na {{email}} z danymi paszportowymi, a wyślemy imienne zaproszenie w PDF.</p>", contact: true },
@@ -298,7 +298,7 @@ window.CONTENT.pl = {
     earlyBird: "Early bird do {{date}}",
     regular: "od {{date}}: {{price}}",
     stepsTitle: "Jak się zapisać",
-    steps: ["Wypełnij formularz zapisów (poniżej).", "Opłać udział przelewem w ciągu {{days}} dni — dane w Instrukcji płatności.", "Po zaksięgowaniu wpłaty otrzymasz e-mail z potwierdzeniem miejsca."],
+    steps: ["Wypełnij formularz zapisów (poniżej) — najlepiej do końca grudnia, bo miejsc na warsztaty jest 80.", "W lutym 2027 wyślemy Ci instrukcję płatności — opłać udział w ciągu {{days}} dni.", "Po zaksięgowaniu wpłaty otrzymasz e-mail z potwierdzeniem miejsca."],
   },
 
   portalBox: {
@@ -315,7 +315,7 @@ window.CONTENT.pl = {
       openForm: "Otwórz formularz w nowej karcie",
       thanksTitle: "Dziękujemy za zgłoszenie!",
       thanksLead: "Wysłaliśmy e-mail z potwierdzeniem i linkiem do panelu uczestnika. Nie widzisz go? Sprawdź spam albo zaloguj się w panelu adresem z formularza.",
-      thanksSteps: ["Opłać udział przelewem w ciągu {{days}} dni — instrukcja poniżej.", "W panelu uczestnika wybierz warsztaty i potwierdź program dodatkowy.", "Dodaj konferencję do kalendarza i do zobaczenia w Warszawie!"],
+      thanksSteps: ["Płatności ruszą w lutym 2027 — wtedy wyślemy Ci mailem instrukcję i dane do przelewu.", "W panelu uczestnika wybierz warsztaty i potwierdź program dodatkowy.", "Dodaj konferencję do kalendarza i do zobaczenia w Warszawie!"],
       thanksPortal: "Otwórz panel uczestnika",
       thanksPay: "Instrukcja płatności",
       thanksCalendar: "Dodaj do kalendarza",
@@ -324,7 +324,7 @@ window.CONTENT.pl = {
       terms: "Wysyłając formularz, akceptujesz {{link}}.",
       termsLink: "regulamin konferencji i zasady przetwarzania danych",
       deadline: "Zapisy trwają do {{date}}",
-      seats: "Liczba miejsc ograniczona do {{n}}.",
+      seats: "Pakiet pełny z warsztatami: {{n}} miejsc · konferencja bez limitu.",
       payOnline: "Zapłać online",
     },
     closed: {
@@ -340,7 +340,7 @@ window.CONTENT.pl = {
     amount: "Kwota",
     amountText: "{{full}} (pełny pakiet) lub {{conf}} (tylko konferencja, lunch +{{lunch}})",
     deadline: "Termin płatności",
-    deadlineText: "{{days}} dni od wysłania formularza",
+    deadlineText: "{{days}} dni od otrzymania instrukcji (płatności ruszą w lutym 2027)",
     recipient: "Odbiorca",
     account: "Numer konta (PLN)",
     accountEur: "IBAN (EUR)",
@@ -350,7 +350,7 @@ window.CONTENT.pl = {
     qr: "Zapłać kodem QR (aplikacja bankowa)",
     invoice: "Faktura",
     invoiceText: "Jeśli potrzebujesz faktury, zaznacz to w formularzu zapisów[[ i napisz na {{email}}, podając nazwę organizacji, NIP, adres i e-mail do wysyłki]].",
-    todo: "TODO: numer konta zostanie podany po potwierdzeniu przez organizatora.",
+    todo: "Płatności uruchomimy w lutym 2027 — wtedy podamy tu numer konta i wyślemy instrukcję mailem.",
   },
 
   footer: {
