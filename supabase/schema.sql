@@ -149,13 +149,10 @@ grant execute on function public.pick_session(text) to authenticated;
 insert into public.admins (email) values ('nwow@ziarno.edu.pl') on conflict do nothing;  -- TODO: e-maile organizatorek
 
 insert into public.sessions (id, block, title, speaker, lang, room, capacity, sort) values
-  ('s1-lama-pl', 1, 'Co sprawia, że tutoring naprawdę działa?', 'Dobrochna Lama', 'PL', 'Sala 1', 35, 1),
-  ('s1-calvo-es', 1, 'Tożsamość szkoły edukacji spersonalizowanej', 'Lucia Calvo', 'ES · tłum. PL', 'Sala 2', 35, 2),
-  ('s1-kowal-pl', 1, 'Szkoła, którą buduje się latami — Źródło i Wierchy', 'Stanisław Kowal', 'PL', 'Sala 3', 35, 3),
-  ('s2-lama-en', 2, 'What makes tutoring actually work?', 'Dobrochna Lama', 'EN', 'Sala 1', 35, 1),
-  ('s2-calvo-es', 2, 'Identity of a personalized-education school (part 2)', 'Lucia Calvo', 'ES · EN interpretation', 'Sala 2', 35, 2),
-  ('s2-kowal-pl', 2, 'Współpraca z rodzicami: od informowania do partnerstwa', 'Stanisław Kowal', 'PL', 'Sala 3', 35, 3),
-  ('s3-lama-pl', 3, 'Rozmowa tutorska — warsztat praktyczny', 'Dobrochna Lama', 'PL', 'Sala 1', 35, 1),
-  ('s3-calvo-es', 3, 'Formación del carácter: casos prácticos', 'Lucia Calvo', 'ES · tłum. PL', 'Sala 2', 35, 2),
-  ('s3-kowal-en', 3, 'Founding a school: lessons learned', 'Stanisław Kowal', 'EN', 'Sala 3', 35, 3)
+  ('lama-pl',   1, 'Kultura pracy, która wydobywa najlepsze z ludzi — warsztat', 'Dobrochna Lama', 'PL', null, 35, 1),
+  ('calvo-en',  1, 'Workshop — title coming soon',                              'Lucía Calvo',    'EN', null, 35, 2),
+  ('teclaw-pl', 2, 'Kształtowanie kultury szkoły w praktyce',                   'Magda Tecław',   'PL', null, 35, 1),
+  ('lama-en',   2, 'A work culture that brings out the best in people — workshop', 'Dobrochna Lama', 'EN', null, 35, 2),
+  ('calvo-es',  3, 'Taller — título próximamente',                              'Lucía Calvo',    'ES', null, 35, 1),
+  ('teclaw-en', 3, 'Shaping school culture in practice',                        'Magda Tecław',   'EN', null, 35, 2)
 on conflict (id) do update set title = excluded.title, speaker = excluded.speaker, lang = excluded.lang, room = excluded.room, capacity = excluded.capacity, sort = excluded.sort;

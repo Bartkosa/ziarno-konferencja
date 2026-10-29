@@ -78,7 +78,7 @@
     var pk = T.packages[me.package] || me.package, full = me.package === "full";
     var picked = picks.length, tasks = [
       { k: "pay", done: !!me.paid, href: "#info" },
-      full ? { k: "workshops", done: picked >= 3, href: "#workshops" } : null,
+      full ? { k: P.workshopsOpen ? "workshops" : "workshopsSoon", done: picked >= 3, href: "#workshops" } : null,
       full ? { k: "options", done: Object.keys(me.options || {}).some(function (k) { return me.options[k]; }), href: "#options" } : null,
       { k: "diet", done: me.diet != null && me.diet !== "" || me._dietChecked, href: "#profile" },
       { k: "networking", done: !!me.networking_consent, href: "#profile" },
@@ -86,10 +86,10 @@
     panel('<h2>' + esc(tpl(T.overview.hello, { name: me.first_name })) + '</h2><p class="lead">' + esc(T.overview.lead) + "</p>" +
       '<div class="stats"><div class="stat"><div class="l">' + esc(T.overview.packageLabel) + '</div><div class="v">' + esc(pk) + "</div></div>" +
       '<div class="stat"><div class="l">' + esc(T.overview.statusLabel) + '</div><div class="v ' + (me.paid ? "ok" : "bad") + '">' + esc(me.paid ? T.overview.paid : T.overview.unpaid) + "</div></div>" +
-      '<div class="stat"><div class="l">' + esc(T.overview.workshopsLabel) + '</div><div class="v">' + esc(!full ? T.overview.workshopsNA : picked ? tpl(T.overview.workshopsPicked, { n: picked }) : T.overview.workshopsNone) + "</div></div></div>" +
+      '<div class="stat"><div class="l">' + esc(T.overview.workshopsLabel) + '</div><div class="v">' + esc(!full ? T.overview.workshopsNA : !P.workshopsOpen ? T.overview.workshopsSoon : picked ? tpl(T.overview.workshopsPicked, { n: picked }) : T.overview.workshopsNone) + "</div></div></div>" +
       (!me.paid ? '<div class="msg warn">' + esc(T.overview.unpaidHint) + "</div>" : "") +
       "<h3>" + esc(T.overview.todo) + '</h3><ul class="tasks">' + tasks.map(function (t) { return '<li class="' + (t.done ? "done" : "") + '"><span class="chk"></span><span>' + esc(T.overview.tasks[t.k]) + '</span><a href="' + t.href + '">→</a></li>'; }).join("") + "</ul>" +
-      (full && P.workshopsDeadline ? '<p class="hint" style="color:var(--muted);font-size:14px;margin-top:14px">' + esc(tpl(T.overview.deadline, { date: fmtDate(P.workshopsDeadline) })) + "</p>" : "") +
+      (full && P.workshopsOpen && P.workshopsDeadline ? '<p class="hint" style="color:var(--muted);font-size:14px;margin-top:14px">' + esc(tpl(T.overview.deadline, { date: fmtDate(P.workshopsDeadline) })) + "</p>" : "") +
       '<div class="row-actions"><a class="btn btn-outline btn-sm" href="../#program">' + esc(T.overview.program) + "</a></div>");
   }
 
@@ -97,6 +97,15 @@
     var full = me.package === "full", locked = deadlinePassed();
     var head = "<h2>" + esc(T.workshops.title) + '</h2><p class="lead">' + esc(tpl(T.workshops.lead, { date: fmtDate(P.workshopsDeadline) })) + '</p><div class="msg ok" id="flash" hidden></div>';
     if (!full) return panel(head + '<div class="msg warn">' + tpl(esc(T.workshops.notInPackage), { contact: contactLink() }) + "</div>");
+    // wybór jeszcze zamknięty (config.portal.workshopsOpen): pokazujemy tylko tematy, bez bloków i przycisków
+    if (!P.workshopsOpen) {
+      var bySpeaker = {};
+      sessions.forEach(function (s) { (bySpeaker[s.speaker] = bySpeaker[s.speaker] || []).push(s); });
+      return panel("<h2>" + esc(T.workshops.title) + '</h2><p class="lead">' + esc(T.workshops.soonLead) + "</p>" +
+        '<div class="sess">' + Object.keys(bySpeaker).map(function (sp) {
+          return '<div class="s"><div class="t">' + esc(sp) + "</div>" + bySpeaker[sp].map(function (s) { return '<div class="m">' + esc(s.title) + ' · <span class="tag">' + esc(s.lang) + "</span></div>"; }).join("") + "</div>";
+        }).join("") + "</div>");
+    }
     if (locked) head += '<div class="msg warn">' + tpl(esc(T.workshops.deadlinePassed), { contact: contactLink() }) + "</div>";
     var blocks = [1, 2, 3].map(function (b) {
       var list = sessions.filter(function (s) { return s.block === b; }).map(function (s) {
