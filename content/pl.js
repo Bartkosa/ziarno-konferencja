@@ -368,6 +368,6 @@ window.CONTENT.pl = {
     privacy: "Polityka prywatności",
     terms: "Regulamin i RODO",
     photo: "Zdjęcie w nagłówku",
-    privacyUrl: "https://www.ziarno.edu.pl/polityka-prywatnosci/",
+    privacyUrl: "regulamin.html#rodo",
   },
 };

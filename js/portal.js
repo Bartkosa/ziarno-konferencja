@@ -35,6 +35,7 @@
   // ------------------------------------------------------------ views
   function view() { var h = (location.hash || "#overview").slice(1); return T.nav[h] ? h : "overview"; }
   function render() {
+    if (!T) return; // hashchange (np. po wyczyszczeniu tokenu z adresu) przed wczytaniem tekstów
     if (!me) return renderLogin();
     if (me._unregistered && me._admin) {
       // organizatorka bez własnego zgłoszenia: zamiast komunikatu o błędzie — przejście do panelu organizatora

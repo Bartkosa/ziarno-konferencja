@@ -367,6 +367,6 @@ window.CONTENT.en = {
     privacy: "Privacy policy",
     terms: "Terms and GDPR",
     photo: "Header photo",
-    privacyUrl: "https://www.ziarno.edu.pl/polityka-prywatnosci/",
+    privacyUrl: "regulamin.html#privacy",
   },
 };
